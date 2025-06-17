@@ -22,7 +22,15 @@ const translations = {
         shareBtn: "결과 공유하기",
         traitsTitle: "당신의 성격 특징",
         detailTitle: "상세 설명",
-        scoreTitle: "점수 분포"
+        scoreTitle: "점수 분포",
+        compatibilityTitle: "💕 연애 궁합",
+        careersTitle: "💼 추천 직업",
+        celebritiesTitle: "⭐ 같은 유형 유명인",
+        healthTitle: "🏥 건강 & 스트레스 관리",
+        growthTitle: "🎯 성장 방향",
+        exerciseTitle: "💪 추천 운동",
+        dietTitle: "🥗 식단 관리",
+        stressTitle: "😌 스트레스 해소"
     },
     en: {
         title: "Teto-Egen Personality Type Test",
@@ -37,7 +45,15 @@ const translations = {
         shareBtn: "Share Result",
         traitsTitle: "Your Personality Traits",
         detailTitle: "Detailed Description",
-        scoreTitle: "Score Distribution"
+        scoreTitle: "Score Distribution",
+        compatibilityTitle: "💕 Love Compatibility",
+        careersTitle: "💼 Recommended Careers",
+        celebritiesTitle: "⭐ Celebrity Examples",
+        healthTitle: "🏥 Health & Stress Management",
+        growthTitle: "🎯 Growth Direction",
+        exerciseTitle: "💪 Recommended Exercise",
+        dietTitle: "🥗 Diet Management",
+        stressTitle: "😌 Stress Relief"
     }
 };
 
@@ -379,7 +395,29 @@ const resultData = {
                 traits: ["남성적", "리더십", "직설적", "현실적", "사교적"],
                 description: "테스토스테론 호르몬이 많은 남성적인 면모가 강한 남자입니다. 축구, 게임, 정치 등에 관심이 많고, 헬스장에서 운동하며 근육을 만드는 것을 좋아합니다. 번듯한 직장을 가지려 노력하고, 돈을 모으며 자기계발에 힘씁니다. 부모와 사이가 좋고, 정기적으로 만나는 남자 친구들이 있어 사회적 관계가 탄탄합니다. 단순하고 긍정적이며, 자기 일에 자부심을 가지고 있습니다.",
                 tetoLabel: "테토남",
-                egenLabel: "에겐남"
+                egenLabel: "에겐남",
+                compatibility: [
+                    { type: "에겐녀", score: 98, emoji: "💕", reason: "완벽한 조화! 남성적 리더십과 여성적 감성의 균형" },
+                    { type: "테토녀", score: 72, emoji: "🔥", reason: "역동적 관계! 서로의 강함이 자극적" },
+                    { type: "에겐남", score: 45, emoji: "🤝", reason: "친구로는 좋지만 연애는 신중히" }
+                ],
+                careers: ["경영진", "운동선수", "군인/경찰", "영업직", "기업가", "정치인", "부동산업", "건설업"],
+                celebrities: [
+                    { name: "박지성", profession: "축구선수" },
+                    { name: "손흥민", profession: "축구선수" },
+                    { name: "이승기", profession: "가수/배우" },
+                    { name: "강호동", profession: "방송인" }
+                ],
+                health: {
+                    exercise: ["헬스장 웨이트 트레이닝", "축구/농구", "러닝/조깅", "등산"],
+                    diet: ["고단백 식단", "근육 증량 위한 칼로리", "규칙적인 식사"],
+                    stress: ["목표 달성 활동", "친구들과 운동", "승부욕을 자극하는 게임"]
+                },
+                growth: [
+                    { title: "감정 표현력 향상", description: "상대방의 감정을 이해하고 공감하는 능력을 기르세요", icon: "❤️" },
+                    { title: "경청 능력 개발", description: "다른 사람의 의견을 끝까지 들어보는 습관을 기르세요", icon: "👂" },
+                    { title: "세심함 기르기", description: "작은 디테일에도 신경 쓰는 섬세함을 개발하세요", icon: "🎯" }
+                ]
             },
             egen: {
                 type: "에겐남",
@@ -387,7 +425,29 @@ const resultData = {
                 traits: ["감성적", "섬세함", "창작적", "개성적", "트렌디"],
                 description: "에스트로겐 호르몬이 많은 여성적인 면모가 강한 남자입니다. 옷과 외모에 많은 신경을 쓰고, 브랜드를 잘 알고 있으며 자기관리에 집착하는 경향이 있습니다. 인테리어에 관심이 많고, 매니악한 음악이나 예술 활동을 즐깁니다. 여성과 같은 섬세하고 재미있는 대화가 가능하며, 데이트 시 아기자기한 장소를 선호합니다. 사회적으로는 다소 수동적이며, 주변 사람들의 눈치를 많이 보는 편입니다.",
                 tetoLabel: "테토남",
-                egenLabel: "에겐남"
+                egenLabel: "에겐남",
+                compatibility: [
+                    { type: "테토녀", score: 91, emoji: "⚖️", reason: "균형잡힌 관계! 서로 부족한 부분을 채워줌" },
+                    { type: "에겐녀", score: 85, emoji: "🌙", reason: "차분한 조화! 감성적 교감이 깊음" },
+                    { type: "테토남", score: 45, emoji: "🤝", reason: "비슷한 성향으로 친구 관계가 적합" }
+                ],
+                careers: ["디자이너", "예술가", "상담사", "교사", "의료진", "작가", "스타일리스트", "미용사"],
+                celebrities: [
+                    { name: "BTS RM", profession: "가수" },
+                    { name: "유재석", profession: "방송인" },
+                    { name: "공유", profession: "배우" },
+                    { name: "이동욱", profession: "배우" }
+                ],
+                health: {
+                    exercise: ["요가/필라테스", "수영", "댄스", "산책"],
+                    diet: ["균형잡힌 식단", "비타민 섭취", "충분한 수분 섭취"],
+                    stress: ["독서", "명상", "친구와 대화", "예술 활동"]
+                },
+                growth: [
+                    { title: "자신감 강화", description: "자신의 장점을 인정하고 당당하게 표현하세요", icon: "💪" },
+                    { title: "결단력 향상", description: "빠른 의사결정 능력을 기르세요", icon: "⚡" },
+                    { title: "사회성 개발", description: "다양한 사람들과의 교류를 늘려보세요", icon: "🤝" }
+                ]
             }
         },
         female: {
@@ -397,7 +457,29 @@ const resultData = {
                 traits: ["당당함", "독립적", "직설적", "현실적", "추진력"],
                 description: "테스토스테론 성향이 강한 여성으로, 독립적이고 당당한 성격을 가지고 있습니다. 목표 지향적이며 리더십이 강하고, 직설적인 소통을 선호합니다. 경쟁을 두려워하지 않고, 자신의 의견을 확실히 표현합니다. 커리어에 대한 야망이 있고, 전통적인 여성의 역할보다는 자신만의 길을 개척하려 합니다. 감정보다는 논리를 우선시하며, 문제 해결 능력이 뛰어납니다.",
                 tetoLabel: "테토녀",
-                egenLabel: "에겐녀"
+                egenLabel: "에겐녀",
+                compatibility: [
+                    { type: "에겐남", score: 91, emoji: "⚖️", reason: "완벽한 균형! 강함과 부드러움의 조화" },
+                    { type: "테토남", score: 72, emoji: "🔥", reason: "강한 성격끼리 자극적이지만 때론 충돌" },
+                    { type: "에겐녀", score: 68, emoji: "💫", reason: "서로 다른 매력으로 보완 관계" }
+                ],
+                careers: ["변호사", "의사", "CEO/임원", "저널리스트", "컨설턴트", "정치인", "마케터", "투자가"],
+                celebrities: [
+                    { name: "김연아", profession: "피겨선수" },
+                    { name: "아이유", profession: "가수" },
+                    { name: "손연재", profession: "체조선수" },
+                    { name: "김나영", profession: "방송인" }
+                ],
+                health: {
+                    exercise: ["크로스핏", "복싱", "테니스", "골프"],
+                    diet: ["고단백 저탄수화물", "규칙적인 식사", "영양제 섭취"],
+                    stress: ["운동으로 에너지 발산", "목표 달성 활동", "경쟁적 게임"]
+                },
+                growth: [
+                    { title: "공감 능력 향상", description: "다른 사람의 감정을 이해하고 배려하는 마음을 기르세요", icon: "💝" },
+                    { title: "유연성 기르기", description: "때로는 타협하고 양보하는 법을 배우세요", icon: "🌊" },
+                    { title: "감정 표현하기", description: "논리뿐만 아니라 감정도 솔직하게 표현해보세요", icon: "🎭" }
+                ]
             },
             egen: {
                 type: "에겐녀",
@@ -405,7 +487,29 @@ const resultData = {
                 traits: ["감성적", "배려심", "섬세함", "온화함", "사교적"],
                 description: "에스트로겐 성향이 강한 여성으로, 전형적인 여성스러운 특징을 많이 가지고 있습니다. 감정 표현이 풍부하고 섬세하며, 타인에 대한 배려심이 깊습니다. 미적 감각이 뛰어나고 패션이나 뷰티에 관심이 많습니다. 조화로운 관계를 중시하며, 갈등 상황을 피하려는 경향이 있습니다. 직관적이고 감성적인 판단을 하며, 예술이나 창작 활동을 즐깁니다. 사람들과의 깊은 정서적 유대를 중요하게 생각합니다.",
                 tetoLabel: "테토녀",
-                egenLabel: "에겐녀"
+                egenLabel: "에겐녀",
+                compatibility: [
+                    { type: "테토남", score: 98, emoji: "💕", reason: "이상적인 커플! 전통적 남녀 조화" },
+                    { type: "에겐남", score: 85, emoji: "🌙", reason: "감성적 교감! 서로를 깊이 이해" },
+                    { type: "테토녀", score: 68, emoji: "💫", reason: "다른 매력으로 좋은 친구 관계" }
+                ],
+                careers: ["간호사", "교사", "예술가", "심리상담사", "사회복지사", "HR", "미용사", "플라워 디자이너"],
+                celebrities: [
+                    { name: "송혜교", profession: "배우" },
+                    { name: "수지", profession: "가수/배우" },
+                    { name: "태연", profession: "가수" },
+                    { name: "한지민", profession: "배우" }
+                ],
+                health: {
+                    exercise: ["요가", "필라테스", "발레", "산책"],
+                    diet: ["균형잡힌 식단", "과일과 채소 위주", "충분한 수분"],
+                    stress: ["친구와 수다", "쇼핑", "영화/드라마 감상", "여행"]
+                },
+                growth: [
+                    { title: "자기 주장 늘리기", description: "자신의 의견을 더 적극적으로 표현해보세요", icon: "📢" },
+                    { title: "독립성 기르기", description: "혼자서도 할 수 있는 일들을 늘려보세요", icon: "🦋" },
+                    { title: "목표 설정하기", description: "명확한 목표를 세우고 체계적으로 추진해보세요", icon: "🎯" }
+                ]
             }
         }
     },
@@ -417,7 +521,29 @@ const resultData = {
                 traits: ["Masculine", "Leadership", "Direct", "Realistic", "Social"],
                 description: "A man with strong masculine traits due to high testosterone levels. Interested in sports, games, politics, and enjoys working out at the gym to build muscle. Strives to have a decent job, saves money, and works on self-improvement. Has good relationships with parents and maintains regular social connections with male friends. Simple, positive, and takes pride in his work.",
                 tetoLabel: "Teto Male",
-                egenLabel: "Egen Male"
+                egenLabel: "Egen Male",
+                compatibility: [
+                    { type: "Egen Female", score: 98, emoji: "💕", reason: "Perfect harmony! Balance of masculine leadership and feminine sensitivity" },
+                    { type: "Teto Female", score: 72, emoji: "🔥", reason: "Dynamic relationship! Mutual strength creates excitement" },
+                    { type: "Egen Male", score: 45, emoji: "🤝", reason: "Good as friends but be careful in romance" }
+                ],
+                careers: ["Executive", "Athlete", "Military/Police", "Sales", "Entrepreneur", "Politician", "Real Estate", "Construction"],
+                celebrities: [
+                    { name: "Son Heung-min", profession: "Soccer Player" },
+                    { name: "Park Ji-sung", profession: "Soccer Player" },
+                    { name: "Lee Seung-gi", profession: "Singer/Actor" },
+                    { name: "Kang Ho-dong", profession: "TV Host" }
+                ],
+                health: {
+                    exercise: ["Weight Training", "Soccer/Basketball", "Running/Jogging", "Hiking"],
+                    diet: ["High Protein Diet", "Sufficient Calories for Muscle Gain", "Regular Meals"],
+                    stress: ["Goal Achievement Activities", "Sports with Friends", "Competitive Games"]
+                },
+                growth: [
+                    { title: "Improve Emotional Expression", description: "Develop ability to understand and empathize with others' emotions", icon: "❤️" },
+                    { title: "Develop Listening Skills", description: "Cultivate habit of listening to others' opinions completely", icon: "👂" },
+                    { title: "Cultivate Attention to Detail", description: "Develop sensitivity to small details", icon: "🎯" }
+                ]
             },
             egen: {
                 type: "Egen Male",
@@ -425,7 +551,29 @@ const resultData = {
                 traits: ["Emotional", "Sensitive", "Creative", "Unique", "Trendy"],
                 description: "A man with strong feminine traits due to high estrogen levels. Pays great attention to clothing and appearance, knows brands well, and tends to be obsessed with self-care. Interested in interior design and enjoys niche music or artistic activities. Capable of sensitive and interesting conversations like women, prefers cozy places when dating. Socially somewhat passive and tends to be very conscious of what others think.",
                 tetoLabel: "Teto Male",
-                egenLabel: "Egen Male"
+                egenLabel: "Egen Male",
+                compatibility: [
+                    { type: "Teto Female", score: 91, emoji: "⚖️", reason: "Balanced relationship! Complement each other's weaknesses" },
+                    { type: "Egen Female", score: 85, emoji: "🌙", reason: "Calm harmony! Deep emotional connection" },
+                    { type: "Teto Male", score: 45, emoji: "🤝", reason: "Similar traits make them suitable as friends" }
+                ],
+                careers: ["Designer", "Artist", "Counselor", "Teacher", "Healthcare", "Writer", "Stylist", "Hairdresser"],
+                celebrities: [
+                    { name: "BTS RM", profession: "Singer" },
+                    { name: "Yoo Jae-suk", profession: "TV Host" },
+                    { name: "Gong Yoo", profession: "Actor" },
+                    { name: "Lee Dong-wook", profession: "Actor" }
+                ],
+                health: {
+                    exercise: ["Yoga/Pilates", "Swimming", "Dancing", "Walking"],
+                    diet: ["Balanced Diet", "Vitamin Intake", "Adequate Hydration"],
+                    stress: ["Reading", "Meditation", "Talking with Friends", "Artistic Activities"]
+                },
+                growth: [
+                    { title: "Build Confidence", description: "Recognize your strengths and express them confidently", icon: "💪" },
+                    { title: "Improve Decisiveness", description: "Develop quick decision-making abilities", icon: "⚡" },
+                    { title: "Develop Social Skills", description: "Increase interactions with diverse people", icon: "🤝" }
+                ]
             }
         },
         female: {
@@ -435,7 +583,29 @@ const resultData = {
                 traits: ["Confident", "Independent", "Direct", "Realistic", "Driven"],
                 description: "A woman with strong testosterone tendencies, having an independent and confident personality. Goal-oriented with strong leadership and prefers direct communication. Not afraid of competition and clearly expresses her opinions. Has career ambitions and seeks to forge her own path rather than traditional female roles. Prioritizes logic over emotions and has excellent problem-solving abilities.",
                 tetoLabel: "Teto Female",
-                egenLabel: "Egen Female"
+                egenLabel: "Egen Female",
+                compatibility: [
+                    { type: "Egen Male", score: 91, emoji: "⚖️", reason: "Perfect balance! Harmony of strength and gentleness" },
+                    { type: "Teto Male", score: 72, emoji: "🔥", reason: "Strong personalities create excitement but sometimes clash" },
+                    { type: "Egen Female", score: 68, emoji: "💫", reason: "Complementary relationship with different charms" }
+                ],
+                careers: ["Lawyer", "Doctor", "CEO/Executive", "Journalist", "Consultant", "Politician", "Marketer", "Investor"],
+                celebrities: [
+                    { name: "Kim Yuna", profession: "Figure Skater" },
+                    { name: "IU", profession: "Singer" },
+                    { name: "Son Yeon-jae", profession: "Gymnast" },
+                    { name: "Kim Na-young", profession: "TV Host" }
+                ],
+                health: {
+                    exercise: ["CrossFit", "Boxing", "Tennis", "Golf"],
+                    diet: ["High Protein Low Carb", "Regular Meals", "Supplement Intake"],
+                    stress: ["Energy Release through Exercise", "Goal Achievement Activities", "Competitive Games"]
+                },
+                growth: [
+                    { title: "Improve Empathy", description: "Develop understanding and consideration for others' emotions", icon: "💝" },
+                    { title: "Cultivate Flexibility", description: "Learn to compromise and yield sometimes", icon: "🌊" },
+                    { title: "Express Emotions", description: "Express emotions honestly, not just logic", icon: "🎭" }
+                ]
             },
             egen: {
                 type: "Egen Female",
@@ -443,7 +613,29 @@ const resultData = {
                 traits: ["Emotional", "Caring", "Sensitive", "Gentle", "Social"],
                 description: "A woman with strong estrogen tendencies, having many typical feminine characteristics. Rich in emotional expression, sensitive, and deeply caring towards others. Has excellent aesthetic sense and is interested in fashion and beauty. Values harmonious relationships and tends to avoid conflict situations. Makes intuitive and emotional judgments, enjoys arts or creative activities. Values deep emotional bonds with people.",
                 tetoLabel: "Teto Female",
-                egenLabel: "Egen Female"
+                egenLabel: "Egen Female",
+                compatibility: [
+                    { type: "Teto Male", score: 98, emoji: "💕", reason: "Ideal couple! Traditional male-female harmony" },
+                    { type: "Egen Male", score: 85, emoji: "🌙", reason: "Emotional connection! Deep mutual understanding" },
+                    { type: "Teto Female", score: 68, emoji: "💫", reason: "Good friendship with different charms" }
+                ],
+                careers: ["Nurse", "Teacher", "Artist", "Counselor", "Social Worker", "HR", "Hairdresser", "Floral Designer"],
+                celebrities: [
+                    { name: "Song Hye-kyo", profession: "Actress" },
+                    { name: "Suzy", profession: "Singer/Actress" },
+                    { name: "Taeyeon", profession: "Singer" },
+                    { name: "Han Ji-min", profession: "Actress" }
+                ],
+                health: {
+                    exercise: ["Yoga", "Pilates", "Ballet", "Walking"],
+                    diet: ["Balanced Diet", "Fruits and Vegetables", "Adequate Hydration"],
+                    stress: ["Chatting with Friends", "Shopping", "Movies/Dramas", "Travel"]
+                },
+                growth: [
+                    { title: "Increase Self-Assertion", description: "Express your opinions more actively", icon: "📢" },
+                    { title: "Develop Independence", description: "Increase things you can do on your own", icon: "🦋" },
+                    { title: "Set Goals", description: "Set clear goals and pursue them systematically", icon: "🎯" }
+                ]
             }
         }
     }
@@ -670,11 +862,135 @@ function showResult() {
     document.getElementById('type1-percent').textContent = tetoPercent + '%';
     document.getElementById('type2-percent').textContent = egenPercent + '%';
     
+    // 💕 연애 궁합 렌더링
+    renderCompatibility(result.compatibility);
+    
+    // 💼 추천 직업 렌더링
+    renderCareers(result.careers);
+    
+    // ⭐ 유명인 렌더링
+    renderCelebrities(result.celebrities);
+    
+    // 🏥 건강 & 스트레스 관리 렌더링
+    renderHealth(result.health);
+    
+    // 🎯 성장 방향 렌더링
+    renderGrowth(result.growth);
+    
     // 애니메이션으로 점수 바 채우기
     setTimeout(() => {
         document.getElementById('type1-score').style.width = tetoPercent + '%';
         document.getElementById('type2-score').style.width = egenPercent + '%';
-    }, 300);
+    }, 500);
+}
+
+// 💕 연애 궁합 렌더링 함수
+function renderCompatibility(compatibilityData) {
+    const container = document.getElementById('compatibility-list');
+    container.innerHTML = '';
+    
+    compatibilityData.forEach(item => {
+        const compatibilityItem = document.createElement('div');
+        compatibilityItem.className = 'compatibility-item';
+        
+        compatibilityItem.innerHTML = `
+            <div class="compatibility-info">
+                <div class="compatibility-type">${item.type}</div>
+                <div class="compatibility-reason">${item.reason}</div>
+            </div>
+            <div class="compatibility-score">
+                <span class="compatibility-emoji">${item.emoji}</span>
+                <span>${item.score}%</span>
+            </div>
+        `;
+        
+        container.appendChild(compatibilityItem);
+    });
+}
+
+// 💼 추천 직업 렌더링 함수
+function renderCareers(careersData) {
+    const container = document.getElementById('career-list');
+    container.innerHTML = '';
+    
+    careersData.forEach(career => {
+        const careerTag = document.createElement('div');
+        careerTag.className = 'career-tag';
+        careerTag.textContent = career;
+        container.appendChild(careerTag);
+    });
+}
+
+// ⭐ 유명인 렌더링 함수
+function renderCelebrities(celebritiesData) {
+    const container = document.getElementById('celebrity-list');
+    container.innerHTML = '';
+    
+    celebritiesData.forEach(celebrity => {
+        const celebrityItem = document.createElement('div');
+        celebrityItem.className = 'celebrity-item';
+        
+        celebrityItem.innerHTML = `
+            <div class="celebrity-name">${celebrity.name}</div>
+            <div class="celebrity-profession">${celebrity.profession}</div>
+        `;
+        
+        container.appendChild(celebrityItem);
+    });
+}
+
+// 🏥 건강 & 스트레스 관리 렌더링 함수
+function renderHealth(healthData) {
+    // 운동 팁
+    const exerciseContainer = document.getElementById('exercise-tips');
+    exerciseContainer.innerHTML = '';
+    healthData.exercise.forEach(tip => {
+        const tipItem = document.createElement('div');
+        tipItem.className = 'tip-item';
+        tipItem.textContent = tip;
+        exerciseContainer.appendChild(tipItem);
+    });
+    
+    // 식단 팁
+    const dietContainer = document.getElementById('diet-tips');
+    dietContainer.innerHTML = '';
+    healthData.diet.forEach(tip => {
+        const tipItem = document.createElement('div');
+        tipItem.className = 'tip-item';
+        tipItem.textContent = tip;
+        dietContainer.appendChild(tipItem);
+    });
+    
+    // 스트레스 해소 팁
+    const stressContainer = document.getElementById('stress-tips');
+    stressContainer.innerHTML = '';
+    healthData.stress.forEach(tip => {
+        const tipItem = document.createElement('div');
+        tipItem.className = 'tip-item';
+        tipItem.textContent = tip;
+        stressContainer.appendChild(tipItem);
+    });
+}
+
+// 🎯 성장 방향 렌더링 함수
+function renderGrowth(growthData) {
+    const container = document.getElementById('growth-tips');
+    container.innerHTML = '';
+    
+    growthData.forEach(item => {
+        const growthItem = document.createElement('div');
+        growthItem.className = 'growth-item';
+        
+        growthItem.innerHTML = `
+            <div class="growth-icon">${item.icon}</div>
+            <div class="growth-content">
+                <div class="growth-title">${item.title}</div>
+                <div class="growth-description">${item.description}</div>
+            </div>
+        `;
+        
+        container.appendChild(growthItem);
+    });
 }
 
 function resetTest() {
@@ -747,26 +1063,42 @@ function toggleLanguage() {
 function updateLanguage() {
     const texts = translations[currentLanguage];
     
-    // 메인 텍스트 업데이트
-    document.querySelector('h1').textContent = texts.title;
-    document.querySelector('.subtitle').textContent = texts.subtitle;
-    document.querySelector('.description').innerHTML = texts.description;
+    // 기본 텍스트들
+    document.querySelector('.hero h1').textContent = texts.title;
+    document.querySelector('.hero .subtitle').textContent = texts.subtitle;
+    document.querySelector('.hero .description').innerHTML = texts.description;
     document.querySelector('.gender-selection h3').textContent = texts.genderTitle;
-    document.querySelector('[data-gender="male"] span:last-child').textContent = texts.male;
-    document.querySelector('[data-gender="female"] span:last-child').textContent = texts.female;
+    document.querySelector('.gender-btn[data-gender="male"] span:last-child').textContent = texts.male;
+    document.querySelector('.gender-btn[data-gender="female"] span:last-child').textContent = texts.female;
     document.getElementById('start-btn').textContent = texts.startBtn;
     document.querySelector('.test-info p').textContent = texts.testInfo;
     document.getElementById('retry-btn').textContent = texts.retryBtn;
     document.getElementById('share-btn').textContent = texts.shareBtn;
     
-    // 결과 화면 제목 텍스트
+    // 결과 화면 제목들
     const traitsTitle = document.querySelector('.result-description h3');
     const detailTitle = document.querySelector('.result-detailed h3');
     const scoreTitle = document.querySelector('.result-score h3');
+    const compatibilityTitle = document.querySelector('.result-compatibility h3');
+    const careersTitle = document.querySelector('.result-careers h3');
+    const celebritiesTitle = document.querySelector('.result-celebrities h3');
+    const healthTitle = document.querySelector('.result-health h3');
+    const growthTitle = document.querySelector('.result-growth h3');
+    const exerciseTitle = document.querySelector('.health-category h4:nth-of-type(1)');
+    const dietTitle = document.querySelector('.health-category h4:nth-of-type(2)');
+    const stressTitle = document.querySelector('.health-category h4:nth-of-type(3)');
     
     if (traitsTitle) traitsTitle.textContent = texts.traitsTitle;
     if (detailTitle) detailTitle.textContent = texts.detailTitle;
     if (scoreTitle) scoreTitle.textContent = texts.scoreTitle;
+    if (compatibilityTitle) compatibilityTitle.textContent = texts.compatibilityTitle;
+    if (careersTitle) careersTitle.textContent = texts.careersTitle;
+    if (celebritiesTitle) celebritiesTitle.textContent = texts.celebritiesTitle;
+    if (healthTitle) healthTitle.textContent = texts.healthTitle;
+    if (growthTitle) growthTitle.textContent = texts.growthTitle;
+    if (exerciseTitle) exerciseTitle.textContent = texts.exerciseTitle;
+    if (dietTitle) dietTitle.textContent = texts.dietTitle;
+    if (stressTitle) stressTitle.textContent = texts.stressTitle;
     
     // 결과 화면에 있는 경우 결과 내용도 업데이트
     updateResultContent();
@@ -803,17 +1135,18 @@ function updateResultContent() {
         // 상세 설명 업데이트
         document.getElementById('result-detail').textContent = result.description;
         
-        // 점수 라벨 업데이트
+        // 라벨 업데이트
         document.getElementById('type1-label').textContent = result.tetoLabel;
         document.getElementById('type2-label').textContent = result.egenLabel;
         
-        console.log('🔄 언어 변경으로 인한 결과 내용 업데이트 완료:', {
-            language: currentLanguage,
-            gender: currentGender,
-            resultType: result.type,
-            tetoScore: tetoScore,
-            egenScore: egenScore
-        });
+        // 새로운 섹션들 업데이트
+        renderCompatibility(result.compatibility);
+        renderCareers(result.careers);
+        renderCelebrities(result.celebrities);
+        renderHealth(result.health);
+        renderGrowth(result.growth);
+        
+        console.log('✅ 결과 내용 언어 업데이트 완료:', currentLanguage);
     }
 }
 

@@ -77,7 +77,7 @@ const questionData = {
                     { text: "집에서 넷플릭스를 보며 휴식을 취한다", type: "egen", score: 2 }
                 ],
                 female: [
-                    { text: "헬스장에서 운동하거나 친구들과 배드민턴을 한다", type: "teto", score: 4 },
+                    { text: "헬스장에서 운동하거나 친구들과 함께 액티비티를 즐긴다", type: "teto", score: 4 },
                     { text: "카페에서 감성적인 음악을 들으며 혼자만의 시간을 보낸다", type: "egen", score: 4 },
                     { text: "집에서 넷플릭스를 보며 휴식을 취한다", type: "egen", score: 2 }
                 ]

@@ -17,7 +17,7 @@ const translations = {
         male: "남성",
         female: "여성",
         startBtn: "테스트 시작하기",
-        testInfo: "📋 총 20문항 | ⏱️ 약 5분 소요",
+        testInfo: "📋 총 25문항 | ⏱️ 약 6분 소요",
         retryBtn: "다시 테스트하기",
         shareBtn: "결과 공유하기",
         traitsTitle: "당신의 성격 특징",
@@ -40,7 +40,7 @@ const translations = {
         male: "Male",
         female: "Female", 
         startBtn: "Start Test",
-        testInfo: "📋 20 Questions | ⏱️ About 5 minutes",
+        testInfo: "📋 25 Questions | ⏱️ About 6 minutes",
         retryBtn: "Retry Test",
         shareBtn: "Share Result",
         traitsTitle: "Your Personality Traits",
@@ -221,6 +221,91 @@ const questionData = {
             ]
         }
     ],
+    // 성별별 추가 질문
+    male_specific: [
+        {
+            situation: "군복무에 대한 생각",
+            options: [
+                { text: "남성의 의무이고 좋은 경험이라고 생각한다", type: "teto", score: 4 },
+                { text: "개인의 선택이어야 한다고 생각한다", type: "egen", score: 4 },
+                { text: "필요악이지만 어쩔 수 없다고 생각한다", type: "teto", score: 2 }
+            ]
+        },
+        {
+            situation: "남성다움이란",
+            options: [
+                { text: "책임감과 리더십을 갖추는 것", type: "teto", score: 4 },
+                { text: "감정 표현과 소통 능력이 중요", type: "egen", score: 4 },
+                { text: "시대에 따라 변하는 개념", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "외모 관리에 대해",
+            options: [
+                { text: "기본적인 청결함만 유지하면 충분", type: "teto", score: 4 },
+                { text: "스킨케어와 패션에 꽤 신경 쓴다", type: "egen", score: 4 },
+                { text: "상황에 따라 적당히 관리한다", type: "teto", score: 2 }
+            ]
+        },
+        {
+            situation: "브로맨스(남성 간의 우정)에서",
+            options: [
+                { text: "함께 운동하거나 게임하며 시간을 보낸다", type: "teto", score: 4 },
+                { text: "깊은 대화나 감정 교류를 중시한다", type: "egen", score: 4 },
+                { text: "가볍게 만나서 즐기는 게 좋다", type: "teto", score: 2 }
+            ]
+        },
+        {
+            situation: "이성과의 관계에서",
+            options: [
+                { text: "남성이 주도적인 역할을 해야 한다", type: "teto", score: 4 },
+                { text: "서로 평등하고 감정적으로 교감해야 한다", type: "egen", score: 4 },
+                { text: "상황에 따라 역할이 달라질 수 있다", type: "egen", score: 3 }
+            ]
+        }
+    ],
+    female_specific: [
+        {
+            situation: "커리어와 가정의 균형",
+            options: [
+                { text: "커리어 성공이 우선이고 가정은 그 다음", type: "teto", score: 4 },
+                { text: "가정의 화목이 더 중요하다", type: "egen", score: 4 },
+                { text: "둘 다 중요하지만 시기마다 우선순위가 다르다", type: "egen", score: 2 }
+            ]
+        },
+        {
+            situation: "여성다움이란",
+            options: [
+                { text: "배려심과 포용력을 갖추는 것", type: "egen", score: 4 },
+                { text: "자신의 의견을 당당하게 표현하는 것", type: "teto", score: 4 },
+                { text: "개인마다 다르게 정의될 수 있다", type: "egen", score: 2 }
+            ]
+        },
+        {
+            situation: "뷰티 루틴에 대해",
+            options: [
+                { text: "시간 대비 효율성을 중시한 간단한 관리", type: "teto", score: 4 },
+                { text: "꼼꼼하고 세밀한 관리 과정을 즐긴다", type: "egen", score: 4 },
+                { text: "기분에 따라 달라진다", type: "egen", score: 2 }
+            ]
+        },
+        {
+            situation: "여성 친구들과의 시간",
+            options: [
+                { text: "목표 지향적인 활동이나 토론을 선호", type: "teto", score: 4 },
+                { text: "감정과 일상을 나누는 시간을 중시", type: "egen", score: 4 },
+                { text: "함께 있는 것만으로도 만족", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "이성과의 관계에서",
+            options: [
+                { text: "서로 독립적이면서 동등한 관계를 원한다", type: "teto", score: 4 },
+                { text: "감정적 교감과 로맨틱한 분위기를 중시한다", type: "egen", score: 4 },
+                { text: "상황에 따라 다양한 모습을 보인다", type: "egen", score: 3 }
+            ]
+        }
+    ],
     en: [
         {
             situation: "When shopping with friends",
@@ -382,6 +467,91 @@ const questionData = {
                 { text: "Daily and practical information", type: "teto", score: 2 }
             ]
         }
+    ],
+    // Gender-specific additional questions
+    male_specific: [
+        {
+            situation: "About military service",
+            options: [
+                { text: "It's a male duty and good experience", type: "teto", score: 4 },
+                { text: "It should be individual choice", type: "egen", score: 4 },
+                { text: "It's necessary evil but inevitable", type: "teto", score: 2 }
+            ]
+        },
+        {
+            situation: "Masculinity means",
+            options: [
+                { text: "Having responsibility and leadership", type: "teto", score: 4 },
+                { text: "Emotional expression and communication skills are important", type: "egen", score: 4 },
+                { text: "A concept that changes with times", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "About appearance management",
+            options: [
+                { text: "Basic cleanliness is sufficient", type: "teto", score: 4 },
+                { text: "I pay quite attention to skincare and fashion", type: "egen", score: 4 },
+                { text: "I manage appropriately depending on situation", type: "teto", score: 2 }
+            ]
+        },
+        {
+            situation: "In bromance (friendship between men)",
+            options: [
+                { text: "Spend time exercising or gaming together", type: "teto", score: 4 },
+                { text: "Value deep conversations and emotional exchange", type: "egen", score: 4 },
+                { text: "Like to meet casually and have fun", type: "teto", score: 2 }
+            ]
+        },
+        {
+            situation: "In relationships with opposite sex",
+            options: [
+                { text: "Men should take the leading role", type: "teto", score: 4 },
+                { text: "Should be equal and emotionally connected", type: "egen", score: 4 },
+                { text: "Roles can vary depending on situation", type: "egen", score: 3 }
+            ]
+        }
+    ],
+    female_specific: [
+        {
+            situation: "Balance between career and family",
+            options: [
+                { text: "Career success comes first, family second", type: "teto", score: 4 },
+                { text: "Family harmony is more important", type: "egen", score: 4 },
+                { text: "Both important but priorities differ by time", type: "egen", score: 2 }
+            ]
+        },
+        {
+            situation: "Femininity means",
+            options: [
+                { text: "Having care and tolerance", type: "egen", score: 4 },
+                { text: "Expressing one's opinions confidently", type: "teto", score: 4 },
+                { text: "Can be defined differently by each person", type: "egen", score: 2 }
+            ]
+        },
+        {
+            situation: "About beauty routine",
+            options: [
+                { text: "Simple care emphasizing time efficiency", type: "teto", score: 4 },
+                { text: "Enjoy thorough and detailed care process", type: "egen", score: 4 },
+                { text: "Depends on mood", type: "egen", score: 2 }
+            ]
+        },
+        {
+            situation: "Time with female friends",
+            options: [
+                { text: "Prefer goal-oriented activities or discussions", type: "teto", score: 4 },
+                { text: "Value time sharing emotions and daily life", type: "egen", score: 4 },
+                { text: "Satisfied just being together", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "In relationships with opposite sex",
+            options: [
+                { text: "Want independent and equal relationship", type: "teto", score: 4 },
+                { text: "Value emotional connection and romantic atmosphere", type: "egen", score: 4 },
+                { text: "Show various sides depending on situation", type: "egen", score: 3 }
+            ]
+        }
     ]
 };
 
@@ -397,8 +567,8 @@ const resultData = {
                 tetoLabel: "테토남",
                 egenLabel: "에겐남",
                 compatibility: [
-                    { type: "에겐녀", emoji: "💕", reason: "완벽한 조화! 남성적 리더십과 여성적 감성의 균형" },
-                    { type: "테토녀", emoji: "🔥", reason: "역동적 관계! 서로의 강함이 자극적" }
+                    { type: "에겐녀", emoji: "💕", reason: "서로 다른 강점이 보완되어 균형잡힌 관계. 하지만 소통 방식 차이로 오해 가능성 있음" },
+                    { type: "테토녀", emoji: "🤝", reason: "목표 지향적인 성향이 비슷해 이해도가 높으나, 경쟁적 관계로 발전할 수 있음" }
                 ],
                 careers: ["경영진", "운동선수", "군인/경찰", "영업직", "기업가", "정치인", "부동산업", "건설업"],
                 celebrities: [
@@ -426,8 +596,8 @@ const resultData = {
                 tetoLabel: "테토남",
                 egenLabel: "에겐남",
                 compatibility: [
-                    { type: "테토녀", emoji: "⚖️", reason: "균형잡힌 관계! 서로 부족한 부분을 채워줌" },
-                    { type: "에겐녀", emoji: "🌙", reason: "차분한 조화! 감성적 교감이 깊음" }
+                    { type: "테토녀", emoji: "⚖️", reason: "서로 다른 성격이 매력적이지만, 가치관 차이로 갈등 상황 발생 가능" },
+                    { type: "에겐녀", emoji: "🌙", reason: "비슷한 감성으로 깊이 공감하나, 때로는 소극적 관계가 될 수 있음" }
                 ],
                 careers: ["디자이너", "예술가", "상담사", "교사", "의료진", "작가", "스타일리스트", "미용사"],
                 celebrities: [
@@ -457,8 +627,8 @@ const resultData = {
                 tetoLabel: "테토녀",
                 egenLabel: "에겐녀",
                 compatibility: [
-                    { type: "에겐남", emoji: "⚖️", reason: "완벽한 균형! 강함과 부드러움의 조화" },
-                    { type: "테토남", emoji: "🔥", reason: "강한 성격끼리 자극적이지만 때론 충돌" }
+                    { type: "에겐남", emoji: "⚖️", reason: "상호 보완적 관계로 서로 성장 가능. 단, 주도권 문제로 갈등 있을 수 있음" },
+                    { type: "테토남", emoji: "🔥", reason: "둘 다 강한 성향으로 열정적 관계 가능하나, 충돌과 경쟁 요소도 존재" }
                 ],
                 careers: ["변호사", "의사", "CEO/임원", "저널리스트", "컨설턴트", "정치인", "마케터", "투자가"],
                 celebrities: [
@@ -486,8 +656,8 @@ const resultData = {
                 tetoLabel: "테토녀",
                 egenLabel: "에겐녀",
                 compatibility: [
-                    { type: "테토남", emoji: "💕", reason: "이상적인 커플! 전통적 남녀 조화" },
-                    { type: "에겐남", emoji: "🌙", reason: "감성적 교감! 서로를 깊이 이해" }
+                    { type: "테토남", emoji: "💕", reason: "전통적인 남녀 역할로 안정적 관계. 다만 현대적 가치관 차이 있을 수 있음" },
+                    { type: "에겐남", emoji: "🌙", reason: "감성적으로 깊이 통하나, 때로는 결정력 부족으로 정체될 수 있음" }
                 ],
                 careers: ["간호사", "교사", "예술가", "심리상담사", "사회복지사", "HR", "미용사", "플라워 디자이너"],
                 celebrities: [
@@ -519,8 +689,8 @@ const resultData = {
                 tetoLabel: "Teto Male",
                 egenLabel: "Egen Male",
                 compatibility: [
-                    { type: "Egen Female", emoji: "💕", reason: "Perfect harmony! Balance of masculine leadership and feminine sensitivity" },
-                    { type: "Teto Female", emoji: "🔥", reason: "Dynamic relationship! Mutual strength creates excitement" }
+                    { type: "Egen Female", emoji: "💕", reason: "Different strengths complement each other for balanced relationship. However, communication style differences may cause misunderstandings" },
+                    { type: "Teto Female", emoji: "🤝", reason: "Similar goal-oriented nature leads to high understanding, but may develop into competitive relationship" }
                 ],
                 careers: ["Executive", "Athlete", "Military/Police", "Sales", "Entrepreneur", "Politician", "Real Estate", "Construction"],
                 celebrities: [
@@ -548,8 +718,8 @@ const resultData = {
                 tetoLabel: "Teto Male",
                 egenLabel: "Egen Male",
                 compatibility: [
-                    { type: "Teto Female", emoji: "⚖️", reason: "Balanced relationship! Complement each other's weaknesses" },
-                    { type: "Egen Female", emoji: "🌙", reason: "Calm harmony! Deep emotional connection" }
+                    { type: "Teto Female", emoji: "⚖️", reason: "Different personalities are attractive, but value differences may cause conflict situations" },
+                    { type: "Egen Female", emoji: "🌙", reason: "Deep empathy through similar emotions, but relationship may become passive at times" }
                 ],
                 careers: ["Designer", "Artist", "Counselor", "Teacher", "Healthcare", "Writer", "Stylist", "Hairdresser"],
                 celebrities: [
@@ -579,8 +749,8 @@ const resultData = {
                 tetoLabel: "Teto Female",
                 egenLabel: "Egen Female",
                 compatibility: [
-                    { type: "Egen Male", emoji: "⚖️", reason: "Perfect balance! Harmony of strength and gentleness" },
-                    { type: "Teto Male", emoji: "🔥", reason: "Strong personalities create excitement but sometimes clash" }
+                    { type: "Egen Male", emoji: "⚖️", reason: "Mutually complementary relationship enables growth. However, leadership issues may cause conflicts" },
+                    { type: "Teto Male", emoji: "🔥", reason: "Both strong personalities enable passionate relationship, but clashes and competition also exist" }
                 ],
                 careers: ["Lawyer", "Doctor", "CEO/Executive", "Journalist", "Consultant", "Politician", "Marketer", "Investor"],
                 celebrities: [
@@ -608,8 +778,8 @@ const resultData = {
                 tetoLabel: "Teto Female",
                 egenLabel: "Egen Female",
                 compatibility: [
-                    { type: "Teto Male", emoji: "💕", reason: "Ideal couple! Traditional male-female harmony" },
-                    { type: "Egen Male", emoji: "🌙", reason: "Emotional connection! Deep mutual understanding" }
+                    { type: "Teto Male", emoji: "💕", reason: "Stable relationship with traditional male-female roles. However, modern value differences may exist" },
+                    { type: "Egen Male", emoji: "🌙", reason: "Deep emotional connection, but may stagnate due to lack of decisiveness at times" }
                 ],
                 careers: ["Nurse", "Teacher", "Artist", "Counselor", "Social Worker", "HR", "Hairdresser", "Floral Designer"],
                 celebrities: [
@@ -743,17 +913,23 @@ function showScreen(screenName) {
 }
 
 function showQuestion() {
-    const questions = questionData[currentLanguage];
-    const question = questions[currentQuestionIndex];
+    // 기본 질문 + 성별별 질문 통합
+    const baseQuestions = questionData[currentLanguage];
+    const genderQuestions = currentGender === 'male' ? 
+        questionData[currentLanguage + '_male_specific'] || questionData['male_specific'] : 
+        questionData[currentLanguage + '_female_specific'] || questionData['female_specific'];
+    
+    const allQuestions = [...baseQuestions, ...genderQuestions];
+    const question = allQuestions[currentQuestionIndex];
     
     // 상황 텍스트 업데이트
     document.getElementById('question-text').textContent = question.situation;
     
     // 진행률 업데이트
-    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+    const progress = ((currentQuestionIndex + 1) / allQuestions.length) * 100;
     document.getElementById('progress').style.width = progress + '%';
     document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-    document.getElementById('total-questions').textContent = questions.length;
+    document.getElementById('total-questions').textContent = allQuestions.length;
     
     // 선택지 생성 (랜덤 순서)
     const optionsContainer = document.querySelector('.options');
@@ -799,8 +975,15 @@ function selectOption(selectedOption) {
 function nextQuestion() {
     currentQuestionIndex++;
     
-    const questions = questionData[currentLanguage];
-    if (currentQuestionIndex < questions.length) {
+    // 기본 질문 + 성별별 질문 통합
+    const baseQuestions = questionData[currentLanguage];
+    const genderQuestions = currentGender === 'male' ? 
+        questionData['male_specific'] : 
+        questionData['female_specific'];
+    
+    const totalQuestions = baseQuestions.length + genderQuestions.length;
+    
+    if (currentQuestionIndex < totalQuestions) {
         showQuestion();
     } else {
         showResult();
@@ -917,19 +1100,19 @@ function renderCompatibility(compatibilityData) {
 
 // 동적 궁합도 계산 함수
 function calculateCompatibilityScore(userTetoRatio, userEgenRatio, partnerType) {
-    // 각 유형별 이상적인 파트너의 특성 정의
+    // 각 유형별 이상적인 파트너의 특성 정의 (더 현실적으로 조정)
     const idealPartnerProfiles = {
         // 한국어
-        '에겐녀': { idealTetoRatio: 0.2, idealEgenRatio: 0.8, baseScore: 95 },
-        '테토녀': { idealTetoRatio: 0.7, idealEgenRatio: 0.3, baseScore: 75 },
-        '에겐남': { idealTetoRatio: 0.3, idealEgenRatio: 0.7, baseScore: 88 },
-        '테토남': { idealTetoRatio: 0.8, idealEgenRatio: 0.2, baseScore: 78 },
+        '에겐녀': { idealTetoRatio: 0.2, idealEgenRatio: 0.8, baseScore: 78 },
+        '테토녀': { idealTetoRatio: 0.7, idealEgenRatio: 0.3, baseScore: 65 },
+        '에겐남': { idealTetoRatio: 0.3, idealEgenRatio: 0.7, baseScore: 72 },
+        '테토남': { idealTetoRatio: 0.8, idealEgenRatio: 0.2, baseScore: 69 },
         
         // 영어
-        'Egen Female': { idealTetoRatio: 0.2, idealEgenRatio: 0.8, baseScore: 95 },
-        'Teto Female': { idealTetoRatio: 0.7, idealEgenRatio: 0.3, baseScore: 75 },
-        'Egen Male': { idealTetoRatio: 0.3, idealEgenRatio: 0.7, baseScore: 88 },
-        'Teto Male': { idealTetoRatio: 0.8, idealEgenRatio: 0.2, baseScore: 78 }
+        'Egen Female': { idealTetoRatio: 0.2, idealEgenRatio: 0.8, baseScore: 78 },
+        'Teto Female': { idealTetoRatio: 0.7, idealEgenRatio: 0.3, baseScore: 65 },
+        'Egen Male': { idealTetoRatio: 0.3, idealEgenRatio: 0.7, baseScore: 72 },
+        'Teto Male': { idealTetoRatio: 0.8, idealEgenRatio: 0.2, baseScore: 69 }
     };
     
     const partnerProfile = idealPartnerProfiles[partnerType];

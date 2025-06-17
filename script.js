@@ -221,8 +221,8 @@ const questionData = {
             ]
         }
     ],
-    // 성별별 추가 질문
-    male_specific: [
+    // 한국어 성별별 추가 질문
+    ko_male_specific: [
         {
             situation: "군복무에 대한 생각",
             options: [
@@ -264,7 +264,7 @@ const questionData = {
             ]
         }
     ],
-    female_specific: [
+    ko_female_specific: [
         {
             situation: "커리어와 가정의 균형",
             options: [
@@ -468,8 +468,8 @@ const questionData = {
             ]
         }
     ],
-    // Gender-specific additional questions
-    male_specific: [
+    // 영어 성별별 추가 질문
+    en_male_specific: [
         {
             situation: "About military service",
             options: [
@@ -511,7 +511,7 @@ const questionData = {
             ]
         }
     ],
-    female_specific: [
+    en_female_specific: [
         {
             situation: "Balance between career and family",
             options: [
@@ -916,14 +916,17 @@ function showQuestion() {
     // 기본 질문 + 성별별 질문 통합 (언어별로)
     const baseQuestions = questionData[currentLanguage];
     
-    // 현재 언어에 맞는 성별별 질문 선택 (한국어만 지원)
+    // 현재 언어에 맞는 성별별 질문 선택
     let genderQuestions = [];
     if (currentLanguage === 'ko') {
         genderQuestions = currentGender === 'male' ? 
-            questionData['male_specific'] : 
-            questionData['female_specific'];
+            questionData['ko_male_specific'] : 
+            questionData['ko_female_specific'];
+    } else if (currentLanguage === 'en') {
+        genderQuestions = currentGender === 'male' ? 
+            questionData['en_male_specific'] : 
+            questionData['en_female_specific'];
     }
-    // 영어의 경우 성별별 질문이 아직 없으므로 빈 배열 사용
     
     const allQuestions = [...baseQuestions, ...genderQuestions];
     const question = allQuestions[currentQuestionIndex];
@@ -981,13 +984,17 @@ function selectOption(selectedOption) {
 function nextQuestion() {
     currentQuestionIndex++;
     
-    // 기본 질문 + 성별별 질문 통합 (한국어만 지원)
+    // 기본 질문 + 성별별 질문 통합
     const baseQuestions = questionData[currentLanguage];
     let genderQuestions = [];
     if (currentLanguage === 'ko') {
         genderQuestions = currentGender === 'male' ? 
-            questionData['male_specific'] : 
-            questionData['female_specific'];
+            questionData['ko_male_specific'] : 
+            questionData['ko_female_specific'];
+    } else if (currentLanguage === 'en') {
+        genderQuestions = currentGender === 'male' ? 
+            questionData['en_male_specific'] : 
+            questionData['en_female_specific'];
     }
     
     const totalQuestions = baseQuestions.length + genderQuestions.length;

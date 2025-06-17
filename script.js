@@ -398,8 +398,7 @@ const resultData = {
                 egenLabel: "에겐남",
                 compatibility: [
                     { type: "에겐녀", score: 98, emoji: "💕", reason: "완벽한 조화! 남성적 리더십과 여성적 감성의 균형" },
-                    { type: "테토녀", score: 72, emoji: "🔥", reason: "역동적 관계! 서로의 강함이 자극적" },
-                    { type: "에겐남", score: 45, emoji: "🤝", reason: "친구로는 좋지만 연애는 신중히" }
+                    { type: "테토녀", score: 72, emoji: "🔥", reason: "역동적 관계! 서로의 강함이 자극적" }
                 ],
                 careers: ["경영진", "운동선수", "군인/경찰", "영업직", "기업가", "정치인", "부동산업", "건설업"],
                 celebrities: [
@@ -428,8 +427,7 @@ const resultData = {
                 egenLabel: "에겐남",
                 compatibility: [
                     { type: "테토녀", score: 91, emoji: "⚖️", reason: "균형잡힌 관계! 서로 부족한 부분을 채워줌" },
-                    { type: "에겐녀", score: 85, emoji: "🌙", reason: "차분한 조화! 감성적 교감이 깊음" },
-                    { type: "테토남", score: 45, emoji: "🤝", reason: "비슷한 성향으로 친구 관계가 적합" }
+                    { type: "에겐녀", score: 85, emoji: "🌙", reason: "차분한 조화! 감성적 교감이 깊음" }
                 ],
                 careers: ["디자이너", "예술가", "상담사", "교사", "의료진", "작가", "스타일리스트", "미용사"],
                 celebrities: [
@@ -460,8 +458,7 @@ const resultData = {
                 egenLabel: "에겐녀",
                 compatibility: [
                     { type: "에겐남", score: 91, emoji: "⚖️", reason: "완벽한 균형! 강함과 부드러움의 조화" },
-                    { type: "테토남", score: 72, emoji: "🔥", reason: "강한 성격끼리 자극적이지만 때론 충돌" },
-                    { type: "에겐녀", score: 68, emoji: "💫", reason: "서로 다른 매력으로 보완 관계" }
+                    { type: "테토남", score: 72, emoji: "🔥", reason: "강한 성격끼리 자극적이지만 때론 충돌" }
                 ],
                 careers: ["변호사", "의사", "CEO/임원", "저널리스트", "컨설턴트", "정치인", "마케터", "투자가"],
                 celebrities: [
@@ -490,8 +487,7 @@ const resultData = {
                 egenLabel: "에겐녀",
                 compatibility: [
                     { type: "테토남", score: 98, emoji: "💕", reason: "이상적인 커플! 전통적 남녀 조화" },
-                    { type: "에겐남", score: 85, emoji: "🌙", reason: "감성적 교감! 서로를 깊이 이해" },
-                    { type: "테토녀", score: 68, emoji: "💫", reason: "다른 매력으로 좋은 친구 관계" }
+                    { type: "에겐남", score: 85, emoji: "🌙", reason: "감성적 교감! 서로를 깊이 이해" }
                 ],
                 careers: ["간호사", "교사", "예술가", "심리상담사", "사회복지사", "HR", "미용사", "플라워 디자이너"],
                 celebrities: [
@@ -524,8 +520,7 @@ const resultData = {
                 egenLabel: "Egen Male",
                 compatibility: [
                     { type: "Egen Female", score: 98, emoji: "💕", reason: "Perfect harmony! Balance of masculine leadership and feminine sensitivity" },
-                    { type: "Teto Female", score: 72, emoji: "🔥", reason: "Dynamic relationship! Mutual strength creates excitement" },
-                    { type: "Egen Male", score: 45, emoji: "🤝", reason: "Good as friends but be careful in romance" }
+                    { type: "Teto Female", score: 72, emoji: "🔥", reason: "Dynamic relationship! Mutual strength creates excitement" }
                 ],
                 careers: ["Executive", "Athlete", "Military/Police", "Sales", "Entrepreneur", "Politician", "Real Estate", "Construction"],
                 celebrities: [
@@ -554,8 +549,7 @@ const resultData = {
                 egenLabel: "Egen Male",
                 compatibility: [
                     { type: "Teto Female", score: 91, emoji: "⚖️", reason: "Balanced relationship! Complement each other's weaknesses" },
-                    { type: "Egen Female", score: 85, emoji: "🌙", reason: "Calm harmony! Deep emotional connection" },
-                    { type: "Teto Male", score: 45, emoji: "🤝", reason: "Similar traits make them suitable as friends" }
+                    { type: "Egen Female", score: 85, emoji: "🌙", reason: "Calm harmony! Deep emotional connection" }
                 ],
                 careers: ["Designer", "Artist", "Counselor", "Teacher", "Healthcare", "Writer", "Stylist", "Hairdresser"],
                 celebrities: [
@@ -586,8 +580,7 @@ const resultData = {
                 egenLabel: "Egen Female",
                 compatibility: [
                     { type: "Egen Male", score: 91, emoji: "⚖️", reason: "Perfect balance! Harmony of strength and gentleness" },
-                    { type: "Teto Male", score: 72, emoji: "🔥", reason: "Strong personalities create excitement but sometimes clash" },
-                    { type: "Egen Female", score: 68, emoji: "💫", reason: "Complementary relationship with different charms" }
+                    { type: "Teto Male", score: 72, emoji: "🔥", reason: "Strong personalities create excitement but sometimes clash" }
                 ],
                 careers: ["Lawyer", "Doctor", "CEO/Executive", "Journalist", "Consultant", "Politician", "Marketer", "Investor"],
                 celebrities: [
@@ -616,8 +609,7 @@ const resultData = {
                 egenLabel: "Egen Female",
                 compatibility: [
                     { type: "Teto Male", score: 98, emoji: "💕", reason: "Ideal couple! Traditional male-female harmony" },
-                    { type: "Egen Male", score: 85, emoji: "🌙", reason: "Emotional connection! Deep mutual understanding" },
-                    { type: "Teto Female", score: 68, emoji: "💫", reason: "Good friendship with different charms" }
+                    { type: "Egen Male", score: 85, emoji: "🌙", reason: "Emotional connection! Deep mutual understanding" }
                 ],
                 careers: ["Nurse", "Teacher", "Artist", "Counselor", "Social Worker", "HR", "Hairdresser", "Floral Designer"],
                 celebrities: [

@@ -70,11 +70,18 @@ const questionData = {
         },
         {
             situation: "주말 저녁 시간에",
-            options: [
-                { text: "헬스장에서 운동하거나 친구들과 축구를 한다", type: "teto", score: 4 },
-                { text: "카페에서 감성적인 음악을 들으며 혼자만의 시간을 보낸다", type: "egen", score: 4 },
-                { text: "집에서 넷플릭스를 보며 휴식을 취한다", type: "egen", score: 2 }
-            ]
+            options: {
+                male: [
+                    { text: "헬스장에서 운동하거나 친구들과 축구를 한다", type: "teto", score: 4 },
+                    { text: "카페에서 감성적인 음악을 들으며 혼자만의 시간을 보낸다", type: "egen", score: 4 },
+                    { text: "집에서 넷플릭스를 보며 휴식을 취한다", type: "egen", score: 2 }
+                ],
+                female: [
+                    { text: "헬스장에서 운동하거나 친구들과 배드민턴을 한다", type: "teto", score: 4 },
+                    { text: "카페에서 감성적인 음악을 들으며 혼자만의 시간을 보낸다", type: "egen", score: 4 },
+                    { text: "집에서 넷플릭스를 보며 휴식을 취한다", type: "egen", score: 2 }
+                ]
+            }
         },
         {
             situation: "새로운 사람들과 만났을 때",
@@ -86,11 +93,18 @@ const questionData = {
         },
         {
             situation: "스트레스를 받았을 때",
-            options: [
-                { text: "운동이나 술을 마시며 스트레스를 푼다", type: "teto", score: 4 },
-                { text: "혼자 있으면서 감성적인 활동으로 마음을 달랜다", type: "egen", score: 4 },
-                { text: "친한 사람과 대화하며 감정을 공유한다", type: "egen", score: 3 }
-            ]
+            options: {
+                male: [
+                    { text: "운동이나 술을 마시며 스트레스를 푼다", type: "teto", score: 4 },
+                    { text: "혼자 있으면서 감성적인 활동으로 마음을 달랜다", type: "egen", score: 4 },
+                    { text: "친한 사람과 대화하며 감정을 공유한다", type: "egen", score: 3 }
+                ],
+                female: [
+                    { text: "운동이나 쇼핑을 하며 스트레스를 푼다", type: "teto", score: 4 },
+                    { text: "혼자 있으면서 감성적인 활동으로 마음을 달랜다", type: "egen", score: 4 },
+                    { text: "친한 사람과 대화하며 감정을 공유한다", type: "egen", score: 3 }
+                ]
+            }
         },
         {
             situation: "돈을 쓸 때",
@@ -142,11 +156,18 @@ const questionData = {
         },
         {
             situation: "데이트할 때",
-            options: [
-                { text: "활동적인 장소나 맛집을 선호한다", type: "teto", score: 4 },
-                { text: "감성적이고 아기자기한 카페나 전시회를 좋아한다", type: "egen", score: 4 },
-                { text: "상대방이 원하는 곳에 맞춰준다", type: "egen", score: 2 }
-            ]
+            options: {
+                male: [
+                    { text: "활동적인 장소나 맛집을 선호한다", type: "teto", score: 4 },
+                    { text: "감성적이고 아기자기한 카페나 전시회를 좋아한다", type: "egen", score: 4 },
+                    { text: "상대방이 원하는 곳에 맞춰준다", type: "egen", score: 2 }
+                ],
+                female: [
+                    { text: "액티비티나 새로운 맛집을 탐험하고 싶다", type: "teto", score: 4 },
+                    { text: "감성적이고 아기자기한 카페나 전시회를 좋아한다", type: "egen", score: 4 },
+                    { text: "상대방이 원하는 곳에 맞춰준다", type: "egen", score: 2 }
+                ]
+            }
         },
         {
             situation: "팀 프로젝트에서",
@@ -158,11 +179,18 @@ const questionData = {
         },
         {
             situation: "여가 시간에",
-            options: [
-                { text: "친구들과 만나 활동적인 일을 한다", type: "teto", score: 4 },
-                { text: "혼자서 취미 활동이나 문화생활을 즐긴다", type: "egen", score: 4 },
-                { text: "집에서 편안하게 쉰다", type: "egen", score: 2 }
-            ]
+            options: {
+                male: [
+                    { text: "친구들과 만나 스포츠나 게임을 한다", type: "teto", score: 4 },
+                    { text: "혼자서 취미 활동이나 문화생활을 즐긴다", type: "egen", score: 4 },
+                    { text: "집에서 편안하게 쉰다", type: "egen", score: 2 }
+                ],
+                female: [
+                    { text: "친구들과 만나 쇼핑이나 브런치를 즐긴다", type: "teto", score: 4 },
+                    { text: "혼자서 취미 활동이나 문화생활을 즐긴다", type: "egen", score: 4 },
+                    { text: "집에서 편안하게 쉰다", type: "egen", score: 2 }
+                ]
+            }
         },
         {
             situation: "의견 충돌이 있을 때",
@@ -317,11 +345,18 @@ const questionData = {
         },
         {
             situation: "On weekend evenings",
-            options: [
-                { text: "I work out at the gym or play sports with friends", type: "teto", score: 4 },
-                { text: "I spend alone time listening to emotional music at a cafe", type: "egen", score: 4 },
-                { text: "I relax at home watching Netflix", type: "egen", score: 2 }
-            ]
+            options: {
+                male: [
+                    { text: "I work out at the gym or play soccer with friends", type: "teto", score: 4 },
+                    { text: "I spend alone time listening to emotional music at a cafe", type: "egen", score: 4 },
+                    { text: "I relax at home watching Netflix", type: "egen", score: 2 }
+                ],
+                female: [
+                    { text: "I work out at the gym or play badminton with friends", type: "teto", score: 4 },
+                    { text: "I spend alone time listening to emotional music at a cafe", type: "egen", score: 4 },
+                    { text: "I relax at home watching Netflix", type: "egen", score: 2 }
+                ]
+            }
         },
         {
             situation: "When meeting new people",
@@ -333,11 +368,18 @@ const questionData = {
         },
         {
             situation: "When feeling stressed",
-            options: [
-                { text: "I relieve stress through exercise or drinking", type: "teto", score: 4 },
-                { text: "I calm myself through emotional activities alone", type: "egen", score: 4 },
-                { text: "I talk to close people and share my feelings", type: "egen", score: 3 }
-            ]
+            options: {
+                male: [
+                    { text: "I relieve stress through exercise or drinking", type: "teto", score: 4 },
+                    { text: "I calm myself through emotional activities alone", type: "egen", score: 4 },
+                    { text: "I talk to close people and share my feelings", type: "egen", score: 3 }
+                ],
+                female: [
+                    { text: "I relieve stress through exercise or shopping", type: "teto", score: 4 },
+                    { text: "I calm myself through emotional activities alone", type: "egen", score: 4 },
+                    { text: "I talk to close people and share my feelings", type: "egen", score: 3 }
+                ]
+            }
         },
         {
             situation: "When spending money",
@@ -389,11 +431,18 @@ const questionData = {
         },
         {
             situation: "When dating",
-            options: [
-                { text: "I prefer active places or good restaurants", type: "teto", score: 4 },
-                { text: "I like emotional and cozy cafes or exhibitions", type: "egen", score: 4 },
-                { text: "I accommodate what my partner wants", type: "egen", score: 2 }
-            ]
+            options: {
+                male: [
+                    { text: "I prefer active places or good restaurants", type: "teto", score: 4 },
+                    { text: "I like emotional and cozy cafes or exhibitions", type: "egen", score: 4 },
+                    { text: "I accommodate what my partner wants", type: "egen", score: 2 }
+                ],
+                female: [
+                    { text: "I prefer activities or exploring new restaurants", type: "teto", score: 4 },
+                    { text: "I like emotional and cozy cafes or exhibitions", type: "egen", score: 4 },
+                    { text: "I accommodate what my partner wants", type: "egen", score: 2 }
+                ]
+            }
         },
         {
             situation: "In team projects",
@@ -405,11 +454,18 @@ const questionData = {
         },
         {
             situation: "During leisure time",
-            options: [
-                { text: "I meet friends and do active things", type: "teto", score: 4 },
-                { text: "I enjoy hobbies or cultural activities alone", type: "egen", score: 4 },
-                { text: "I relax comfortably at home", type: "egen", score: 2 }
-            ]
+            options: {
+                male: [
+                    { text: "I meet friends and play sports or games", type: "teto", score: 4 },
+                    { text: "I enjoy hobbies or cultural activities alone", type: "egen", score: 4 },
+                    { text: "I relax comfortably at home", type: "egen", score: 2 }
+                ],
+                female: [
+                    { text: "I meet friends for shopping or brunch", type: "teto", score: 4 },
+                    { text: "I enjoy hobbies or cultural activities alone", type: "egen", score: 4 },
+                    { text: "I relax comfortably at home", type: "egen", score: 2 }
+                ]
+            }
         },
         {
             situation: "When there are conflicting opinions",
@@ -944,8 +1000,18 @@ function showQuestion() {
     const optionsContainer = document.querySelector('.options');
     optionsContainer.innerHTML = '';
     
+    // 성별별 선택지 처리
+    let questionOptions;
+    if (question.options && typeof question.options === 'object' && question.options.male && question.options.female) {
+        // 성별별 선택지가 있는 경우
+        questionOptions = question.options[currentGender];
+    } else {
+        // 공통 선택지인 경우
+        questionOptions = question.options;
+    }
+    
     // 선택지 순서 랜덤화
-    const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+    const shuffledOptions = [...questionOptions].sort(() => Math.random() - 0.5);
     
     shuffledOptions.forEach((option, index) => {
         const button = document.createElement('button');

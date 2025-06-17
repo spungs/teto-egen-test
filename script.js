@@ -1075,7 +1075,7 @@ function showResult() {
     }, 500);
 }
 
-// 💕 연애 궁합 렌더링 함수 (동적 계산)
+// 💕 연애 궁합 렌더링 함수 (동적 계산, 합계 100%)
 function renderCompatibility(compatibilityData) {
     const container = document.getElementById('compatibility-list');
     container.innerHTML = '';
@@ -1092,10 +1092,22 @@ function renderCompatibility(compatibilityData) {
         userEgenRatio: userEgenRatio
     });
     
-    compatibilityData.forEach(item => {
-        // 동적 궁합도 계산
-        const dynamicScore = calculateCompatibilityScore(userTetoRatio, userEgenRatio, item.type);
-        
+    // 모든 궁합 점수를 먼저 계산
+    const compatibilityScores = compatibilityData.map(item => ({
+        ...item,
+        rawScore: calculateCompatibilityScore(userTetoRatio, userEgenRatio, item.type)
+    }));
+    
+    // 두 점수의 합이 100%가 되도록 정규화
+    const totalRawScore = compatibilityScores.reduce((sum, item) => sum + item.rawScore, 0);
+    
+    // 정규화된 점수로 업데이트하고 높은 점수 순으로 정렬
+    const sortedCompatibilityScores = compatibilityScores.map(item => ({
+        ...item,
+        normalizedScore: Math.round((item.rawScore / totalRawScore) * 100)
+    })).sort((a, b) => b.normalizedScore - a.normalizedScore);
+    
+    sortedCompatibilityScores.forEach(item => {
         const compatibilityItem = document.createElement('div');
         compatibilityItem.className = 'compatibility-item';
         
@@ -1106,62 +1118,56 @@ function renderCompatibility(compatibilityData) {
             </div>
             <div class="compatibility-score">
                 <span class="compatibility-emoji">${item.emoji}</span>
-                <span>${dynamicScore}%</span>
+                <span>${item.normalizedScore}%</span>
             </div>
         `;
         
         container.appendChild(compatibilityItem);
+        
+        console.log(`💕 ${item.type} 최종 궁합:`, {
+            rawScore: item.rawScore,
+            normalizedScore: item.normalizedScore
+        });
     });
 }
 
-// 동적 궁합도 계산 함수
+// Helen Fisher 이론 기반 궁합도 계산 함수
 function calculateCompatibilityScore(userTetoRatio, userEgenRatio, partnerType) {
-    // 각 유형별 이상적인 파트너의 특성 정의 (더 현실적으로 조정)
-    const idealPartnerProfiles = {
-        // 한국어
-        '에겐녀': { idealTetoRatio: 0.2, idealEgenRatio: 0.8, baseScore: 78 },
-        '테토녀': { idealTetoRatio: 0.7, idealEgenRatio: 0.3, baseScore: 65 },
-        '에겐남': { idealTetoRatio: 0.3, idealEgenRatio: 0.7, baseScore: 72 },
-        '테토남': { idealTetoRatio: 0.8, idealEgenRatio: 0.2, baseScore: 69 },
-        
-        // 영어
-        'Egen Female': { idealTetoRatio: 0.2, idealEgenRatio: 0.8, baseScore: 78 },
-        'Teto Female': { idealTetoRatio: 0.7, idealEgenRatio: 0.3, baseScore: 65 },
-        'Egen Male': { idealTetoRatio: 0.3, idealEgenRatio: 0.7, baseScore: 72 },
-        'Teto Male': { idealTetoRatio: 0.8, idealEgenRatio: 0.2, baseScore: 69 }
-    };
+    // Helen Fisher 연구: Director(테토) ↔ Negotiator(에겐) 강한 끌림
+    // 반대 성향끼리 높은 호환성을 가짐
     
-    const partnerProfile = idealPartnerProfiles[partnerType];
-    if (!partnerProfile) {
-        console.warn('알 수 없는 파트너 유형:', partnerType);
-        return 75; // 기본값
+    let compatibilityScore;
+    
+    if (partnerType.includes('에겐') || partnerType.includes('Egen')) {
+        // 에겐형 파트너: 사용자가 테토형일수록 높은 궁합
+        // 테토 비율이 높을수록 에겐형과 궁합이 좋음
+        const baseAttraction = 40; // 기본 끌림
+        const oppositeAttraction = userTetoRatio * 40; // 반대 성향 끌림 (0~40점)
+        const personalityBonus = (1 - Math.abs(userTetoRatio - 0.7)) * 20; // 최적 테토 비율 보너스
+        
+        compatibilityScore = baseAttraction + oppositeAttraction + personalityBonus;
+        
+    } else if (partnerType.includes('테토') || partnerType.includes('Teto')) {
+        // 테토형 파트너: 사용자가 에겐형일수록 높은 궁합
+        // 에겐 비율이 높을수록 테토형과 궁합이 좋음
+        const baseAttraction = 40; // 기본 끌림
+        const oppositeAttraction = userEgenRatio * 40; // 반대 성향 끌림 (0~40점)
+        const personalityBonus = (1 - Math.abs(userEgenRatio - 0.7)) * 20; // 최적 에겐 비율 보너스
+        
+        compatibilityScore = baseAttraction + oppositeAttraction + personalityBonus;
     }
     
-    // 유저와 이상적인 파트너 프로필 간의 호환성 계산
-    const tetoCompatibility = 1 - Math.abs(userTetoRatio - partnerProfile.idealTetoRatio);
-    const egenCompatibility = 1 - Math.abs(userEgenRatio - partnerProfile.idealEgenRatio);
+    // 점수 범위 제한 (30-100%)
+    const finalScore = Math.max(30, Math.min(100, Math.round(compatibilityScore)));
     
-    // 전체 호환성 점수 (가중평균)
-    const overallCompatibility = (tetoCompatibility + egenCompatibility) / 2;
-    
-    // 기본 점수에서 호환성에 따라 조정 (±15% 범위)
-    const variationRange = 15;
-    const adjustment = (overallCompatibility - 0.5) * variationRange * 2; // -15 ~ +15
-    const finalScore = Math.round(partnerProfile.baseScore + adjustment);
-    
-    // 점수 범위 제한 (50-100%)
-    const clampedScore = Math.max(50, Math.min(100, finalScore));
-    
-    console.log(`💕 ${partnerType} 궁합 계산:`, {
+    console.log(`💕 ${partnerType} Helen Fisher 이론 기반 궁합:`, {
         userRatio: `테토${Math.round(userTetoRatio*100)}% / 에겐${Math.round(userEgenRatio*100)}%`,
-        idealPartner: `테토${Math.round(partnerProfile.idealTetoRatio*100)}% / 에겐${Math.round(partnerProfile.idealEgenRatio*100)}%`,
-        compatibility: Math.round(overallCompatibility*100) + '%',
-        baseScore: partnerProfile.baseScore,
-        adjustment: Math.round(adjustment),
-        finalScore: clampedScore
+        isOppositeAttraction: partnerType.includes('에겐') ? '테토→에겐 끌림' : '에겐→테토 끌림',
+        finalScore: finalScore,
+        theory: 'Director(테토) ↔ Negotiator(에겐) 강한 상호 끌림'
     });
     
-    return clampedScore;
+    return finalScore;
 }
 
 // 💼 추천 직업 렌더링 함수

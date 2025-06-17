@@ -515,6 +515,65 @@ body.dark-mode .score-percent {
     margin-top: 40px;
 }
 
+/* 광고 컨테이너 스타일 */
+.ad-container {
+    margin: 30px 0;
+    text-align: center;
+    min-height: 100px;
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px dashed rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+.ad-container:before {
+    content: "광고 영역 (AdSense 승인 후 활성화)";
+}
+
+body.dark-mode .ad-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #666;
+}
+
+/* 광고가 로드되면 placeholder 숨기기 */
+.ad-container:has(.adsbygoogle) {
+    background: transparent;
+    border: none;
+    min-height: auto;
+}
+
+.ad-container:has(.adsbygoogle):before {
+    display: none;
+}
+
+/* 광고 위치별 스타일 조정 */
+#ad-start-bottom {
+    margin-top: 40px;
+    max-width: 728px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#ad-result-middle {
+    margin: 40px 0;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#ad-result-bottom {
+    margin-top: 40px;
+    max-width: 728px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .container {
@@ -573,5 +632,21 @@ body.dark-mode .score-percent {
     
     .score-label {
         text-align: center;
+    }
+
+    /* 모바일에서 광고 크기 조정 */
+    .ad-container {
+        min-height: 80px;
+        margin: 20px 0;
+        font-size: 0.8rem;
+    }
+
+    #ad-start-bottom,
+    #ad-result-bottom {
+        max-width: 320px;
+    }
+
+    #ad-result-middle {
+        max-width: 250px;
     }
 } 

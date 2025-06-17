@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테토-에겐 성격 유형 테스트</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings-bar">
+        <button id="language-toggle" class="setting-btn">EN</button>
+        <button id="theme-toggle" class="setting-btn">🌙</button>
+    </div>
+    <div class="container">
+        <!-- 시작 화면 -->
+        <div id="start-screen" class="screen active">
+            <div class="hero">
+                <h1>테토-에겐 성격 유형 테스트</h1>
+                <p class="subtitle">나는 테토형? 에겐형?</p>
+                <p class="description">
+                    테스토스테론과 에스트로겐 호르몬 성향을 바탕으로 한 성격 유형 테스트입니다.<br>
+                    간단한 질문을 통해 당신의 성격 유형을 알아보세요!
+                </p>
+                
+                <div class="gender-selection">
+                    <h3>성별을 선택해주세요</h3>
+                    <div class="gender-buttons">
+                        <button class="gender-btn" data-gender="male">
+                            <span class="emoji">👨</span>
+                            <span>남성</span>
+                        </button>
+                        <button class="gender-btn" data-gender="female">
+                            <span class="emoji">👩</span>
+                            <span>여성</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <button id="start-btn" class="btn btn-primary" disabled>
+                    테스트 시작하기
+                </button>
+                
+                <div class="test-info">
+                    <p>📋 총 20문항 | ⏱️ 약 5분 소요</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 테스트 화면 -->
+        <div id="test-screen" class="screen">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progress" class="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="current-question">1</span> / <span id="total-questions">20</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text"></h2>
+                <div class="options">
+                    <!-- 동적으로 생성됩니다 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <div id="result-screen" class="screen">
+            <div class="result-container">
+                <div class="result-header">
+                    <h1 id="result-type"></h1>
+                    <div id="result-emoji" class="result-emoji"></div>
+                </div>
+                
+                <div class="result-description">
+                    <h3>당신의 성격 특징</h3>
+                    <div id="result-traits" class="traits-container"></div>
+                </div>
+                
+                <div class="result-detailed">
+                    <h3>상세 설명</h3>
+                    <p id="result-detail"></p>
+                </div>
+                
+                <div class="result-score">
+                    <h3>점수 분포</h3>
+                    <div class="score-bars">
+                        <div class="score-item">
+                            <span class="score-label" id="type1-label"></span>
+                            <div class="score-bar">
+                                <div id="type1-score" class="score-fill"></div>
+                            </div>
+                            <span id="type1-percent" class="score-percent"></span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label" id="type2-label"></span>
+                            <div class="score-bar">
+                                <div id="type2-score" class="score-fill"></div>
+                            </div>
+                            <span id="type2-percent" class="score-percent"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-actions">
+                    <button id="retry-btn" class="btn btn-secondary">다시 테스트하기</button>
+                    <button id="share-btn" class="btn btn-primary">결과 공유하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

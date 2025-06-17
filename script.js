@@ -40,7 +40,7 @@ const translations = {
         male: "Male",
         female: "Female", 
         startBtn: "Start Test",
-        testInfo: "📋 25 Questions | ⏱️ About 6 minutes",
+        testInfo: "📋 20 Questions | ⏱️ About 5 minutes",
         retryBtn: "Retry Test",
         shareBtn: "Share Result",
         traitsTitle: "Your Personality Traits",
@@ -694,10 +694,10 @@ const resultData = {
                 ],
                 careers: ["Executive", "Athlete", "Military/Police", "Sales", "Entrepreneur", "Politician", "Real Estate", "Construction"],
                 celebrities: [
-                    { name: "Son Heung-min", profession: "Soccer Player" },
-                    { name: "Park Ji-sung", profession: "Soccer Player" },
-                    { name: "Lee Seung-gi", profession: "Singer/Actor" },
-                    { name: "Kang Ho-dong", profession: "TV Host" }
+                    { name: "Dwayne Johnson", profession: "Actor/Wrestler" },
+                    { name: "Cristiano Ronaldo", profession: "Soccer Player" },
+                    { name: "Chris Hemsworth", profession: "Actor" },
+                    { name: "Gordon Ramsay", profession: "Chef" }
                 ],
                 health: {
                     exercise: ["Weight Training", "Soccer/Basketball", "Running/Jogging", "Hiking"],
@@ -723,10 +723,10 @@ const resultData = {
                 ],
                 careers: ["Designer", "Artist", "Counselor", "Teacher", "Healthcare", "Writer", "Stylist", "Hairdresser"],
                 celebrities: [
-                    { name: "BTS RM", profession: "Singer" },
-                    { name: "Yoo Jae-suk", profession: "TV Host" },
-                    { name: "Gong Yoo", profession: "Actor" },
-                    { name: "Lee Dong-wook", profession: "Actor" }
+                    { name: "Timothée Chalamet", profession: "Actor" },
+                    { name: "Harry Styles", profession: "Singer" },
+                    { name: "Ryan Gosling", profession: "Actor" },
+                    { name: "Eddie Redmayne", profession: "Actor" }
                 ],
                 health: {
                     exercise: ["Yoga/Pilates", "Swimming", "Dancing", "Walking"],
@@ -754,10 +754,10 @@ const resultData = {
                 ],
                 careers: ["Lawyer", "Doctor", "CEO/Executive", "Journalist", "Consultant", "Politician", "Marketer", "Investor"],
                 celebrities: [
-                    { name: "Kim Yuna", profession: "Figure Skater" },
-                    { name: "IU", profession: "Singer" },
-                    { name: "Son Yeon-jae", profession: "Gymnast" },
-                    { name: "Kim Na-young", profession: "TV Host" }
+                    { name: "Serena Williams", profession: "Tennis Player" },
+                    { name: "Gal Gadot", profession: "Actress" },
+                    { name: "Ronda Rousey", profession: "MMA Fighter" },
+                    { name: "Oprah Winfrey", profession: "Media Mogul" }
                 ],
                 health: {
                     exercise: ["CrossFit", "Boxing", "Tennis", "Golf"],
@@ -783,10 +783,10 @@ const resultData = {
                 ],
                 careers: ["Nurse", "Teacher", "Artist", "Counselor", "Social Worker", "HR", "Hairdresser", "Floral Designer"],
                 celebrities: [
-                    { name: "Song Hye-kyo", profession: "Actress" },
-                    { name: "Suzy", profession: "Singer/Actress" },
-                    { name: "Taeyeon", profession: "Singer" },
-                    { name: "Han Ji-min", profession: "Actress" }
+                    { name: "Emma Stone", profession: "Actress" },
+                    { name: "Taylor Swift", profession: "Singer" },
+                    { name: "Jennifer Lawrence", profession: "Actress" },
+                    { name: "Zendaya", profession: "Actress/Singer" }
                 ],
                 health: {
                     exercise: ["Yoga", "Pilates", "Ballet", "Walking"],
@@ -913,11 +913,17 @@ function showScreen(screenName) {
 }
 
 function showQuestion() {
-    // 기본 질문 + 성별별 질문 통합
+    // 기본 질문 + 성별별 질문 통합 (언어별로)
     const baseQuestions = questionData[currentLanguage];
-    const genderQuestions = currentGender === 'male' ? 
-        questionData[currentLanguage + '_male_specific'] || questionData['male_specific'] : 
-        questionData[currentLanguage + '_female_specific'] || questionData['female_specific'];
+    
+    // 현재 언어에 맞는 성별별 질문 선택 (한국어만 지원)
+    let genderQuestions = [];
+    if (currentLanguage === 'ko') {
+        genderQuestions = currentGender === 'male' ? 
+            questionData['male_specific'] : 
+            questionData['female_specific'];
+    }
+    // 영어의 경우 성별별 질문이 아직 없으므로 빈 배열 사용
     
     const allQuestions = [...baseQuestions, ...genderQuestions];
     const question = allQuestions[currentQuestionIndex];
@@ -975,11 +981,14 @@ function selectOption(selectedOption) {
 function nextQuestion() {
     currentQuestionIndex++;
     
-    // 기본 질문 + 성별별 질문 통합
+    // 기본 질문 + 성별별 질문 통합 (한국어만 지원)
     const baseQuestions = questionData[currentLanguage];
-    const genderQuestions = currentGender === 'male' ? 
-        questionData['male_specific'] : 
-        questionData['female_specific'];
+    let genderQuestions = [];
+    if (currentLanguage === 'ko') {
+        genderQuestions = currentGender === 'male' ? 
+            questionData['male_specific'] : 
+            questionData['female_specific'];
+    }
     
     const totalQuestions = baseQuestions.length + genderQuestions.length;
     
@@ -1324,9 +1333,9 @@ function updateLanguage() {
     const celebritiesTitle = document.querySelector('.result-celebrities h3');
     const healthTitle = document.querySelector('.result-health h3');
     const growthTitle = document.querySelector('.result-growth h3');
-    const exerciseTitle = document.querySelector('.health-category h4:nth-of-type(1)');
-    const dietTitle = document.querySelector('.health-category h4:nth-of-type(2)');
-    const stressTitle = document.querySelector('.health-category h4:nth-of-type(3)');
+    const exerciseTitle = document.querySelector('.health-category:nth-child(1) h4');
+    const dietTitle = document.querySelector('.health-category:nth-child(2) h4');
+    const stressTitle = document.querySelector('.health-category:nth-child(3) h4');
     
     if (traitsTitle) traitsTitle.textContent = texts.traitsTitle;
     if (detailTitle) detailTitle.textContent = texts.detailTitle;
@@ -1340,8 +1349,14 @@ function updateLanguage() {
     if (dietTitle) dietTitle.textContent = texts.dietTitle;
     if (stressTitle) stressTitle.textContent = texts.stressTitle;
     
-    // 결과 화면에 있는 경우 결과 내용도 업데이트
-    updateResultContent();
+    // 현재 화면에 따라 적절한 업데이트 수행
+    if (screens.test.classList.contains('active')) {
+        // 테스트 진행 중이면 현재 질문 업데이트
+        showQuestion();
+    } else if (screens.result.classList.contains('active')) {
+        // 결과 화면에 있는 경우 결과 내용도 업데이트
+        updateResultContent();
+    }
     
     // 언어 토글 버튼 텍스트
     document.getElementById('language-toggle').textContent = currentLanguage === 'ko' ? 'EN' : '한국어';

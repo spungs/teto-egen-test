@@ -40,7 +40,7 @@ const translations = {
         male: "Male",
         female: "Female", 
         startBtn: "Start Test",
-        testInfo: "📋 20 Questions | ⏱️ About 5 minutes",
+        testInfo: "📋 25 Questions | ⏱️ About 6 minutes",
         retryBtn: "Retry Test",
         shareBtn: "Share Result",
         traitsTitle: "Your Personality Traits",

@@ -5,7 +5,6 @@ let answers = [];
 let tetoScore = 0;
 let egenScore = 0;
 let currentLanguage = 'ko';
-let currentTheme = 'light';
 
 // 다국어 데이터
 const translations = {
@@ -874,17 +873,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initializeApp() {
     // 저장된 설정 불러오기
-    const savedTheme = localStorage.getItem('theme-preference');
     const savedLanguage = localStorage.getItem('language-preference');
-    
-    if (savedTheme) {
-        currentTheme = savedTheme;
-    } else {
-        // 시스템 테마 감지
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            currentTheme = 'dark';
-        }
-    }
     
     if (savedLanguage) {
         currentLanguage = savedLanguage;
@@ -896,11 +885,10 @@ function initializeApp() {
         }
     }
     
-    // 테마 적용
-    document.body.classList.toggle('dark-mode', currentTheme === 'dark');
+    // 다크모드를 기본으로 적용
+    document.body.classList.add('dark-mode');
     
     updateLanguage();
-    updateThemeToggle();
 }
 
 function setupEventListeners() {
@@ -922,18 +910,6 @@ function setupEventListeners() {
     
     // 언어 토글 버튼
     document.getElementById('language-toggle').addEventListener('click', toggleLanguage);
-    
-    // 테마 토글 버튼
-    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-    
-    // 시스템 테마 변경 감지
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        if (!localStorage.getItem('theme-preference')) {
-            currentTheme = e.matches ? 'dark' : 'light';
-            document.body.classList.toggle('dark-mode', e.matches);
-            updateThemeToggle();
-        }
-    });
 }
 
 function selectGender(gender) {
@@ -1440,8 +1416,7 @@ function updateLanguage() {
     // 언어 토글 버튼 텍스트
     document.getElementById('language-toggle').textContent = currentLanguage === 'ko' ? 'EN' : '한국어';
     
-    // 테마 토글 버튼 타이틀도 언어에 맞게 업데이트
-    updateThemeToggle();
+
 }
 
 // 결과 내용을 현재 언어로 업데이트하는 함수
@@ -1484,21 +1459,4 @@ function updateResultContent() {
     }
 }
 
-// 테마 관련 함수들
-function toggleTheme() {
-    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.body.classList.toggle('dark-mode', currentTheme === 'dark');
-    updateThemeToggle();
-    localStorage.setItem('theme-preference', currentTheme);
-}
-
-function updateThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    if (currentTheme === 'dark') {
-        themeToggle.textContent = '☀️';
-        themeToggle.title = currentLanguage === 'ko' ? '라이트 모드' : 'Light Mode';
-    } else {
-        themeToggle.textContent = '🌙';
-        themeToggle.title = currentLanguage === 'ko' ? '다크 모드' : 'Dark Mode';
-    }
-} 
+ 

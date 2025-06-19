@@ -677,3 +677,79 @@ const translations = {
         }
     }
 }; 
+
+// 공통 언어 관련 함수들
+function getNestedValue(obj, path) {
+    return path.split('.').reduce((curr, key) => curr && curr[key], obj);
+}
+
+// 공통 언어 토글 함수
+function toggleLanguage() {
+    const previousLanguage = currentLanguage;
+    currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
+    
+    console.log('🌐 언어 변경:', {
+        from: previousLanguage,
+        to: currentLanguage,
+        page: window.location.pathname
+    });
+    
+    updateLanguage();
+    localStorage.setItem('language-preference', currentLanguage);
+}
+
+// 공통 언어 업데이트 함수
+function updateLanguage() {
+    const elements = document.querySelectorAll('[data-text]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-text');
+        if (key) {
+            const text = getNestedValue(translations[currentLanguage], key);
+            if (text) {
+                element.innerHTML = text;
+            }
+        }
+    });
+    
+    // 페이지 제목 업데이트
+    const titleKey = document.querySelector('title[data-text]')?.getAttribute('data-text');
+    if (titleKey) {
+        const titleText = getNestedValue(translations[currentLanguage], titleKey);
+        if (titleText) {
+            document.title = titleText;
+        }
+    } else {
+        // 페이지별 기본 제목 설정
+        const pageTitles = {
+            'index.html': translations[currentLanguage].title,
+            'about.html': translations[currentLanguage].about?.title,
+            'guide.html': translations[currentLanguage].guide?.title,
+            'privacy-policy.html': translations[currentLanguage].privacy?.title
+        };
+        
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const pageTitle = pageTitles[currentPage];
+        if (pageTitle) {
+            document.title = pageTitle;
+        }
+    }
+    
+    // 언어 토글 버튼 텍스트 업데이트
+    const languageBtn = document.getElementById('language-toggle');
+    if (languageBtn) {
+        languageBtn.textContent = currentLanguage === 'ko' ? 'EN' : '한국어';
+    }
+}
+
+// 페이지 로딩 시 저장된 언어 설정 적용
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLanguage = localStorage.getItem('language-preference');
+    if (savedLanguage && savedLanguage !== currentLanguage) {
+        currentLanguage = savedLanguage;
+    }
+    
+    // 100ms 지연 후 언어 업데이트 (DOM 완전 로딩 대기)
+    setTimeout(() => {
+        updateLanguage();
+    }, 100);
+});

@@ -8,13 +8,23 @@ async function loadHeader() {
         // 현재 페이지에 따라 활성 버튼 설정
         setActiveNavButton();
         
-        // 언어 토글 이벤트 리스너 추가 (약간의 지연을 두어 script.js가 로드되길 기다림)
+        // 언어 토글 이벤트 리스너 추가 (translations.js가 로드된 후)
         setTimeout(() => {
             const languageToggle = document.getElementById('language-toggle');
-            if (languageToggle && typeof toggleLanguage === 'function') {
-                languageToggle.addEventListener('click', toggleLanguage);
+            if (languageToggle) {
+                // 기존 이벤트 리스너 제거 (중복 방지)
+                if (!languageToggle.hasAttribute('data-listener-added')) {
+                    languageToggle.addEventListener('click', function() {
+                        if (typeof toggleLanguage === 'function') {
+                            toggleLanguage();
+                        } else {
+                            console.warn('toggleLanguage 함수를 찾을 수 없습니다.');
+                        }
+                    });
+                    languageToggle.setAttribute('data-listener-added', 'true');
+                }
             }
-        }, 50);
+        }, 100);
     } catch (error) {
         console.error('헤더 로딩 실패:', error);
     }

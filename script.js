@@ -811,16 +811,20 @@ const resultData = {
 };
 
 // DOM 요소들
-const screens = {
-    start: document.getElementById('start-screen'),
-    test: document.getElementById('test-screen'),
-    result: document.getElementById('result-screen')
-};
+let screens = {};
 
 // 이벤트 리스너 설정
 document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
-    setupEventListeners();
+    // DOM이 로드된 후 screens 초기화
+    setTimeout(() => {
+        screens = {
+            start: document.getElementById('start-screen'),
+            test: document.getElementById('test-screen'),
+            result: document.getElementById('result-screen')
+        };
+        initializeApp();
+        setupEventListeners();
+    }, 100); // 헤더 로딩을 위한 약간의 지연
 });
 
 function initializeApp() {
@@ -852,16 +856,30 @@ function setupEventListeners() {
     });
 
     // 테스트 시작 버튼
-    document.getElementById('start-btn').addEventListener('click', startTest);
+    const startBtn = document.getElementById('start-btn');
+    if (startBtn) {
+        startBtn.addEventListener('click', startTest);
+    }
 
     // 다시 시작 버튼
-    document.getElementById('retry-btn').addEventListener('click', resetTest);
+    const retryBtn = document.getElementById('retry-btn');
+    if (retryBtn) {
+        retryBtn.addEventListener('click', resetTest);
+    }
 
     // 공유 버튼
-    document.getElementById('share-btn').addEventListener('click', shareResult);
+    const shareBtn = document.getElementById('share-btn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', shareResult);
+    }
     
-    // 언어 토글 버튼
-    document.getElementById('language-toggle').addEventListener('click', toggleLanguage);
+    // 언어 토글 버튼 (헤더에서 처리하므로 여기서는 제거)
+    // 하지만 기존 페이지에서 이미 토글된 경우를 대비해 중복 체크
+    const languageToggle = document.getElementById('language-toggle');
+    if (languageToggle && !languageToggle.hasAttribute('data-listener-added')) {
+        languageToggle.addEventListener('click', toggleLanguage);
+        languageToggle.setAttribute('data-listener-added', 'true');
+    }
 }
 
 function selectGender(gender) {
@@ -1319,17 +1337,47 @@ function toggleLanguage() {
 function updateLanguage() {
     const texts = translations[currentLanguage];
     
-    // 기본 텍스트들
-    document.querySelector('.hero h1').textContent = texts.title;
-    document.querySelector('.hero .subtitle').textContent = texts.subtitle;
-    document.querySelector('.hero .description').innerHTML = texts.description;
-    document.querySelector('.gender-selection h3').textContent = texts.genderTitle;
-    document.querySelector('.gender-btn[data-gender="male"] span:last-child').textContent = texts.male;
-    document.querySelector('.gender-btn[data-gender="female"] span:last-child').textContent = texts.female;
-    document.getElementById('start-btn').textContent = texts.startBtn;
-    document.querySelector('.test-info p').textContent = texts.testInfo;
-    document.getElementById('retry-btn').textContent = texts.retryBtn;
-    document.getElementById('share-btn').textContent = texts.shareBtn;
+    // 모든 data-text 속성을 가진 요소 업데이트
+    document.querySelectorAll('[data-text]').forEach(element => {
+        const keys = element.dataset.text.split('.');
+        let text = texts;
+        
+        for (const key of keys) {
+            if (text && typeof text === 'object' && key in text) {
+                text = text[key];
+            } else {
+                console.warn(`번역 키를 찾을 수 없습니다: ${element.dataset.text}`);
+                return;
+            }
+        }
+        
+        if (typeof text === 'string') {
+            element.innerHTML = text;
+        }
+    });
+    
+    // 기본 텍스트들 (index.html용)
+    const heroTitle = document.querySelector('.hero h1');
+    const heroSubtitle = document.querySelector('.hero .subtitle');
+    const heroDescription = document.querySelector('.hero .description');
+    const genderTitle = document.querySelector('.gender-selection h3');
+    const maleBtn = document.querySelector('.gender-btn[data-gender="male"] span:last-child');
+    const femaleBtn = document.querySelector('.gender-btn[data-gender="female"] span:last-child');
+    const startBtn = document.getElementById('start-btn');
+    const testInfo = document.querySelector('.test-info p');
+    const retryBtn = document.getElementById('retry-btn');
+    const shareBtn = document.getElementById('share-btn');
+    
+    if (heroTitle) heroTitle.textContent = texts.title;
+    if (heroSubtitle) heroSubtitle.textContent = texts.subtitle;
+    if (heroDescription) heroDescription.innerHTML = texts.description;
+    if (genderTitle) genderTitle.textContent = texts.genderTitle;
+    if (maleBtn) maleBtn.textContent = texts.male;
+    if (femaleBtn) femaleBtn.textContent = texts.female;
+    if (startBtn) startBtn.textContent = texts.startBtn;
+    if (testInfo) testInfo.textContent = texts.testInfo;
+    if (retryBtn) retryBtn.textContent = texts.retryBtn;
+    if (shareBtn) shareBtn.textContent = texts.shareBtn;
     
     // 결과 화면 제목들
     const traitsTitle = document.querySelector('.result-description h3');
@@ -1356,19 +1404,28 @@ function updateLanguage() {
     if (dietTitle) dietTitle.textContent = texts.dietTitle;
     if (stressTitle) stressTitle.textContent = texts.stressTitle;
     
+    // title 업데이트
+    if (document.title.includes('테토-에겐') || document.title.includes('Teto-Egen')) {
+        document.title = texts.title || document.title;
+    }
+    
     // 현재 화면에 따라 적절한 업데이트 수행
-    if (screens.test.classList.contains('active')) {
+    if (screens && screens.test && screens.test.classList.contains('active')) {
         // 테스트 진행 중이면 현재 질문 업데이트
         showQuestion();
-    } else if (screens.result.classList.contains('active')) {
+    } else if (screens && screens.result && screens.result.classList.contains('active')) {
         // 결과 화면에 있는 경우 결과 내용도 업데이트
         updateResultContent();
     }
     
     // 언어 토글 버튼 텍스트
-    document.getElementById('language-toggle').textContent = currentLanguage === 'ko' ? 'EN' : '한국어';
+    const languageToggle = document.getElementById('language-toggle');
+    if (languageToggle) {
+        languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : '한국어';
+    }
     
-
+    // 언어 설정 저장
+    localStorage.setItem('language-preference', currentLanguage);
 }
 
 // 결과 내용을 현재 언어로 업데이트하는 함수

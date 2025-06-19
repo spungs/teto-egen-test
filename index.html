@@ -15,16 +15,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="settings-bar">
-        <div class="version-info">v2.2.0</div>
-        <div class="settings-right">
-            <a href="about.html" class="setting-btn" style="text-decoration: none; font-size: 0.9rem;">📖</a>
-            <a href="guide.html" class="setting-btn" style="text-decoration: none; font-size: 0.9rem;">📚</a>
-            <button id="language-toggle" class="setting-btn">EN</button>
-            <button id="theme-toggle" class="setting-btn">🌙</button>
-            <a href="privacy-policy.html" class="setting-btn" style="text-decoration: none; font-size: 0.9rem;">🛡️</a>
+    <header class="header">
+        <div class="header-content">
+            <div class="version-info">v2.2.0</div>
+            <nav class="header-nav">
+                <a href="about.html" class="nav-btn" title="소개">📖</a>
+                <a href="guide.html" class="nav-btn" title="가이드">📚</a>
+                <button id="language-toggle" class="nav-btn">EN</button>
+                <button id="theme-toggle" class="nav-btn">🌙</button>
+                <a href="privacy-policy.html" class="nav-btn" title="개인정보보호">🛡️</a>
+            </nav>
         </div>
-    </div>
+    </header>
+    <main class="main-content">
     <div class="container">
         <!-- 시작 화면 -->
         <div id="start-screen" class="screen active">
@@ -221,6 +224,7 @@
             </div>
         </div>
     </div>
+    </main>
 
     <script src="script.js"></script>
 </body>

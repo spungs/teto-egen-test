@@ -822,6 +822,15 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .type-card {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .type-content {
+        max-width: 100%;
+    }
+    
     .tips-grid {
         grid-template-columns: 1fr;
     }
@@ -902,6 +911,9 @@ body {
     border-radius: 15px;
     padding: 25px;
     transition: all 0.3s ease;
+    overflow: hidden;
+    word-wrap: break-word;
+    box-sizing: border-box;
 }
 
 .type-card h3 {
@@ -909,8 +921,8 @@ body {
     margin-bottom: 15px;
 }
 
-.application-areas {
-    margin-top: 30px;
+.relationship-tips {
+    margin-bottom: 20px;
 }
 
 .area {
@@ -963,6 +975,13 @@ footer {
 
 .type-analysis {
     margin-bottom: 30px;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.type-content {
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .type-content h4 {
@@ -1011,6 +1030,13 @@ h1, h2, h3, h4, h5, h6 {
 
 p, li, span {
     color: #bdc3c7;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+li {
+    margin-bottom: 8px;
+    line-height: 1.5;
 }
 
 /* 개인정보보호정책 페이지 */

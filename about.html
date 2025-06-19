@@ -12,18 +12,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <div class="version-info">v2.3.0</div>
-            <nav class="header-nav">
-                <a href="index.html" class="nav-btn" title="홈">🏠</a>
-                <a href="about.html" class="nav-btn active" title="소개">📖</a>
-                <a href="guide.html" class="nav-btn" title="가이드">📚</a>
-                <button id="language-toggle" class="nav-btn">EN</button>
-                <a href="privacy-policy.html" class="nav-btn" title="개인정보보호">🛡️</a>
-            </nav>
-        </div>
-    </header>
+
 
     <main class="main-content">
         <div class="container">
@@ -31,11 +20,11 @@
                 <article>
                     <h1 data-text="about.title">테토-에겐 성격 유형 테스트란?</h1>
                     
-                    <section class="intro-section">
+                    <section class="intro-section scientific-background">
                         <h2 data-text="about.scientific.title">🧬 과학적 근거</h2>
                         <p data-text="about.scientific.intro">테토-에겐 성격 유형 테스트는 <strong>테스토스테론(Testosterone)</strong>과 <strong>에스트로겐(Estrogen)</strong> 호르몬의 영향에 기반한 성격 분석 도구입니다.</p>
                         
-                        <div class="scientific-background">
+                        <div class="content-subsection">
                             <h3 data-text="about.scientific.relationship">호르몬과 성격의 관계</h3>
                             <ul>
                                 <li data-text="about.scientific.testosterone"><strong>테스토스테론</strong>: 경쟁심, 리더십, 목표 지향성, 독립성과 연관</li>
@@ -46,7 +35,7 @@
                         </div>
                     </section>
 
-                    <section class="types-section">
+                    <section class="types-section type-analysis">
                         <h2 data-text="about.types.title">🎯 4가지 성격 유형</h2>
                         
                         <div class="type-grid">
@@ -96,7 +85,7 @@
                         </div>
                     </section>
 
-                    <section class="how-it-works">
+                    <section class="how-it-works scientific-background">
                         <h2 data-text="about.howItWorks.title">⚙️ 테스트 작동 원리</h2>
                         
                         <div class="methodology">
@@ -118,10 +107,10 @@
                         </div>
                     </section>
 
-                    <section class="applications">
+                    <section class="applications application-areas">
                         <h2 data-text="about.applications.title">🎯 활용 분야</h2>
                         
-                        <div class="application-areas">
+                        <div class="areas-grid">
                             <div class="area">
                                 <h3 data-text="about.applications.career.title">💼 직업 선택</h3>
                                 <p data-text="about.applications.career.desc">개인의 호르몬 성향에 맞는 직업과 업무 환경을 찾는 데 도움</p>
@@ -144,30 +133,7 @@
                         </div>
                     </section>
 
-                    <section class="research-background">
-                        <h2 data-text="about.research.title">📚 연구 배경</h2>
-                        
-                        <div class="research-content">
-                            <h3 data-text="about.research.studies">관련 연구들</h3>
-                            <ul>
-                                <li data-text="about.research.baron"><strong>Baron-Cohen et al. (2003)</strong>: 호르몬과 뇌 발달의 관계</li>
-                                <li data-text="about.research.buss"><strong>Buss (1995)</strong>: 진화심리학적 성차 연구</li>
-                                <li data-text="about.research.archer"><strong>Archer (2006)</strong>: 테스토스테론과 공격성의 상관관계</li>
-                                <li data-text="about.research.taylor"><strong>Taylor et al. (2000)</strong>: 에스트로겐과 사회적 행동</li>
-                            </ul>
-
-                            <h3 data-text="about.research.development">테스트 개발 과정</h3>
-                            <ol>
-                                <li data-text="about.research.step1">문헌 연구 및 이론적 토대 구축</li>
-                                <li data-text="about.research.step2">예비 문항 개발 및 전문가 검토</li>
-                                <li data-text="about.research.step3">파일럿 테스트 실시 (500명)</li>
-                                <li data-text="about.research.step4">통계적 분석 및 문항 개선</li>
-                                <li data-text="about.research.step5">최종 25문항 확정</li>
-                            </ol>
-                        </div>
-                    </section>
-
-                    <section class="limitations">
+                    <section class="limitations scientific-background">
                         <h2 data-text="about.limitations.title">⚠️ 주의사항</h2>
                         
                         <div class="disclaimers">
@@ -184,7 +150,7 @@
                     <section class="cta-section">
                         <h2 data-text="about.cta.title">🚀 지금 테스트해보세요!</h2>
                         <p data-text="about.cta.description">당신의 테토-에겐 성격 유형을 알아보고 더 나은 자신을 발견해보세요.</p>
-                        <a href="index.html" class="btn btn-primary" data-text="about.cta.button">테스트 시작하기</a>
+                        <a href="index.html" class="btn btn-primary" data-text="about.cta.button">테스트로 돌아가기</a>
                     </section>
                 </article>
             </main>
@@ -195,6 +161,8 @@
         </div>
     </main>
 
+    <script src="header.js"></script>
+    <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 

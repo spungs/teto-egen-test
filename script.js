@@ -6,55 +6,7 @@ let tetoScore = 0;
 let egenScore = 0;
 let currentLanguage = 'ko';
 
-// 다국어 데이터
-const translations = {
-    ko: {
-        title: "테토-에겐 성격 유형 테스트",
-        subtitle: "나는 테토형? 에겐형?",
-        description: "테스토스테론과 에스트로겐 호르몬 성향을 바탕으로 한 성격 유형 테스트입니다.<br>간단한 질문을 통해 당신의 성격 유형을 알아보세요!",
-        genderTitle: "성별을 선택해주세요",
-        male: "남성",
-        female: "여성",
-        startBtn: "테스트 시작하기",
-        testInfo: "📋 총 25문항 | ⏱️ 약 6분 소요",
-        retryBtn: "다시 테스트하기",
-        shareBtn: "결과 공유하기",
-        traitsTitle: "당신의 성격 특징",
-        detailTitle: "상세 설명",
-        scoreTitle: "점수 분포",
-        compatibilityTitle: "💕 연애 궁합",
-        careersTitle: "💼 추천 직업",
-        celebritiesTitle: "⭐ 같은 유형 유명인",
-        healthTitle: "🏥 건강 & 스트레스 관리",
-        growthTitle: "🎯 성장 방향",
-        exerciseTitle: "💪 추천 운동",
-        dietTitle: "🥗 식단 관리",
-        stressTitle: "😌 스트레스 해소"
-    },
-    en: {
-        title: "Teto-Egen Personality Type Test",
-        subtitle: "Am I Teto or Egen Type?",
-        description: "A personality type test based on testosterone and estrogen hormone tendencies.<br>Discover your personality type through simple questions!",
-        genderTitle: "Please select your gender",
-        male: "Male",
-        female: "Female", 
-        startBtn: "Start Test",
-        testInfo: "📋 25 Questions | ⏱️ About 6 minutes",
-        retryBtn: "Retry Test",
-        shareBtn: "Share Result",
-        traitsTitle: "Your Personality Traits",
-        detailTitle: "Detailed Description",
-        scoreTitle: "Score Distribution",
-        compatibilityTitle: "💕 Love Compatibility",
-        careersTitle: "💼 Recommended Careers",
-        celebritiesTitle: "⭐ Celebrity Examples",
-        healthTitle: "🏥 Health & Stress Management",
-        growthTitle: "🎯 Growth Direction",
-        exerciseTitle: "💪 Recommended Exercise",
-        dietTitle: "🥗 Diet Management",
-        stressTitle: "😌 Stress Relief"
-    }
-};
+
 
 // 상황 기반 질문지 데이터
 const questionData = {

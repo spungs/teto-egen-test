@@ -5,555 +5,555 @@ let answers = [];
 let tetoScore = 0;
 let egenScore = 0;
 
-// 상황 기반 질문지 데이터
+// 개선된 상황 기반 질문지 데이터 (심리학적 검증 기반)
 const questionData = {
     ko: [
         {
-            situation: "친구들과 쇼핑몰에 갔을 때",
+            situation: "새로운 직장에서 첫 미팅에 참석할 때",
             options: [
-                { text: "마음에 드는 옷이 있으면 브랜드나 가격보다 편안함을 우선 고려한다", type: "teto", score: 4 },
-                { text: "유명 브랜드나 트렌디한 디자인의 옷을 주로 찾아본다", type: "egen", score: 4 },
-                { text: "친구들 의견을 물어보고 결정한다", type: "egen", score: 2 }
+                { text: "미리 자료를 준비하고 적극적으로 의견을 제시한다", type: "teto", score: 3 },
+                { text: "분위기를 파악한 후 상황에 맞게 발언한다", type: "balanced", score: 1 },
+                { text: "다른 사람들의 이야기를 주의 깊게 듣고 필요할 때만 발언한다", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "주말 저녁 시간에",
+            situation: "친구가 힘든 일로 상담을 요청했을 때",
+            options: [
+                { text: "구체적인 해결방안을 논리적으로 제시해준다", type: "teto", score: 3 },
+                { text: "감정을 충분히 들어준 후 상황에 맞는 조언을 한다", type: "balanced", score: 1 },
+                { text: "먼저 공감하고 위로하며 감정적 지지를 해준다", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "연인과 데이트 장소를 정할 때",
             options: {
                 male: [
-                    { text: "헬스장에서 운동하거나 친구들과 축구를 한다", type: "teto", score: 4 },
-                    { text: "카페에서 감성적인 음악을 들으며 혼자만의 시간을 보낸다", type: "egen", score: 4 },
-                    { text: "집에서 넷플릭스를 보며 휴식을 취한다", type: "egen", score: 2 }
+                    { text: "액티비티나 스포츠 관련 장소를 제안한다", type: "teto", score: 3 },
+                    { text: "둘 다 좋아할 만한 절충안을 찾아본다", type: "balanced", score: 1 },
+                    { text: "연인이 좋아할 만한 감성적인 장소를 우선 고려한다", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "헬스장에서 운동하거나 친구들과 함께 액티비티를 즐긴다", type: "teto", score: 4 },
-                    { text: "카페에서 감성적인 음악을 들으며 혼자만의 시간을 보낸다", type: "egen", score: 4 },
-                    { text: "집에서 넷플릭스를 보며 휴식을 취한다", type: "egen", score: 2 }
+                    { text: "새롭고 도전적인 액티비티를 제안한다", type: "teto", score: 3 },
+                    { text: "둘 다 즐길 수 있는 장소를 함께 정한다", type: "balanced", score: 1 },
+                    { text: "아름답고 감성적인 카페나 전시회를 선호한다", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "새로운 사람들과 만났을 때",
+            situation: "중요한 인생 결정을 내려야 할 때",
             options: [
-                { text: "먼저 대화를 시작하고 분위기를 이끌어간다", type: "teto", score: 4 },
-                { text: "상대방을 관찰하면서 조심스럽게 접근한다", type: "egen", score: 3 },
-                { text: "누군가 먼저 말을 걸어주기를 기다린다", type: "egen", score: 2 }
+                { text: "데이터와 사실을 기반으로 논리적으로 판단한다", type: "teto", score: 3 },
+                { text: "논리와 직감을 모두 고려하여 신중하게 결정한다", type: "balanced", score: 1 },
+                { text: "내 마음의 소리와 직감을 더 중요하게 여긴다", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "스트레스를 받았을 때",
+            situation: "갈등 상황에 직면했을 때",
+            options: [
+                { text: "문제의 핵심을 파악하고 직접적으로 해결하려 한다", type: "teto", score: 3 },
+                { text: "상황을 객관적으로 분석한 후 최선의 방법을 찾는다", type: "balanced", score: 1 },
+                { text: "모든 사람의 감정을 고려하여 조화로운 해결책을 찾는다", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "스트레스를 받았을 때 대처 방식",
             options: {
                 male: [
-                    { text: "운동이나 술을 마시며 스트레스를 푼다", type: "teto", score: 4 },
-                    { text: "혼자 있으면서 감성적인 활동으로 마음을 달랜다", type: "egen", score: 4 },
-                    { text: "친한 사람과 대화하며 감정을 공유한다", type: "egen", score: 3 }
+                    { text: "운동이나 신체 활동으로 스트레스를 해소한다", type: "teto", score: 3 },
+                    { text: "상황에 따라 다양한 방법을 시도한다", type: "balanced", score: 1 },
+                    { text: "음악감상, 독서 등 조용한 활동으로 마음을 달랜다", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "운동이나 쇼핑을 하며 스트레스를 푼다", type: "teto", score: 4 },
-                    { text: "혼자 있으면서 감성적인 활동으로 마음을 달랜다", type: "egen", score: 4 },
-                    { text: "친한 사람과 대화하며 감정을 공유한다", type: "egen", score: 3 }
+                    { text: "운동이나 적극적인 활동으로 기분전환을 한다", type: "teto", score: 3 },
+                    { text: "그때그때 기분에 맞는 방법을 선택한다", type: "balanced", score: 1 },
+                    { text: "감성적인 영화나 음악으로 감정을 정리한다", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "돈을 쓸 때",
+            situation: "새로운 사람들과의 모임에서",
             options: [
-                { text: "미래를 위한 투자나 실용적인 것에 먼저 쓴다", type: "teto", score: 4 },
-                { text: "외모 관리나 취미 활동에 아낌없이 투자한다", type: "egen", score: 4 },
-                { text: "필요한 것만 사고 나머지는 저축한다", type: "teto", score: 2 }
+                { text: "먼저 다가가 대화를 이끌어간다", type: "teto", score: 3 },
+                { text: "자연스럽게 대화에 참여한다", type: "balanced", score: 1 },
+                { text: "분위기를 살펴본 후 조심스럽게 어울린다", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "갈등 상황에서",
+            situation: "돈을 쓸 때의 우선순위",
             options: [
-                { text: "직접적으로 문제를 제기하고 해결책을 찾는다", type: "teto", score: 4 },
-                { text: "감정이 상하지 않도록 조심스럽게 접근한다", type: "egen", score: 4 },
-                { text: "가능하면 갈등을 피하고 시간이 해결해주길 기다린다", type: "egen", score: 3 }
+                { text: "장기적 투자나 실용적 가치를 우선 고려한다", type: "teto", score: 3 },
+                { text: "필요성과 즐거움을 균형있게 고려한다", type: "balanced", score: 1 },
+                { text: "현재의 행복과 감정적 만족을 중시한다", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "SNS를 사용할 때",
-            options: [
-                { text: "특별한 일이 있을 때만 가끔 올린다", type: "teto", score: 3 },
-                { text: "일상을 예쁘게 꾸며서 자주 올린다", type: "egen", score: 4 },
-                { text: "거의 사용하지 않거나 보기만 한다", type: "teto", score: 2 }
-            ]
-        },
-        {
-            situation: "집을 꾸밀 때",
-            options: [
-                { text: "실용성과 편의성을 가장 중요하게 생각한다", type: "teto", score: 4 },
-                { text: "미적 감각과 분위기를 중시한다", type: "egen", score: 4 },
-                { text: "기본적인 가구만 있으면 충분하다", type: "teto", score: 2 }
-            ]
-        },
-        {
-            situation: "친구가 고민 상담을 요청했을 때",
-            options: [
-                { text: "구체적인 해결책을 제시해준다", type: "teto", score: 4 },
-                { text: "감정을 공감해주고 위로해준다", type: "egen", score: 4 },
-                { text: "조언보다는 들어주는 역할을 한다", type: "egen", score: 3 }
-            ]
-        },
-        {
-            situation: "새로운 도전 앞에서",
-            options: [
-                { text: "계획을 세우고 적극적으로 도전한다", type: "teto", score: 4 },
-                { text: "신중하게 고민한 후 결정한다", type: "egen", score: 3 },
-                { text: "다른 사람들의 의견을 많이 구한다", type: "egen", score: 2 }
-            ]
-        },
-        {
-            situation: "데이트할 때",
+            situation: "취미나 여가 활동을 선택할 때",
             options: {
                 male: [
-                    { text: "활동적인 장소나 맛집을 선호한다", type: "teto", score: 4 },
-                    { text: "감성적이고 아기자기한 카페나 전시회를 좋아한다", type: "egen", score: 4 },
-                    { text: "상대방이 원하는 곳에 맞춰준다", type: "egen", score: 2 }
+                    { text: "경쟁적이고 도전적인 활동을 선호한다", type: "teto", score: 3 },
+                    { text: "기분에 따라 다양한 활동을 즐긴다", type: "balanced", score: 1 },
+                    { text: "창작이나 예술적 표현 활동을 좋아한다", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "액티비티나 새로운 맛집을 탐험하고 싶다", type: "teto", score: 4 },
-                    { text: "감성적이고 아기자기한 카페나 전시회를 좋아한다", type: "egen", score: 4 },
-                    { text: "상대방이 원하는 곳에 맞춰준다", type: "egen", score: 2 }
+                    { text: "활동적이고 사교적인 취미를 선호한다", type: "teto", score: 3 },
+                    { text: "그때그때 끌리는 활동을 선택한다", type: "balanced", score: 1 },
+                    { text: "조용하고 개인적인 취미를 즐긴다", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "팀 프로젝트에서",
+            situation: "팀 프로젝트에서 나의 역할",
             options: [
-                { text: "리더 역할을 맡아 팀을 이끈다", type: "teto", score: 4 },
-                { text: "창의적인 아이디어를 제안한다", type: "egen", score: 4 },
-                { text: "주어진 역할을 성실히 수행한다", type: "teto", score: 2 }
+                { text: "리더십을 발휘하여 프로젝트를 이끈다", type: "teto", score: 3 },
+                { text: "필요에 따라 리더나 팔로워 역할을 한다", type: "balanced", score: 1 },
+                { text: "창의적 아이디어 제공과 세심한 지원을 담당한다", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "여가 시간에",
+            situation: "실패나 좌절을 경험했을 때",
+            options: [
+                { text: "빠르게 원인을 분석하고 다음 도전을 준비한다", type: "teto", score: 3 },
+                { text: "적당한 시간을 두고 차근차근 회복한다", type: "balanced", score: 1 },
+                { text: "충분히 감정을 느끼고 내면의 힘을 기른다", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "의견이 다른 상황에서",
+            options: [
+                { text: "논리적 근거로 내 의견을 설득력 있게 제시한다", type: "teto", score: 3 },
+                { text: "서로의 의견을 종합하여 절충안을 찾는다", type: "balanced", score: 1 },
+                { text: "상대방의 입장을 이해하고 공감대를 형성한다", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "미래 계획을 세울 때",
+            options: [
+                { text: "구체적인 목표와 실행 계획을 체계적으로 수립한다", type: "teto", score: 3 },
+                { text: "큰 방향은 정하되 유연성을 유지한다", type: "balanced", score: 1 },
+                { text: "직감과 흐름에 맞춰 자연스럽게 진행한다", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "성취감을 느끼는 순간",
+            options: [
+                { text: "목표 달성과 성과 창출을 이루었을 때", type: "teto", score: 3 },
+                { text: "균형잡힌 삶을 유지할 때", type: "balanced", score: 1 },
+                { text: "타인과의 관계나 감정적 연결이 깊어질 때", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "중요한 발표나 프레젠테이션 준비할 때",
+            options: [
+                { text: "철저한 자료 준비와 논리적 구성에 집중한다", type: "teto", score: 3 },
+                { text: "내용과 전달 방식을 균형있게 준비한다", type: "balanced", score: 1 },
+                { text: "청중과의 감정적 소통과 공감에 중점을 둔다", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "예상치 못한 변화에 직면했을 때",
+            options: [
+                { text: "빠르게 상황을 파악하고 적극적으로 대응한다", type: "teto", score: 3 },
+                { text: "신중하게 상황을 관찰한 후 점진적으로 적응한다", type: "balanced", score: 1 },
+                { text: "변화로 인한 감정을 충분히 받아들인 후 대응한다", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "리더십을 발휘해야 하는 상황에서",
+            options: [
+                { text: "명확한 방향성과 강력한 추진력으로 이끈다", type: "teto", score: 3 },
+                { text: "상황에 맞는 적절한 리더십 스타일을 택한다", type: "balanced", score: 1 },
+                { text: "구성원들의 의견을 수렴하며 협력적으로 이끈다", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "여가 시간 활용 방식",
             options: {
                 male: [
-                    { text: "친구들과 만나 스포츠나 게임을 한다", type: "teto", score: 4 },
-                    { text: "혼자서 취미 활동이나 문화생활을 즐긴다", type: "egen", score: 4 },
-                    { text: "집에서 편안하게 쉰다", type: "egen", score: 2 }
+                    { text: "스포츠나 게임 등 경쟁적 활동을 선호한다", type: "teto", score: 3 },
+                    { text: "그때 기분에 따라 다양하게 보낸다", type: "balanced", score: 1 },
+                    { text: "혼자만의 조용한 시간이나 문화 활동을 즐긴다", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "친구들과 만나 쇼핑이나 브런치를 즐긴다", type: "teto", score: 4 },
-                    { text: "혼자서 취미 활동이나 문화생활을 즐긴다", type: "egen", score: 4 },
-                    { text: "집에서 편안하게 쉰다", type: "egen", score: 2 }
+                    { text: "친구들과 활발한 사교 활동을 즐긴다", type: "teto", score: 3 },
+                    { text: "때로는 활발하게, 때로는 조용하게 보낸다", type: "balanced", score: 1 },
+                    { text: "개인적인 취미나 자기계발에 시간을 투자한다", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "의견 충돌이 있을 때",
+            situation: "자신의 감정 표현 방식",
             options: [
-                { text: "자신의 의견을 확실히 표현한다", type: "teto", score: 4 },
-                { text: "상대방의 입장을 먼저 이해하려 한다", type: "egen", score: 4 },
-                { text: "타협점을 찾으려고 노력한다", type: "egen", score: 3 }
+                { text: "감정보다는 행동으로 표현하는 편이다", type: "teto", score: 3 },
+                { text: "상황에 따라 표현 방식을 조절한다", type: "balanced", score: 1 },
+                { text: "감정을 세밀하고 풍부하게 표현한다", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "중요한 결정을 내릴 때",
+            situation: "문제 해결 접근 방식",
             options: [
-                { text: "논리적으로 분석해서 결정한다", type: "teto", score: 4 },
-                { text: "직감과 감정을 중요하게 생각한다", type: "egen", score: 4 },
-                { text: "주변 사람들의 조언을 구한다", type: "egen", score: 2 }
-            ]
-        },
-        {
-            situation: "성취감을 느낄 때",
-            options: [
-                { text: "목표를 달성했을 때", type: "teto", score: 4 },
-                { text: "창작이나 표현 활동을 완성했을 때", type: "egen", score: 4 },
-                { text: "다른 사람들로부터 인정받을 때", type: "egen", score: 3 }
-            ]
-        },
-        {
-            situation: "파티나 모임에서",
-            options: [
-                { text: "많은 사람들과 활발하게 대화한다", type: "teto", score: 4 },
-                { text: "가까운 몇 명과 깊은 대화를 나눈다", type: "egen", score: 4 },
-                { text: "분위기를 즐기면서 적당히 참여한다", type: "egen", score: 2 }
-            ]
-        },
-        {
-            situation: "실패했을 때",
-            options: [
-                { text: "빨리 털어내고 다음 기회를 준비한다", type: "teto", score: 4 },
-                { text: "충분히 감정을 느끼고 다음에 더 잘하려 한다", type: "egen", score: 4 },
-                { text: "다른 사람들에게 위로를 구한다", type: "egen", score: 2 }
-            ]
-        },
-        {
-            situation: "일할 때",
-            options: [
-                { text: "효율성과 결과를 중시한다", type: "teto", score: 4 },
-                { text: "창의성과 과정을 중요하게 여긴다", type: "egen", score: 4 },
-                { text: "안정성과 협업을 선호한다", type: "egen", score: 2 }
-            ]
-        },
-        {
-            situation: "관심사를 선택할 때",
-            options: [
-                { text: "스포츠, 정치, 경제 등 사회적 이슈", type: "teto", score: 4 },
-                { text: "예술, 문화, 감성적 콘텐츠", type: "egen", score: 4 },
-                { text: "일상적이고 실용적인 정보", type: "teto", score: 2 }
+                { text: "체계적이고 단계적으로 해결책을 찾는다", type: "teto", score: 3 },
+                { text: "직관과 논리를 조합하여 접근한다", type: "balanced", score: 1 },
+                { text: "창의적이고 유연한 방법을 모색한다", type: "egen", score: 3 }
             ]
         }
     ],
     // 한국어 성별별 추가 질문
     ko_male_specific: [
         {
-            situation: "군복무에 대한 생각",
+            situation: "남성으로서의 자아 정체성에 대해",
             options: [
-                { text: "남성의 의무이고 좋은 경험이라고 생각한다", type: "teto", score: 4 },
-                { text: "개인의 선택이어야 한다고 생각한다", type: "egen", score: 4 },
-                { text: "필요악이지만 어쩔 수 없다고 생각한다", type: "teto", score: 2 }
+                { text: "전통적인 남성다움의 가치를 중요하게 생각한다", type: "teto", score: 2 },
+                { text: "시대에 맞는 유연한 남성상을 추구한다", type: "balanced", score: 1 },
+                { text: "감성적이고 세심한 면도 남성다움의 일부라고 본다", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "남성다움이란",
+            situation: "연인과의 관계에서 남성의 역할",
             options: [
-                { text: "책임감과 리더십을 갖추는 것", type: "teto", score: 4 },
-                { text: "감정 표현과 소통 능력이 중요", type: "egen", score: 4 },
-                { text: "시대에 따라 변하는 개념", type: "egen", score: 3 }
+                { text: "보호자이자 이끄는 역할을 해야 한다고 생각한다", type: "teto", score: 2 },
+                { text: "상황에 따라 역할이 바뀔 수 있다고 본다", type: "balanced", score: 1 },
+                { text: "평등한 파트너로서 감정적 교감을 중시한다", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "외모 관리에 대해",
+            situation: "외모 관리에 대한 관점",
             options: [
-                { text: "기본적인 청결함만 유지하면 충분", type: "teto", score: 4 },
-                { text: "스킨케어와 패션에 꽤 신경 쓴다", type: "egen", score: 4 },
-                { text: "상황에 따라 적당히 관리한다", type: "teto", score: 2 }
+                { text: "기본적인 청결함만 유지하면 충분하다", type: "teto", score: 2 },
+                { text: "상황에 맞게 적절히 관리한다", type: "balanced", score: 1 },
+                { text: "스킨케어나 패션에도 관심이 많다", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "브로맨스(남성 간의 우정)에서",
+            situation: "남성 친구들과의 우정 표현",
             options: [
-                { text: "함께 운동하거나 게임하며 시간을 보낸다", type: "teto", score: 4 },
-                { text: "깊은 대화나 감정 교류를 중시한다", type: "egen", score: 4 },
-                { text: "가볍게 만나서 즐기는 게 좋다", type: "teto", score: 2 }
+                { text: "함께 활동하고 경쟁하며 우정을 쌓는다", type: "teto", score: 2 },
+                { text: "때로는 깊게, 때로는 가볍게 교류한다", type: "balanced", score: 1 },
+                { text: "깊은 대화와 감정적 교감을 나눈다", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "이성과의 관계에서",
+            situation: "직업이나 성공에 대한 태도",
             options: [
-                { text: "남성이 주도적인 역할을 해야 한다", type: "teto", score: 4 },
-                { text: "서로 평등하고 감정적으로 교감해야 한다", type: "egen", score: 4 },
-                { text: "상황에 따라 역할이 달라질 수 있다", type: "egen", score: 3 }
+                { text: "성취와 성공이 남성의 중요한 덕목이다", type: "teto", score: 2 },
+                { text: "성공도 중요하지만 균형있는 삶을 추구한다", type: "balanced", score: 1 },
+                { text: "개인적 만족과 의미를 더 중시한다", type: "egen", score: 2 }
             ]
         }
     ],
     ko_female_specific: [
         {
+            situation: "여성으로서의 자아 정체성에 대해",
+            options: [
+                { text: "강인하고 독립적인 여성상을 추구한다", type: "teto", score: 2 },
+                { text: "상황에 따라 다양한 면모를 보여준다", type: "balanced", score: 1 },
+                { text: "따뜻하고 포용적인 여성다움을 중요시한다", type: "egen", score: 2 }
+            ]
+        },
+        {
             situation: "커리어와 가정의 균형",
             options: [
-                { text: "커리어 성공이 우선이고 가정은 그 다음", type: "teto", score: 4 },
-                { text: "가정의 화목이 더 중요하다", type: "egen", score: 4 },
-                { text: "둘 다 중요하지만 시기마다 우선순위가 다르다", type: "egen", score: 2 }
+                { text: "커리어 성공이 우선이며 그에 따라 가정을 조율한다", type: "teto", score: 2 },
+                { text: "상황과 시기에 따라 우선순위를 조절한다", type: "balanced", score: 1 },
+                { text: "가족과의 관계와 조화를 가장 중요하게 여긴다", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "여성다움이란",
+            situation: "리더십을 발휘할 때의 스타일",
             options: [
-                { text: "배려심과 포용력을 갖추는 것", type: "egen", score: 4 },
-                { text: "자신의 의견을 당당하게 표현하는 것", type: "teto", score: 4 },
-                { text: "개인마다 다르게 정의될 수 있다", type: "egen", score: 2 }
+                { text: "결단력 있고 강력한 리더십을 보여준다", type: "teto", score: 2 },
+                { text: "상황에 맞는 다양한 리더십을 발휘한다", type: "balanced", score: 1 },
+                { text: "공감과 소통을 바탕으로 한 리더십을 추구한다", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "뷰티 루틴에 대해",
+            situation: "외모나 패션에 대한 관심",
             options: [
-                { text: "시간 대비 효율성을 중시한 간단한 관리", type: "teto", score: 4 },
-                { text: "꼼꼼하고 세밀한 관리 과정을 즐긴다", type: "egen", score: 4 },
-                { text: "기분에 따라 달라진다", type: "egen", score: 2 }
+                { text: "실용성과 편의성을 우선시한다", type: "teto", score: 2 },
+                { text: "때와 장소에 맞게 조절한다", type: "balanced", score: 1 },
+                { text: "아름다움과 스타일을 중요하게 생각한다", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "여성 친구들과의 시간",
+            situation: "여성 친구들과의 관계",
             options: [
-                { text: "목표 지향적인 활동이나 토론을 선호", type: "teto", score: 4 },
-                { text: "감정과 일상을 나누는 시간을 중시", type: "egen", score: 4 },
-                { text: "함께 있는 것만으로도 만족", type: "egen", score: 3 }
-            ]
-        },
-        {
-            situation: "이성과의 관계에서",
-            options: [
-                { text: "서로 독립적이면서 동등한 관계를 원한다", type: "teto", score: 4 },
-                { text: "감정적 교감과 로맨틱한 분위기를 중시한다", type: "egen", score: 4 },
-                { text: "상황에 따라 다양한 모습을 보인다", type: "egen", score: 3 }
+                { text: "함께 목표를 추구하고 서로 동기부여를 한다", type: "teto", score: 2 },
+                { text: "다양한 방식으로 친밀감을 나눈다", type: "balanced", score: 1 },
+                { text: "감정적 지지와 깊은 공감대를 형성한다", type: "egen", score: 2 }
             ]
         }
     ],
     en: [
         {
-            situation: "When shopping with friends",
+            situation: "When attending your first meeting at a new workplace",
             options: [
-                { text: "I prioritize comfort over brand or price when I like something", type: "teto", score: 4 },
-                { text: "I mainly look for famous brands or trendy designs", type: "egen", score: 4 },
-                { text: "I ask friends for their opinions before deciding", type: "egen", score: 2 }
+                { text: "I prepare materials in advance and actively share my opinions", type: "teto", score: 3 },
+                { text: "I assess the atmosphere and speak appropriately to the situation", type: "balanced", score: 1 },
+                { text: "I listen carefully to others and speak only when necessary", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "On weekend evenings",
+            situation: "When a friend asks for advice about their troubles",
+            options: [
+                { text: "I logically present specific solutions", type: "teto", score: 3 },
+                { text: "I listen to their emotions fully, then give situation-appropriate advice", type: "balanced", score: 1 },
+                { text: "I empathize and comfort them first, providing emotional support", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "When deciding on a date location with your partner",
             options: {
                 male: [
-                    { text: "I work out at the gym or play soccer with friends", type: "teto", score: 4 },
-                    { text: "I spend alone time listening to emotional music at a cafe", type: "egen", score: 4 },
-                    { text: "I relax at home watching Netflix", type: "egen", score: 2 }
+                    { text: "I suggest activity or sports-related places", type: "teto", score: 3 },
+                    { text: "I look for a compromise that both of us would enjoy", type: "balanced", score: 1 },
+                    { text: "I prioritize emotional places my partner would like", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "I work out at the gym or play badminton with friends", type: "teto", score: 4 },
-                    { text: "I spend alone time listening to emotional music at a cafe", type: "egen", score: 4 },
-                    { text: "I relax at home watching Netflix", type: "egen", score: 2 }
+                    { text: "I suggest new and challenging activities", type: "teto", score: 3 },
+                    { text: "I decide on a place we can both enjoy together", type: "balanced", score: 1 },
+                    { text: "I prefer beautiful and emotional cafes or exhibitions", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "When meeting new people",
+            situation: "When making important life decisions",
             options: [
-                { text: "I start conversations first and lead the atmosphere", type: "teto", score: 4 },
-                { text: "I observe others and approach them carefully", type: "egen", score: 3 },
-                { text: "I wait for someone else to talk to me first", type: "egen", score: 2 }
+                { text: "I make logical judgments based on data and facts", type: "teto", score: 3 },
+                { text: "I consider both logic and intuition carefully before deciding", type: "balanced", score: 1 },
+                { text: "I value my inner voice and intuition more", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When feeling stressed",
+            situation: "When facing conflict situations",
+            options: [
+                { text: "I identify the core problem and try to solve it directly", type: "teto", score: 3 },
+                { text: "I analyze the situation objectively and find the best approach", type: "balanced", score: 1 },
+                { text: "I consider everyone's feelings to find harmonious solutions", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "How I cope with stress",
             options: {
                 male: [
-                    { text: "I relieve stress through exercise or drinking", type: "teto", score: 4 },
-                    { text: "I calm myself through emotional activities alone", type: "egen", score: 4 },
-                    { text: "I talk to close people and share my feelings", type: "egen", score: 3 }
+                    { text: "I relieve stress through exercise or physical activities", type: "teto", score: 3 },
+                    { text: "I try various methods depending on the situation", type: "balanced", score: 1 },
+                    { text: "I calm my mind with quiet activities like music or reading", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "I relieve stress through exercise or shopping", type: "teto", score: 4 },
-                    { text: "I calm myself through emotional activities alone", type: "egen", score: 4 },
-                    { text: "I talk to close people and share my feelings", type: "egen", score: 3 }
+                    { text: "I lift my mood through exercise or active activities", type: "teto", score: 3 },
+                    { text: "I choose methods that match my mood at the time", type: "balanced", score: 1 },
+                    { text: "I organize my emotions with emotional movies or music", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "When spending money",
+            situation: "At gatherings with new people",
             options: [
-                { text: "I spend on investments or practical things for the future first", type: "teto", score: 4 },
-                { text: "I invest generously in appearance care or hobbies", type: "egen", score: 4 },
-                { text: "I only buy what I need and save the rest", type: "teto", score: 2 }
+                { text: "I approach first and lead conversations", type: "teto", score: 3 },
+                { text: "I naturally participate in conversations", type: "balanced", score: 1 },
+                { text: "I observe the atmosphere and join in carefully", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "In conflict situations",
+            situation: "My priorities when spending money",
             options: [
-                { text: "I directly address the problem and find solutions", type: "teto", score: 4 },
-                { text: "I approach carefully to avoid hurt feelings", type: "egen", score: 4 },
-                { text: "I avoid conflict when possible and wait for time to resolve it", type: "egen", score: 3 }
+                { text: "I prioritize long-term investments or practical value", type: "teto", score: 3 },
+                { text: "I consider both necessity and enjoyment in balance", type: "balanced", score: 1 },
+                { text: "I value current happiness and emotional satisfaction", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When using social media",
-            options: [
-                { text: "I only post occasionally when something special happens", type: "teto", score: 3 },
-                { text: "I often post my daily life beautifully arranged", type: "egen", score: 4 },
-                { text: "I rarely use it or just browse", type: "teto", score: 2 }
-            ]
-        },
-        {
-            situation: "When decorating home",
-            options: [
-                { text: "I prioritize practicality and convenience most", type: "teto", score: 4 },
-                { text: "I value aesthetic sense and atmosphere", type: "egen", score: 4 },
-                { text: "Basic furniture is enough for me", type: "teto", score: 2 }
-            ]
-        },
-        {
-            situation: "When a friend asks for advice",
-            options: [
-                { text: "I provide specific solutions", type: "teto", score: 4 },
-                { text: "I empathize with their emotions and comfort them", type: "egen", score: 4 },
-                { text: "I focus on listening rather than giving advice", type: "egen", score: 3 }
-            ]
-        },
-        {
-            situation: "Facing new challenges",
-            options: [
-                { text: "I make plans and actively take on the challenge", type: "teto", score: 4 },
-                { text: "I think carefully before deciding", type: "egen", score: 3 },
-                { text: "I seek many opinions from others", type: "egen", score: 2 }
-            ]
-        },
-        {
-            situation: "When dating",
+            situation: "When choosing hobbies or leisure activities",
             options: {
                 male: [
-                    { text: "I prefer active places or good restaurants", type: "teto", score: 4 },
-                    { text: "I like emotional and cozy cafes or exhibitions", type: "egen", score: 4 },
-                    { text: "I accommodate what my partner wants", type: "egen", score: 2 }
+                    { text: "I prefer competitive and challenging activities", type: "teto", score: 3 },
+                    { text: "I enjoy various activities depending on my mood", type: "balanced", score: 1 },
+                    { text: "I like creative or artistic expression activities", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "I prefer activities or exploring new restaurants", type: "teto", score: 4 },
-                    { text: "I like emotional and cozy cafes or exhibitions", type: "egen", score: 4 },
-                    { text: "I accommodate what my partner wants", type: "egen", score: 2 }
+                    { text: "I prefer active and social hobbies", type: "teto", score: 3 },
+                    { text: "I choose activities that appeal to me at the moment", type: "balanced", score: 1 },
+                    { text: "I enjoy quiet and personal hobbies", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "In team projects",
+            situation: "My role in team projects",
             options: [
-                { text: "I take the leader role and guide the team", type: "teto", score: 4 },
-                { text: "I propose creative ideas", type: "egen", score: 4 },
-                { text: "I faithfully perform my assigned role", type: "teto", score: 2 }
+                { text: "I demonstrate leadership and guide the project", type: "teto", score: 3 },
+                { text: "I take either leader or follower roles as needed", type: "balanced", score: 1 },
+                { text: "I provide creative ideas and careful support", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "During leisure time",
+            situation: "When experiencing failure or setbacks",
+            options: [
+                { text: "I quickly analyze the cause and prepare for the next challenge", type: "teto", score: 3 },
+                { text: "I take appropriate time to recover step by step", type: "balanced", score: 1 },
+                { text: "I fully feel the emotions and build inner strength", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "In situations with differing opinions",
+            options: [
+                { text: "I present my opinion persuasively with logical evidence", type: "teto", score: 3 },
+                { text: "I combine different opinions to find compromise", type: "balanced", score: 1 },
+                { text: "I understand others' positions and build empathy", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "When making future plans",
+            options: [
+                { text: "I systematically establish specific goals and action plans", type: "teto", score: 3 },
+                { text: "I set the general direction but maintain flexibility", type: "balanced", score: 1 },
+                { text: "I proceed naturally according to intuition and flow", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "When I feel accomplished",
+            options: [
+                { text: "When I achieve goals and create results", type: "teto", score: 3 },
+                { text: "When I maintain a balanced life", type: "balanced", score: 1 },
+                { text: "When relationships deepen or emotional connections grow", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "When preparing for important presentations",
+            options: [
+                { text: "I focus on thorough material preparation and logical structure", type: "teto", score: 3 },
+                { text: "I prepare both content and delivery methods in balance", type: "balanced", score: 1 },
+                { text: "I emphasize emotional communication and empathy with the audience", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "When facing unexpected changes",
+            options: [
+                { text: "I quickly assess the situation and respond actively", type: "teto", score: 3 },
+                { text: "I carefully observe the situation and adapt gradually", type: "balanced", score: 1 },
+                { text: "I fully accept emotions from change before responding", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "When leadership is required",
+            options: [
+                { text: "I lead with clear direction and strong momentum", type: "teto", score: 3 },
+                { text: "I adopt appropriate leadership styles for each situation", type: "balanced", score: 1 },
+                { text: "I lead collaboratively by gathering members' opinions", type: "egen", score: 3 }
+            ]
+        },
+        {
+            situation: "How I use leisure time",
             options: {
                 male: [
-                    { text: "I meet friends and play sports or games", type: "teto", score: 4 },
-                    { text: "I enjoy hobbies or cultural activities alone", type: "egen", score: 4 },
-                    { text: "I relax comfortably at home", type: "egen", score: 2 }
+                    { text: "I prefer competitive activities like sports or games", type: "teto", score: 3 },
+                    { text: "I spend time differently depending on my mood", type: "balanced", score: 1 },
+                    { text: "I enjoy quiet personal time or cultural activities", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "I meet friends for shopping or brunch", type: "teto", score: 4 },
-                    { text: "I enjoy hobbies or cultural activities alone", type: "egen", score: 4 },
-                    { text: "I relax comfortably at home", type: "egen", score: 2 }
+                    { text: "I enjoy active social activities with friends", type: "teto", score: 3 },
+                    { text: "Sometimes active, sometimes quiet activities", type: "balanced", score: 1 },
+                    { text: "I invest time in personal hobbies or self-development", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "When there are conflicting opinions",
+            situation: "My way of expressing emotions",
             options: [
-                { text: "I clearly express my opinion", type: "teto", score: 4 },
-                { text: "I try to understand the other person's position first", type: "egen", score: 4 },
-                { text: "I try to find a compromise", type: "egen", score: 3 }
+                { text: "I express through actions rather than emotions", type: "teto", score: 3 },
+                { text: "I adjust expression methods according to situations", type: "balanced", score: 1 },
+                { text: "I express emotions in detailed and rich ways", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When making important decisions",
+            situation: "My approach to problem-solving",
             options: [
-                { text: "I analyze logically and decide", type: "teto", score: 4 },
-                { text: "I value intuition and emotions", type: "egen", score: 4 },
-                { text: "I seek advice from people around me", type: "egen", score: 2 }
-            ]
-        },
-        {
-            situation: "When feeling accomplished",
-            options: [
-                { text: "When I achieve my goals", type: "teto", score: 4 },
-                { text: "When I complete creative or expressive activities", type: "egen", score: 4 },
-                { text: "When I receive recognition from others", type: "egen", score: 3 }
-            ]
-        },
-        {
-            situation: "At parties or gatherings",
-            options: [
-                { text: "I actively talk with many people", type: "teto", score: 4 },
-                { text: "I have deep conversations with a few close people", type: "egen", score: 4 },
-                { text: "I enjoy the atmosphere and participate moderately", type: "egen", score: 2 }
-            ]
-        },
-        {
-            situation: "When I fail",
-            options: [
-                { text: "I quickly shake it off and prepare for the next opportunity", type: "teto", score: 4 },
-                { text: "I fully feel the emotions and try to do better next time", type: "egen", score: 4 },
-                { text: "I seek comfort from others", type: "egen", score: 2 }
-            ]
-        },
-        {
-            situation: "When working",
-            options: [
-                { text: "I value efficiency and results", type: "teto", score: 4 },
-                { text: "I consider creativity and process important", type: "egen", score: 4 },
-                { text: "I prefer stability and collaboration", type: "egen", score: 2 }
-            ]
-        },
-        {
-            situation: "When choosing interests",
-            options: [
-                { text: "Sports, politics, economics and other social issues", type: "teto", score: 4 },
-                { text: "Arts, culture, and emotional content", type: "egen", score: 4 },
-                { text: "Daily and practical information", type: "teto", score: 2 }
+                { text: "I find solutions systematically and step by step", type: "teto", score: 3 },
+                { text: "I approach by combining intuition and logic", type: "balanced", score: 1 },
+                { text: "I seek creative and flexible methods", type: "egen", score: 3 }
             ]
         }
     ],
-    // 영어 성별별 추가 질문
+    // English gender-specific additional questions
     en_male_specific: [
         {
-            situation: "About military service",
+            situation: "About my identity as a man",
             options: [
-                { text: "It's a male duty and good experience", type: "teto", score: 4 },
-                { text: "It should be individual choice", type: "egen", score: 4 },
-                { text: "It's necessary evil but inevitable", type: "teto", score: 2 }
+                { text: "I value traditional masculinity principles", type: "teto", score: 2 },
+                { text: "I pursue a flexible male image for modern times", type: "balanced", score: 1 },
+                { text: "I believe emotional and caring aspects are part of masculinity", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "Masculinity means",
+            situation: "Men's role in romantic relationships",
             options: [
-                { text: "Having responsibility and leadership", type: "teto", score: 4 },
-                { text: "Emotional expression and communication skills are important", type: "egen", score: 4 },
-                { text: "A concept that changes with times", type: "egen", score: 3 }
+                { text: "I think men should be protectors and leaders", type: "teto", score: 2 },
+                { text: "I believe roles can change depending on situations", type: "balanced", score: 1 },
+                { text: "I value equal partnership and emotional connection", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "About appearance management",
+            situation: "My perspective on appearance management",
             options: [
-                { text: "Basic cleanliness is sufficient", type: "teto", score: 4 },
-                { text: "I pay quite attention to skincare and fashion", type: "egen", score: 4 },
-                { text: "I manage appropriately depending on situation", type: "teto", score: 2 }
+                { text: "Basic cleanliness is sufficient", type: "teto", score: 2 },
+                { text: "I manage appropriately according to situations", type: "balanced", score: 1 },
+                { text: "I'm also interested in skincare and fashion", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "In bromance (friendship between men)",
+            situation: "Expressing friendship with male friends",
             options: [
-                { text: "Spend time exercising or gaming together", type: "teto", score: 4 },
-                { text: "Value deep conversations and emotional exchange", type: "egen", score: 4 },
-                { text: "Like to meet casually and have fun", type: "teto", score: 2 }
+                { text: "I build friendship through activities and competition", type: "teto", score: 2 },
+                { text: "Sometimes deep, sometimes light interaction", type: "balanced", score: 1 },
+                { text: "I share deep conversations and emotional connections", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "In relationships with opposite sex",
+            situation: "My attitude toward career and success",
             options: [
-                { text: "Men should take the leading role", type: "teto", score: 4 },
-                { text: "Should be equal and emotionally connected", type: "egen", score: 4 },
-                { text: "Roles can vary depending on situation", type: "egen", score: 3 }
+                { text: "Achievement and success are important virtues for men", type: "teto", score: 2 },
+                { text: "Success is important but I pursue balanced life", type: "balanced", score: 1 },
+                { text: "I value personal satisfaction and meaning more", type: "egen", score: 2 }
             ]
         }
     ],
     en_female_specific: [
         {
+            situation: "About my identity as a woman",
+            options: [
+                { text: "I pursue a strong and independent female image", type: "teto", score: 2 },
+                { text: "I show various aspects depending on situations", type: "balanced", score: 1 },
+                { text: "I value warm and embracing femininity", type: "egen", score: 2 }
+            ]
+        },
+        {
             situation: "Balance between career and family",
             options: [
-                { text: "Career success comes first, family second", type: "teto", score: 4 },
-                { text: "Family harmony is more important", type: "egen", score: 4 },
-                { text: "Both important but priorities differ by time", type: "egen", score: 2 }
+                { text: "Career success is priority, adjusting family accordingly", type: "teto", score: 2 },
+                { text: "I adjust priorities according to situations and timing", type: "balanced", score: 1 },
+                { text: "I value family relationships and harmony most", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "Femininity means",
+            situation: "My leadership style when taking charge",
             options: [
-                { text: "Having care and tolerance", type: "egen", score: 4 },
-                { text: "Expressing one's opinions confidently", type: "teto", score: 4 },
-                { text: "Can be defined differently by each person", type: "egen", score: 2 }
+                { text: "I demonstrate decisive and strong leadership", type: "teto", score: 2 },
+                { text: "I exercise various leadership styles for different situations", type: "balanced", score: 1 },
+                { text: "I pursue leadership based on empathy and communication", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "About beauty routine",
+            situation: "My interest in appearance and fashion",
             options: [
-                { text: "Simple care emphasizing time efficiency", type: "teto", score: 4 },
-                { text: "Enjoy thorough and detailed care process", type: "egen", score: 4 },
-                { text: "Depends on mood", type: "egen", score: 2 }
+                { text: "I prioritize practicality and convenience", type: "teto", score: 2 },
+                { text: "I adjust according to time and place", type: "balanced", score: 1 },
+                { text: "I consider beauty and style important", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "Time with female friends",
+            situation: "Relationships with female friends",
             options: [
-                { text: "Prefer goal-oriented activities or discussions", type: "teto", score: 4 },
-                { text: "Value time sharing emotions and daily life", type: "egen", score: 4 },
-                { text: "Satisfied just being together", type: "egen", score: 3 }
-            ]
-        },
-        {
-            situation: "In relationships with opposite sex",
-            options: [
-                { text: "Want independent and equal relationship", type: "teto", score: 4 },
-                { text: "Value emotional connection and romantic atmosphere", type: "egen", score: 4 },
-                { text: "Show various sides depending on situation", type: "egen", score: 3 }
+                { text: "We pursue goals together and motivate each other", type: "teto", score: 2 },
+                { text: "We share intimacy in various ways", type: "balanced", score: 1 },
+                { text: "We form emotional support and deep empathy", type: "egen", score: 2 }
             ]
         }
     ]
@@ -977,11 +977,15 @@ function selectOption(selectedOption) {
     // 답변 저장
     answers[currentQuestionIndex] = selectedOption;
     
-    // 점수 계산
+    // 개선된 점수 계산 (balanced 타입 추가)
     if (selectedOption.type === 'teto') {
         tetoScore += selectedOption.score;
-    } else {
+    } else if (selectedOption.type === 'egen') {
         egenScore += selectedOption.score;
+    } else if (selectedOption.type === 'balanced') {
+        // balanced 선택지는 양쪽에 균등하게 배분
+        tetoScore += selectedOption.score * 0.5;
+        egenScore += selectedOption.score * 0.5;
     }
     
     // 다음 질문으로 이동 (잠시 후)
@@ -1018,8 +1022,22 @@ function nextQuestion() {
 function showResult() {
     showScreen('result');
     
-    // 결과 계산
-    const isTetoType = tetoScore >= egenScore;
+    // 개선된 결과 계산 (비율과 차이를 고려)
+    const totalScore = tetoScore + egenScore;
+    const tetoRatio = tetoScore / totalScore;
+    const egenRatio = egenScore / totalScore;
+    const scoreDifference = Math.abs(tetoScore - egenScore);
+    
+    // 더 정교한 타입 판정 (10% 이상 차이가 나야 확실한 타입으로 판정)
+    let isTetoType;
+    if (scoreDifference / totalScore >= 0.1) {
+        // 뚜렷한 차이가 있는 경우
+        isTetoType = tetoScore > egenScore;
+    } else {
+        // 차이가 적은 경우, 소수점까지 고려하여 판정
+        isTetoType = tetoScore >= egenScore;
+    }
+    
     const result = resultData[currentLanguage][currentGender][isTetoType ? 'teto' : 'egen'];
     
     console.log('📊 결과 표시:', {
@@ -1049,7 +1067,6 @@ function showResult() {
     document.getElementById('result-detail').textContent = result.description;
     
     // 점수 분포
-    const totalScore = tetoScore + egenScore;
     const tetoPercent = Math.round((tetoScore / totalScore) * 100);
     const egenPercent = Math.round((egenScore / totalScore) * 100);
     
@@ -1353,5 +1370,7 @@ function updateResultContent() {
         console.log('✅ 결과 내용 언어 업데이트 완료:', currentLanguage);
     }
 }
+
+ 
 
  

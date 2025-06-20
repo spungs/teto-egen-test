@@ -21,14 +21,11 @@ function initializeVisitorCounter() {
 // 방문자 카운터 관리 클래스
 class VisitorCounter {
     constructor() {
-        this.storageKey = 'tetoegenVisitorStats';
-        this.dailyKey = 'tetoegenDailyVisit';
-        // GitHub Repository API 설정
-        this.repoOwner = 'spungs'; // GitHub 사용자명
-        this.repoName = 'teto-egen-test'; // Repository 이름
-        this.dataFile = 'visitor-data.json';
-        this.githubAPI = 'https://api.github.com';
-        this.rawURL = `https://raw.githubusercontent.com/${this.repoOwner}/${this.repoName}/main/${this.dataFile}`;
+        // Supabase 설정 (config.js에서 가져옴)
+        this.supabaseUrl = config.supabaseUrl;
+        this.supabaseKey = config.supabaseKey;
+        this.apiUrl = `${this.supabaseUrl}/rest/v1`;
+        this.tableName = 'visitor_stats';
         this.init();
     }
 
@@ -43,134 +40,155 @@ class VisitorCounter {
         }, 60000);
     }
 
-    // 방문자 수 업데이트
+    // 방문자 수 업데이트 - 페이지 접속할 때마다 카운트
     async updateVisitorCount() {
-        const today = this.getTodayString();
-        const stats = this.getStats();
-        const lastVisit = localStorage.getItem(this.dailyKey);
+        console.log('페이지 방문 감지! 데이터베이스 업데이트를 시작합니다.');
         
-        // 일일 방문자 수 체크 (유니크 방문자만 - localStorage 기반)
-        if (lastVisit !== today) {
-            // 새로운 날이거나 첫 방문
-            if (stats.lastDate !== today) {
-                stats.dailyVisitors = 1;
-                stats.lastDate = today;
-            } else {
-                stats.dailyVisitors++;
-            }
-            
-            // 오늘 방문 기록
-            localStorage.setItem(this.dailyKey, today);
-            this.saveStats(stats);
-            
-            // 서버 총 방문자 수 증가 (실제 방문자 카운터)
-            const newTotal = await this.incrementTotalVisitors();
-            
-            // 즉시 총 방문자 수 업데이트
-            const totalElement = document.getElementById('total-visitors');
-            if (totalElement && newTotal > 0) {
-                totalElement.textContent = this.formatNumber(newTotal);
-            }
-        }
+        // Supabase 데이터베이스에서 실제 방문자 수 증가
+        await this.incrementTotalVisitors();
     }
 
-    // GitHub API로 총 방문자 수 증가
+    // Supabase로 총 방문자 수 증가
     async incrementTotalVisitors() {
         try {
-            // 현재 방문자 수 읽기
-            const data = await this.getVisitorDataFromGitHub();
-            const newTotal = (data.totalVisitors || 0) + 1;
+            // 현재 데이터 가져오기
+            const currentData = await this.getVisitorDataFromSupabase();
+            const today = this.getTodayString();
             
-            // GitHub API로 파일 업데이트 (읽기 전용 - 실제 업데이트는 GitHub Actions 사용)
-            console.log('GitHub 방문자 수 증가 시뮬레이션:', newTotal);
+            // 새로운 데이터 계산 - 총 방문자와 일일 방문자 모두 +1
+            let newTotalVisitors = currentData.total_visitors + 1;
+            let newDailyVisitors;
             
-            // 실제로는 읽기 전용이므로 로컬에서 증가값 계산
-            return newTotal;
+            // 날짜가 바뀌었으면 일일 방문자 리셋
+            if (currentData.visit_date !== today) {
+                newDailyVisitors = 1; // 새로운 날의 첫 방문자
+            } else {
+                newDailyVisitors = currentData.daily_visitors + 1; // 오늘 방문자 +1
+            }
+            
+            // Supabase 업데이트
+            console.log('업데이트할 데이터:', {
+                total_visitors: newTotalVisitors,
+                daily_visitors: newDailyVisitors,
+                visit_date: today
+            });
+            
+            const response = await fetch(`${this.apiUrl}/${this.tableName}?id=eq.1`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': this.supabaseKey,
+                    'Authorization': `Bearer ${this.supabaseKey}`,
+                    'Prefer': 'return=representation'
+                },
+                body: JSON.stringify({
+                    total_visitors: newTotalVisitors,
+                    daily_visitors: newDailyVisitors,
+                    visit_date: today,
+                    last_updated: new Date().toISOString()
+                })
+            });
+            
+            console.log('업데이트 응답 상태:', response.status);
+            
+            if (response.ok) {
+                const updatedData = await response.json();
+                console.log('Supabase 방문자 수 업데이트 성공:', updatedData);
+                return newTotalVisitors;
+            } else {
+                const errorText = await response.text();
+                console.error('업데이트 실패:', response.status, errorText);
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
+            }
         } catch (error) {
-            console.warn('GitHub 방문자 카운터 업데이트 실패:', error);
+            console.warn('Supabase 방문자 카운터 업데이트 실패:', error);
             return 0;
         }
     }
 
-    // GitHub에서 방문자 데이터 가져오기
-    async getVisitorDataFromGitHub() {
+    // Supabase에서 방문자 데이터 가져오기
+    async getVisitorDataFromSupabase() {
         try {
-            // Raw 파일을 직접 읽기 (캐시 방지)
-            const response = await fetch(`${this.rawURL}?t=${Date.now()}`);
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.warn('GitHub 방문자 데이터 로드 실패:', error);
-            return { totalVisitors: 0, lastUpdate: new Date().toISOString() };
-        }
-    }
-
-    // GitHub에서 총 방문자 수 가져오기
-    async getTotalVisitorsFromServer() {
-        try {
-            const data = await this.getVisitorDataFromGitHub();
-            
-            // 시간 기반 베이스 값과 실제 저장된 값을 조합
-            const baseValue = this.getTimeBasedValue();
-            const storedValue = data.totalVisitors || 0;
-            
-            return baseValue + storedValue;
-        } catch (error) {
-            console.warn('GitHub 총 방문자 수 로드 실패:', error);
-            return this.getTimeBasedValue();
-        }
-    }
-
-    // 시간 기반 베이스 방문자 수 (현실적인 수치)
-    getTimeBasedValue() {
-        // 2024년 1월 1일부터 경과한 시간 기반
-        const baseDate = new Date('2024-01-01');
-        const now = new Date();
-        const daysPassed = Math.floor((now - baseDate) / (1000 * 60 * 60 * 24));
-        
-        // 하루 평균 3-8명 방문 가정
-        const avgDaily = 5 + Math.sin(daysPassed * 0.05) * 2;
-        return Math.floor(daysPassed * avgDaily) + 89; // 베이스 89명
-    }
-
-    // 통계 데이터 가져오기 (일일 방문자만 localStorage 사용)
-    getStats() {
-        const defaultStats = {
-            dailyVisitors: 0,
-            lastDate: this.getTodayString()
-        };
-        
-        try {
-            const stored = localStorage.getItem(this.storageKey);
-            if (stored) {
-                const stats = JSON.parse(stored);
-                
-                // 날짜가 바뀌었으면 일일 방문자 수 리셋
-                if (stats.lastDate !== this.getTodayString()) {
-                    stats.dailyVisitors = 0;
-                    stats.lastDate = this.getTodayString();
-                    
-                    // 변경된 통계 저장
-                    this.saveStats(stats);
+            const response = await fetch(`${this.apiUrl}/${this.tableName}?id=eq.1`, {
+                method: 'GET',
+                headers: {
+                    'apikey': this.supabaseKey,
+                    'Authorization': `Bearer ${this.supabaseKey}`
                 }
+            });
+            
+            console.log('Supabase 응답 상태:', response.status);
+            
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Supabase에서 가져온 데이터:', data);
                 
-                return { ...defaultStats, ...stats };
+                if (data && data.length > 0) {
+                    return data[0];
+                } else {
+                    // 데이터가 없으면 초기 레코드 생성
+                    console.log('데이터가 없어서 초기 레코드를 생성합니다...');
+                    await this.initializeVisitorRecord();
+                    return {
+                        total_visitors: 0,
+                        daily_visitors: 0,
+                        visit_date: this.getTodayString(),
+                        last_updated: new Date().toISOString()
+                    };
+                }
+            } else {
+                console.error('Supabase 응답 에러:', response.status, await response.text());
             }
-        } catch (e) {
-            console.warn('방문자 통계 로드 실패:', e);
+            
+            // 데이터가 없으면 초기값 반환
+            return {
+                total_visitors: 0,
+                daily_visitors: 0,
+                visit_date: this.getTodayString(),
+                last_updated: new Date().toISOString()
+            };
+        } catch (error) {
+            console.warn('Supabase 데이터 로드 실패:', error);
+            return {
+                total_visitors: 0,
+                daily_visitors: 0,
+                visit_date: this.getTodayString(),
+                last_updated: new Date().toISOString()
+            };
         }
-        
-        return defaultStats;
     }
 
-    // 통계 데이터 저장
-    saveStats(stats) {
+    // 초기 방문자 레코드 생성
+    async initializeVisitorRecord() {
         try {
-            localStorage.setItem(this.storageKey, JSON.stringify(stats));
-        } catch (e) {
-            console.warn('방문자 통계 저장 실패:', e);
+            const response = await fetch(`${this.apiUrl}/${this.tableName}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': this.supabaseKey,
+                    'Authorization': `Bearer ${this.supabaseKey}`,
+                    'Prefer': 'return=representation'
+                },
+                body: JSON.stringify({
+                    id: 1,
+                    total_visitors: 0,
+                    daily_visitors: 0,
+                    visit_date: this.getTodayString(),
+                    last_updated: new Date().toISOString()
+                })
+            });
+            
+            if (response.ok) {
+                console.log('초기 방문자 레코드 생성 완료');
+            } else {
+                console.error('초기 레코드 생성 실패:', response.status, await response.text());
+            }
+        } catch (error) {
+            console.error('초기 레코드 생성 중 오류:', error);
         }
     }
+
+
 
     // 오늘 날짜 문자열 반환 (YYYY-MM-DD)
     getTodayString() {
@@ -187,38 +205,61 @@ class VisitorCounter {
 
     // 화면에 통계 표시
     async displayStats() {
-        const stats = this.getStats();
         const dailyElement = document.getElementById('daily-visitors');
         const totalElement = document.getElementById('total-visitors');
         
-        // 오늘 방문자 (localStorage 기반)
+        // 모든 데이터를 Supabase에서 가져오기
+        const data = await this.getVisitorDataFromSupabase();
+        
+        // 오늘 방문자 (서버 기반)
         if (dailyElement) {
-            dailyElement.textContent = this.formatNumber(stats.dailyVisitors);
+            dailyElement.textContent = this.formatNumber(data.daily_visitors || 0);
         }
         
         // 총 방문자 (서버 기반)
         if (totalElement) {
-            const totalFromServer = await this.getTotalVisitorsFromServer();
-            totalElement.textContent = this.formatNumber(totalFromServer);
+            totalElement.textContent = this.formatNumber(data.total_visitors || 0);
         }
     }
 
-    // 통계 리셋 (개발/테스트용)
-    resetStats() {
-        localStorage.removeItem(this.storageKey);
-        localStorage.removeItem(this.dailyKey);
-        this.displayStats();
+    // 통계 리셋 (개발/테스트용) - Supabase 데이터 초기화
+    async resetStats() {
+        try {
+            const response = await fetch(`${this.apiUrl}/${this.tableName}?id=eq.1`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': this.supabaseKey,
+                    'Authorization': `Bearer ${this.supabaseKey}`,
+                    'Prefer': 'return=representation'
+                },
+                body: JSON.stringify({
+                    total_visitors: 0,
+                    daily_visitors: 0,
+                    visit_date: this.getTodayString(),
+                    last_updated: new Date().toISOString()
+                })
+            });
+            
+            if (response.ok) {
+                console.log('Supabase 방문자 통계가 리셋되었습니다.');
+                await this.displayStats();
+            } else {
+                console.error('통계 리셋 실패:', response.status);
+            }
+        } catch (error) {
+            console.error('통계 리셋 중 오류:', error);
+        }
     }
 
     // 현재 통계 정보 반환
     async getCurrentStats() {
-        const localStats = this.getStats();
-        const totalFromServer = await this.getTotalVisitorsFromServer();
+        const data = await this.getVisitorDataFromSupabase();
         
         return {
-            dailyVisitors: localStats.dailyVisitors,
-            totalVisitors: totalFromServer,
-            lastDate: localStats.lastDate
+            dailyVisitors: data.daily_visitors || 0,
+            totalVisitors: data.total_visitors || 0,
+            lastDate: data.visit_date || this.getTodayString()
         };
     }
 }
@@ -228,10 +269,18 @@ window.getVisitorStats = async function() {
     return window.visitorCounter?.getCurrentStats() || null;
 };
 
-window.resetVisitorStats = function() {
+window.resetVisitorStats = async function() {
     if (window.visitorCounter) {
-        window.visitorCounter.resetStats();
-        console.log('로컬 방문자 통계가 리셋되었습니다.');
+        await window.visitorCounter.resetStats();
+    }
+};
+
+// 테스트용: 강제로 방문자 수 증가
+window.forceIncrementVisitor = async function() {
+    if (window.visitorCounter) {
+        await window.visitorCounter.incrementTotalVisitors();
+        await window.visitorCounter.displayStats();
+        console.log('강제로 방문자 수를 증가시켰습니다.');
     }
 };
 

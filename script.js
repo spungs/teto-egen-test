@@ -5,8 +5,6 @@ let answers = [];
 let tetoScore = 0;
 let egenScore = 0;
 
-
-
 // 상황 기반 질문지 데이터
 const questionData = {
     ko: [
@@ -607,10 +605,10 @@ const resultData = {
                 ],
                 careers: ["디자이너", "예술가", "상담사", "교사", "의료진", "작가", "스타일리스트", "미용사"],
                 celebrities: [
-                    { name: "BTS RM", profession: "가수" },
-                    { name: "유재석", profession: "방송인" },
-                    { name: "공유", profession: "배우" },
-                    { name: "이동욱", profession: "배우" }
+                    { name: "감성적 아티스트", profession: "음악 분야" },
+                    { name: "유머러스한 진행자", profession: "방송 분야" },
+                    { name: "섬세한 연기자", profession: "연기 분야" },
+                    { name: "로맨틱한 배우", profession: "영화 분야" }
                 ],
                 health: {
                     exercise: ["요가/필라테스", "수영", "댄스", "산책"],

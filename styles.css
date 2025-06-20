@@ -12,6 +12,7 @@ body {
     color: #ecf0f1;
     transition: all 0.3s ease;
     padding-top: 90px;
+    padding-bottom: 50px; /* footer 공간 확보 */
 }
 
 @media (max-width: 768px) {
@@ -1121,4 +1122,77 @@ li {
     text-align: center;
     margin-top: 30px;
     font-size: 0.9rem;
+}
+
+/* 방문자 통계 Footer */
+.visitor-stats {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(44, 62, 80, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
+    z-index: 999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.stats-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.stats-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.stats-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+}
+
+.stats-count {
+    font-size: 1rem;
+    color: #74b9ff;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+.stats-divider {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 1rem;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .visitor-stats {
+        padding: 8px 0;
+    }
+    
+    .stats-container {
+        gap: 15px;
+        padding: 0 15px;
+    }
+    
+    .stats-label {
+        font-size: 0.7rem;
+    }
+    
+    .stats-count {
+        font-size: 0.9rem;
+    }
+    
+    .stats-divider {
+        font-size: 0.9rem;
+    }
 } 

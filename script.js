@@ -4,7 +4,6 @@ let currentQuestionIndex = 0;
 let answers = [];
 let tetoScore = 0;
 let egenScore = 0;
-let currentLanguage = 'ko';
 
 
 
@@ -579,10 +578,10 @@ const resultData = {
                 ],
                 careers: ["경영진", "운동선수", "군인/경찰", "영업직", "기업가", "정치인", "부동산업", "건설업"],
                 celebrities: [
-                    { name: "박지성", profession: "축구선수" },
-                    { name: "손흥민", profession: "축구선수" },
-                    { name: "이승기", profession: "가수/배우" },
-                    { name: "강호동", profession: "방송인" }
+                    { name: "리더십형 축구선수", profession: "스포츠 분야" },
+                    { name: "목표지향적 운동선수", profession: "체육 분야" },
+                    { name: "진취적 엔터테이너", profession: "연예 분야" },
+                    { name: "적극적 방송인", profession: "미디어 분야" }
                 ],
                 health: {
                     exercise: ["헬스장 웨이트 트레이닝", "축구/농구", "러닝/조깅", "등산"],
@@ -639,10 +638,10 @@ const resultData = {
                 ],
                 careers: ["변호사", "의사", "CEO/임원", "저널리스트", "컨설턴트", "정치인", "마케터", "투자가"],
                 celebrities: [
-                    { name: "김연아", profession: "피겨선수" },
-                    { name: "아이유", profession: "가수" },
-                    { name: "손연재", profession: "체조선수" },
-                    { name: "김나영", profession: "방송인" }
+                    { name: "리더십형 스포츠 스타", profession: "스포츠 분야" },
+                    { name: "자립적 아티스트", profession: "음악 분야" },
+                    { name: "목표지향적 선수", profession: "체육 분야" },
+                    { name: "진취적 미디어 인물", profession: "방송 분야" }
                 ],
                 health: {
                     exercise: ["크로스핏", "복싱", "테니스", "골프"],
@@ -668,10 +667,10 @@ const resultData = {
                 ],
                 careers: ["간호사", "교사", "예술가", "심리상담사", "사회복지사", "HR", "미용사", "플라워 디자이너"],
                 celebrities: [
-                    { name: "송혜교", profession: "배우" },
-                    { name: "수지", profession: "가수/배우" },
-                    { name: "태연", profession: "가수" },
-                    { name: "한지민", profession: "배우" }
+                    { name: "감성적 배우", profession: "연기 분야" },
+                    { name: "다재다능한 엔터테이너", profession: "엔터테인먼트 분야" },
+                    { name: "섬세한 보컬리스트", profession: "음악 분야" },
+                    { name: "온화한 연기자", profession: "영화 분야" }
                 ],
                 health: {
                     exercise: ["요가", "필라테스", "발레", "산책"],
@@ -701,10 +700,10 @@ const resultData = {
                 ],
                 careers: ["Executive", "Athlete", "Military/Police", "Sales", "Entrepreneur", "Politician", "Real Estate", "Construction"],
                 celebrities: [
-                    { name: "Dwayne Johnson", profession: "Actor/Wrestler" },
-                    { name: "Cristiano Ronaldo", profession: "Soccer Player" },
-                    { name: "Chris Hemsworth", profession: "Actor" },
-                    { name: "Gordon Ramsay", profession: "Chef" }
+                    { name: "Leadership-oriented Athlete", profession: "Sports & Entertainment" },
+                    { name: "Goal-driven Sports Icon", profession: "Sports Field" },
+                    { name: "Action-oriented Actor", profession: "Entertainment Field" },
+                    { name: "Competitive Chef", profession: "Culinary Field" }
                 ],
                 health: {
                     exercise: ["Weight Training", "Soccer/Basketball", "Running/Jogging", "Hiking"],
@@ -730,10 +729,10 @@ const resultData = {
                 ],
                 careers: ["Designer", "Artist", "Counselor", "Teacher", "Healthcare", "Writer", "Stylist", "Hairdresser"],
                 celebrities: [
-                    { name: "Timothée Chalamet", profession: "Actor" },
-                    { name: "Harry Styles", profession: "Singer" },
-                    { name: "Ryan Gosling", profession: "Actor" },
-                    { name: "Eddie Redmayne", profession: "Actor" }
+                    { name: "Sensitive Artist", profession: "Acting Field" },
+                    { name: "Creative Performer", profession: "Music Field" },
+                    { name: "Emotional Actor", profession: "Film Field" },
+                    { name: "Artistic Performer", profession: "Theater Field" }
                 ],
                 health: {
                     exercise: ["Yoga/Pilates", "Swimming", "Dancing", "Walking"],
@@ -761,10 +760,10 @@ const resultData = {
                 ],
                 careers: ["Lawyer", "Doctor", "CEO/Executive", "Journalist", "Consultant", "Politician", "Marketer", "Investor"],
                 celebrities: [
-                    { name: "Serena Williams", profession: "Tennis Player" },
-                    { name: "Gal Gadot", profession: "Actress" },
-                    { name: "Ronda Rousey", profession: "MMA Fighter" },
-                    { name: "Oprah Winfrey", profession: "Media Mogul" }
+                    { name: "Competitive Sports Leader", profession: "Athletic Field" },
+                    { name: "Strong Action Star", profession: "Entertainment Field" },
+                    { name: "Fighting Sports Pioneer", profession: "Combat Sports" },
+                    { name: "Media Leadership Figure", profession: "Broadcasting Field" }
                 ],
                 health: {
                     exercise: ["CrossFit", "Boxing", "Tennis", "Golf"],
@@ -790,10 +789,10 @@ const resultData = {
                 ],
                 careers: ["Nurse", "Teacher", "Artist", "Counselor", "Social Worker", "HR", "Hairdresser", "Floral Designer"],
                 celebrities: [
-                    { name: "Emma Stone", profession: "Actress" },
-                    { name: "Taylor Swift", profession: "Singer" },
-                    { name: "Jennifer Lawrence", profession: "Actress" },
-                    { name: "Zendaya", profession: "Actress/Singer" }
+                    { name: "Charming Actress", profession: "Film Field" },
+                    { name: "Emotional Storyteller", profession: "Music Field" },
+                    { name: "Relatable Performer", profession: "Entertainment Field" },
+                    { name: "Versatile Entertainer", profession: "Multi-talent Field" }
                 ],
                 health: {
                     exercise: ["Yoga", "Pilates", "Ballet", "Walking"],
@@ -1315,117 +1314,6 @@ function shareResult() {
             alert(message);
         });
     }
-}
-
-// 언어 관련 함수들
-function toggleLanguage() {
-    const previousLanguage = currentLanguage;
-    currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
-    
-    console.log('🌐 언어 변경:', {
-        from: previousLanguage,
-        to: currentLanguage,
-        currentScreen: Object.keys(screens).find(key => screens[key].classList.contains('active')),
-        hasGender: !!currentGender,
-        hasScores: tetoScore > 0 || egenScore > 0
-    });
-    
-    updateLanguage();
-    localStorage.setItem('language-preference', currentLanguage);
-}
-
-function updateLanguage() {
-    const texts = translations[currentLanguage];
-    
-    // 모든 data-text 속성을 가진 요소 업데이트
-    document.querySelectorAll('[data-text]').forEach(element => {
-        const keys = element.dataset.text.split('.');
-        let text = texts;
-        
-        for (const key of keys) {
-            if (text && typeof text === 'object' && key in text) {
-                text = text[key];
-            } else {
-                console.warn(`번역 키를 찾을 수 없습니다: ${element.dataset.text}`);
-                return;
-            }
-        }
-        
-        if (typeof text === 'string') {
-            element.innerHTML = text;
-        }
-    });
-    
-    // 기본 텍스트들 (index.html용)
-    const heroTitle = document.querySelector('.hero h1');
-    const heroSubtitle = document.querySelector('.hero .subtitle');
-    const heroDescription = document.querySelector('.hero .description');
-    const genderTitle = document.querySelector('.gender-selection h3');
-    const maleBtn = document.querySelector('.gender-btn[data-gender="male"] span:last-child');
-    const femaleBtn = document.querySelector('.gender-btn[data-gender="female"] span:last-child');
-    const startBtn = document.getElementById('start-btn');
-    const testInfo = document.querySelector('.test-info p');
-    const retryBtn = document.getElementById('retry-btn');
-    const shareBtn = document.getElementById('share-btn');
-    
-    if (heroTitle) heroTitle.textContent = texts.title;
-    if (heroSubtitle) heroSubtitle.textContent = texts.subtitle;
-    if (heroDescription) heroDescription.innerHTML = texts.description;
-    if (genderTitle) genderTitle.textContent = texts.genderTitle;
-    if (maleBtn) maleBtn.textContent = texts.male;
-    if (femaleBtn) femaleBtn.textContent = texts.female;
-    if (startBtn) startBtn.textContent = texts.startBtn;
-    if (testInfo) testInfo.textContent = texts.testInfo;
-    if (retryBtn) retryBtn.textContent = texts.retryBtn;
-    if (shareBtn) shareBtn.textContent = texts.shareBtn;
-    
-    // 결과 화면 제목들
-    const traitsTitle = document.querySelector('.result-description h3');
-    const detailTitle = document.querySelector('.result-detailed h3');
-    const scoreTitle = document.querySelector('.result-score h3');
-    const compatibilityTitle = document.querySelector('.result-compatibility h3');
-    const careersTitle = document.querySelector('.result-careers h3');
-    const celebritiesTitle = document.querySelector('.result-celebrities h3');
-    const healthTitle = document.querySelector('.result-health h3');
-    const growthTitle = document.querySelector('.result-growth h3');
-    const exerciseTitle = document.querySelector('.health-category:nth-child(1) h4');
-    const dietTitle = document.querySelector('.health-category:nth-child(2) h4');
-    const stressTitle = document.querySelector('.health-category:nth-child(3) h4');
-    
-    if (traitsTitle) traitsTitle.textContent = texts.traitsTitle;
-    if (detailTitle) detailTitle.textContent = texts.detailTitle;
-    if (scoreTitle) scoreTitle.textContent = texts.scoreTitle;
-    if (compatibilityTitle) compatibilityTitle.textContent = texts.compatibilityTitle;
-    if (careersTitle) careersTitle.textContent = texts.careersTitle;
-    if (celebritiesTitle) celebritiesTitle.textContent = texts.celebritiesTitle;
-    if (healthTitle) healthTitle.textContent = texts.healthTitle;
-    if (growthTitle) growthTitle.textContent = texts.growthTitle;
-    if (exerciseTitle) exerciseTitle.textContent = texts.exerciseTitle;
-    if (dietTitle) dietTitle.textContent = texts.dietTitle;
-    if (stressTitle) stressTitle.textContent = texts.stressTitle;
-    
-    // title 업데이트
-    if (document.title.includes('테토-에겐') || document.title.includes('Teto-Egen')) {
-        document.title = texts.title || document.title;
-    }
-    
-    // 현재 화면에 따라 적절한 업데이트 수행
-    if (screens && screens.test && screens.test.classList.contains('active')) {
-        // 테스트 진행 중이면 현재 질문 업데이트
-        showQuestion();
-    } else if (screens && screens.result && screens.result.classList.contains('active')) {
-        // 결과 화면에 있는 경우 결과 내용도 업데이트
-        updateResultContent();
-    }
-    
-    // 언어 토글 버튼 텍스트
-    const languageToggle = document.getElementById('language-toggle');
-    if (languageToggle) {
-        languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : '한국어';
-    }
-    
-    // 언어 설정 저장
-    localStorage.setItem('language-preference', currentLanguage);
 }
 
 // 결과 내용을 현재 언어로 업데이트하는 함수

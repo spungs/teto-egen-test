@@ -109,12 +109,23 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .setting-btn:hover {
     background: rgba(44, 62, 80, 1);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.setting-btn:focus {
+    outline: none;
+}
+
+.setting-btn:active {
+    transform: translateY(0);
+    background: rgba(44, 62, 80, 0.8);
 }
 
 .container {

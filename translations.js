@@ -4,7 +4,7 @@ const translations = {
         // 메인 페이지
         title: "테토-에겐 성격 유형 테스트",
         subtitle: "나는 테토형? 에겐형?",
-        description: "테스토스테론과 에스트로겐 호르몬 성향을 바탕으로 한 성격 유형 테스트입니다.<br>간단한 질문을 통해 당신의 성격 유형을 알아보세요!",
+        description: "테스토스테론과 에스트로겐 호르몬의 일반적 특성에서 영감을 받은 재미있는 성격 유형 테스트입니다.<br>간단한 질문을 통해 당신의 성격 경향을 알아보세요!",
         genderTitle: "성별을 선택해주세요",
         male: "남성",
         female: "여성",
@@ -342,7 +342,7 @@ const translations = {
         // Main page
         title: "Teto-Egen Personality Type Test",
         subtitle: "Am I Teto or Egen Type?",
-        description: "A personality type test based on testosterone and estrogen hormone tendencies.<br>Discover your personality type through simple questions!",
+        description: "A fun personality type test inspired by general characteristics of testosterone and estrogen hormones.<br>Discover your personality tendencies through simple questions!",
         genderTitle: "Please select your gender",
         male: "Male",
         female: "Female", 
@@ -678,6 +678,9 @@ const translations = {
     }
 }; 
 
+// 현재 언어 설정
+let currentLanguage = 'ko';
+
 // 공통 언어 관련 함수들
 function getNestedValue(obj, path) {
     return path.split('.').reduce((curr, key) => curr && curr[key], obj);
@@ -700,6 +703,9 @@ function toggleLanguage() {
 
 // 공통 언어 업데이트 함수
 function updateLanguage() {
+    const texts = translations[currentLanguage];
+    
+    // data-text 속성을 가진 요소들 업데이트
     const elements = document.querySelectorAll('[data-text]');
     elements.forEach(element => {
         const key = element.getAttribute('data-text');
@@ -710,6 +716,54 @@ function updateLanguage() {
             }
         }
     });
+    
+    // index.html 하드코딩된 텍스트들 업데이트 (script.js의 updateLanguage 로직 통합)
+    const heroTitle = document.querySelector('.hero h1');
+    const heroSubtitle = document.querySelector('.hero .subtitle');
+    const heroDescription = document.querySelector('.hero .description');
+    const genderTitle = document.querySelector('.gender-selection h3');
+    const maleBtn = document.querySelector('.gender-btn[data-gender="male"] span:last-child');
+    const femaleBtn = document.querySelector('.gender-btn[data-gender="female"] span:last-child');
+    const startBtn = document.getElementById('start-btn');
+    const testInfo = document.querySelector('.test-info p');
+    const retryBtn = document.getElementById('retry-btn');
+    const shareBtn = document.getElementById('share-btn');
+    
+    if (heroTitle) heroTitle.textContent = texts.title;
+    if (heroSubtitle) heroSubtitle.textContent = texts.subtitle;
+    if (heroDescription) heroDescription.innerHTML = texts.description;
+    if (genderTitle) genderTitle.textContent = texts.genderTitle;
+    if (maleBtn) maleBtn.textContent = texts.male;
+    if (femaleBtn) femaleBtn.textContent = texts.female;
+    if (startBtn) startBtn.textContent = texts.startBtn;
+    if (testInfo) testInfo.textContent = texts.testInfo;
+    if (retryBtn) retryBtn.textContent = texts.retryBtn;
+    if (shareBtn) shareBtn.textContent = texts.shareBtn;
+    
+    // 결과 화면 제목들
+    const traitsTitle = document.querySelector('.result-description h3');
+    const detailTitle = document.querySelector('.result-detailed h3');
+    const scoreTitle = document.querySelector('.result-score h3');
+    const compatibilityTitle = document.querySelector('.result-compatibility h3');
+    const careersTitle = document.querySelector('.result-careers h3');
+    const celebritiesTitle = document.querySelector('.result-celebrities h3');
+    const healthTitle = document.querySelector('.result-health h3');
+    const growthTitle = document.querySelector('.result-growth h3');
+    const exerciseTitle = document.querySelector('.health-category:nth-child(1) h4');
+    const dietTitle = document.querySelector('.health-category:nth-child(2) h4');
+    const stressTitle = document.querySelector('.health-category:nth-child(3) h4');
+    
+    if (traitsTitle) traitsTitle.textContent = texts.traitsTitle;
+    if (detailTitle) detailTitle.textContent = texts.detailTitle;
+    if (scoreTitle) scoreTitle.textContent = texts.scoreTitle;
+    if (compatibilityTitle) compatibilityTitle.textContent = texts.compatibilityTitle;
+    if (careersTitle) careersTitle.textContent = texts.careersTitle;
+    if (celebritiesTitle) celebritiesTitle.textContent = texts.celebritiesTitle;
+    if (healthTitle) healthTitle.textContent = texts.healthTitle;
+    if (growthTitle) growthTitle.textContent = texts.growthTitle;
+    if (exerciseTitle) exerciseTitle.textContent = texts.exerciseTitle;
+    if (dietTitle) dietTitle.textContent = texts.dietTitle;
+    if (stressTitle) stressTitle.textContent = texts.stressTitle;
     
     // 페이지 제목 업데이트
     const titleKey = document.querySelector('title[data-text]')?.getAttribute('data-text');
@@ -738,6 +792,19 @@ function updateLanguage() {
     const languageBtn = document.getElementById('language-toggle');
     if (languageBtn) {
         languageBtn.textContent = currentLanguage === 'ko' ? 'EN' : '한국어';
+    }
+    
+    // index.html의 화면별 업데이트 (script.js의 로직)
+    if (typeof screens !== 'undefined' && screens.test && screens.test.classList.contains('active')) {
+        // 테스트 진행 중이면 현재 질문 업데이트
+        if (typeof showQuestion === 'function') {
+            showQuestion();
+        }
+    } else if (typeof screens !== 'undefined' && screens.result && screens.result.classList.contains('active')) {
+        // 결과 화면에 있는 경우 결과 내용도 업데이트
+        if (typeof updateResultContent === 'function') {
+            updateResultContent();
+        }
     }
 }
 

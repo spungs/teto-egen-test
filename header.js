@@ -20,6 +20,8 @@ async function loadHeader() {
                         } else {
                             console.warn('toggleLanguage 함수를 찾을 수 없습니다.');
                         }
+                        // 클릭 후 포커스 제거 (모바일에서 포커스 상태 해제)
+                        this.blur();
                     });
                     languageToggle.setAttribute('data-listener-added', 'true');
                 }

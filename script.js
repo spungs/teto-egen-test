@@ -869,6 +869,12 @@ function setupEventListeners() {
     if (shareBtn) {
         shareBtn.addEventListener('click', shareResult);
     }
+
+    // 뒤로가기 버튼
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) {
+        backBtn.addEventListener('click', goToPreviousQuestion);
+    }
     
     // 언어 토글 버튼 (헤더에서 처리하므로 여기서는 제거)
     // 하지만 기존 페이지에서 이미 토글된 경우를 대비해 중복 체크
@@ -930,6 +936,16 @@ function showQuestion() {
     const allQuestions = [...baseQuestions, ...genderQuestions];
     const question = allQuestions[currentQuestionIndex];
     
+    // 뒤로가기 버튼 표시/숨김 관리
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) {
+        if (currentQuestionIndex > 0) {
+            backBtn.style.display = 'inline-block';
+        } else {
+            backBtn.style.display = 'none';
+        }
+    }
+    
     // 상황 텍스트 업데이트
     document.getElementById('question-text').textContent = question.situation;
     
@@ -953,13 +969,19 @@ function showQuestion() {
         questionOptions = question.options;
     }
     
-    // 선택지 순서 랜덤화
-    const shuffledOptions = [...questionOptions].sort(() => Math.random() - 0.5);
+    // 선택지 순서 고정 (일관된 사용자 경험을 위해)
+    const optionsToShow = questionOptions;
     
-    shuffledOptions.forEach((option, index) => {
+    optionsToShow.forEach((option, index) => {
         const button = document.createElement('button');
         button.className = 'option-btn';
         button.textContent = option.text;
+        
+        // 이전에 선택한 답변이 있다면 강조
+        if (answers[currentQuestionIndex] && answers[currentQuestionIndex].text === option.text) {
+            button.classList.add('selected');
+        }
+        
         button.addEventListener('click', () => selectOption(option));
         optionsContainer.appendChild(button);
     });
@@ -977,16 +999,8 @@ function selectOption(selectedOption) {
     // 답변 저장
     answers[currentQuestionIndex] = selectedOption;
     
-    // 개선된 점수 계산 (balanced 타입 추가)
-    if (selectedOption.type === 'teto') {
-        tetoScore += selectedOption.score;
-    } else if (selectedOption.type === 'egen') {
-        egenScore += selectedOption.score;
-    } else if (selectedOption.type === 'balanced') {
-        // balanced 선택지는 양쪽에 균등하게 배분
-        tetoScore += selectedOption.score * 0.5;
-        egenScore += selectedOption.score * 0.5;
-    }
+    // 점수 재계산 (이미 답변한 질문을 다시 선택할 수 있으므로)
+    recalculateScores();
     
     // 다음 질문으로 이동 (잠시 후)
     setTimeout(() => {
@@ -1017,6 +1031,51 @@ function nextQuestion() {
     } else {
         showResult();
     }
+}
+
+// 뒤로가기 기능
+function goToPreviousQuestion() {
+    if (currentQuestionIndex > 0) {
+        // 현재 질문의 답변 제거 (아직 답변하지 않았다면)
+        answers[currentQuestionIndex] = null;
+        
+        // 이전 질문으로 이동
+        currentQuestionIndex--;
+        
+        // 점수 재계산
+        recalculateScores();
+        
+        // 질문 화면 업데이트
+        showQuestion();
+    }
+}
+
+// 점수 재계산 함수
+function recalculateScores() {
+    tetoScore = 0;
+    egenScore = 0;
+    
+    // 현재까지 답변한 질문들의 점수를 다시 계산
+    for (let i = 0; i <= currentQuestionIndex; i++) {
+        const answer = answers[i];
+        if (answer) {
+            if (answer.type === 'teto') {
+                tetoScore += answer.score;
+            } else if (answer.type === 'egen') {
+                egenScore += answer.score;
+            } else if (answer.type === 'balanced') {
+                tetoScore += answer.score * 0.5;
+                egenScore += answer.score * 0.5;
+            }
+        }
+    }
+    
+    console.log('🔄 점수 재계산:', {
+        questionIndex: currentQuestionIndex,
+        tetoScore: tetoScore,
+        egenScore: egenScore,
+        answeredQuestions: answers.slice(0, currentQuestionIndex + 1).filter(Boolean).length
+    });
 }
 
 function showResult() {

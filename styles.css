@@ -278,6 +278,28 @@ body {
     transform: translateY(-2px);
 }
 
+.btn-back {
+    background: rgba(52, 73, 94, 0.8);
+    color: #bdc3c7;
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    margin: 0 0 20px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-back:hover {
+    background: rgba(52, 73, 94, 1);
+    color: #ecf0f1;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.question-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
 .test-info {
     margin-top: 30px;
     color: #bdc3c7;
@@ -759,6 +781,12 @@ body {
 
     .question-container h2 {
         font-size: 1.3rem;
+    }
+    
+    .btn-back {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+        margin: 0 0 15px 0;
     }
 
     .result-container {

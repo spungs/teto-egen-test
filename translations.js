@@ -10,6 +10,7 @@ const translations = {
         female: "여성",
         startBtn: "테스트 시작하기",
         testInfo: "📋 총 25문항 | ⏱️ 약 6분 소요",
+        backBtn: "← 이전 질문",
         retryBtn: "다시 테스트하기",
         shareBtn: "결과 공유하기",
         traitsTitle: "당신의 성격 특징",
@@ -348,6 +349,7 @@ const translations = {
         female: "Female", 
         startBtn: "Start Test",
         testInfo: "📋 25 Questions | ⏱️ About 6 minutes",
+        backBtn: "← Previous Question",
         retryBtn: "Retry Test",
         shareBtn: "Share Result",
         traitsTitle: "Your Personality Traits",
@@ -726,6 +728,7 @@ function updateLanguage() {
     const femaleBtn = document.querySelector('.gender-btn[data-gender="female"] span:last-child');
     const startBtn = document.getElementById('start-btn');
     const testInfo = document.querySelector('.test-info p');
+    const backBtn = document.getElementById('back-btn');
     const retryBtn = document.getElementById('retry-btn');
     const shareBtn = document.getElementById('share-btn');
     
@@ -737,6 +740,7 @@ function updateLanguage() {
     if (femaleBtn) femaleBtn.textContent = texts.female;
     if (startBtn) startBtn.textContent = texts.startBtn;
     if (testInfo) testInfo.textContent = texts.testInfo;
+    if (backBtn) backBtn.textContent = texts.backBtn;
     if (retryBtn) retryBtn.textContent = texts.retryBtn;
     if (shareBtn) shareBtn.textContent = texts.shareBtn;
     

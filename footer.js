@@ -31,13 +31,65 @@ class VisitorCounter {
 
     // 초기화
     async init() {
-        await this.updateVisitorCount();
+        // 현재 페이지가 메인 테스트 페이지인지 확인
+        const isMainTestPage = this.isMainTestPage();
+        const isLocal = this.isLocalEnvironment();
+        
+        // 디버깅용 로그
+        console.log('현재 페이지:', window.location.pathname);
+        console.log('현재 호스트:', window.location.hostname);
+        console.log('로컬 환경 여부:', isLocal);
+        console.log('메인 테스트 페이지 여부:', isMainTestPage);
+        
+        if (isLocal) {
+            console.log('🏠 로컬 환경 - 방문자 카운트 제외');
+        } else if (isMainTestPage) {
+            // 프로덕션 환경의 메인 테스트 페이지에서만 방문자 카운트 증가
+            console.log('✅ 방문자 카운트 증가 (프로덕션)');
+            await this.updateVisitorCount();
+        } else {
+            console.log('❌ 방문자 카운트 제외 (가이드/소개 페이지)');
+        }
+        
+        // 모든 페이지에서 통계는 표시
         await this.displayStats();
         
         // 주기적으로 카운터 업데이트 (1분마다)
         setInterval(async () => {
             await this.displayStats();
         }, 60000);
+    }
+
+    // 로컬 환경인지 확인
+    isLocalEnvironment() {
+        const hostname = window.location.hostname;
+        return (
+            hostname === 'localhost' ||
+            hostname === '127.0.0.1' ||
+            hostname.startsWith('192.168.') ||
+            hostname.startsWith('10.') ||
+            hostname.startsWith('172.') ||
+            hostname === '' ||
+            hostname.includes('local')
+        );
+    }
+
+    // 메인 테스트 페이지인지 확인
+    isMainTestPage() {
+        const currentPath = window.location.pathname;
+        const currentPage = window.location.href;
+        
+        // 다음 조건들 중 하나라도 만족하면 메인 테스트 페이지로 판단
+        return (
+            // 1. 루트 경로 (/) 또는 루트의 index.html
+            currentPath === '/' || 
+            currentPath.endsWith('/index.html') ||
+            // 2. 레포지토리 루트 경로 (GitHub Pages의 경우)
+            currentPath.endsWith('/teto-egen-test/') ||
+            currentPath.endsWith('/teto-egen-test/index.html') ||
+            // 3. 파일명이 명시적으로 index.html이고 루트 레벨
+            (currentPage.includes('index.html') && !currentPath.includes('/about.html') && !currentPath.includes('/guide.html') && !currentPath.includes('/privacy-policy.html'))
+        );
     }
 
     // 방문자 수 업데이트 - 페이지 접속할 때마다 카운트

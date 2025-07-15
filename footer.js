@@ -145,6 +145,7 @@ class VisitorCounter {
     async incrementTotalVisitors() {
         let retryCount = 0;
         const maxRetries = 3;
+        let lastError = null;
         
         while (retryCount < maxRetries) {
             try {
@@ -157,19 +158,9 @@ class VisitorCounter {
                     return false;
                 }
                 
-                const today = this.getTodayString();
-                
-                // 새로운 데이터 계산 - 총 방문자와 일일 방문자 모두 +1
+                // daily_visitors, total_visitors +1
                 let newTotalVisitors = (currentData.total_visitors || 0) + 1;
-                let newDailyVisitors;
-                
-                // 날짜가 바뀌었으면 일일 방문자 리셋
-                if (currentData.visit_date !== today) {
-                    newDailyVisitors = 1; // 새로운 날의 첫 방문자
-                    console.log('새로운 날 시작 - 일일 방문자 리셋');
-                } else {
-                    newDailyVisitors = (currentData.daily_visitors || 0) + 1; // 오늘 방문자 +1
-                }
+                let newDailyVisitors = (currentData.daily_visitors || 0) + 1;
                 
                 // Supabase 업데이트
                 const response = await fetch(`${this.apiUrl}/${this.tableName}?id=eq.1`, {
@@ -182,8 +173,7 @@ class VisitorCounter {
                     },
                     body: JSON.stringify({
                         total_visitors: newTotalVisitors,
-                        daily_visitors: newDailyVisitors,
-                        visit_date: today
+                        daily_visitors: newDailyVisitors
                     })
                 });
                 
@@ -194,24 +184,29 @@ class VisitorCounter {
                     return true;
                 } else {
                     const errorText = await response.text();
-                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                    lastError = `HTTP ${response.status}: ${errorText}`;
+                    throw new Error(lastError);
                 }
             } catch (error) {
                 retryCount++;
+                lastError = error;
                 console.error(`방문자 카운트 업데이트 시도 ${retryCount}/${maxRetries} 실패:`, error);
                 
                 if (retryCount >= maxRetries) {
                     console.error('최대 재시도 횟수 초과, 카운트 업데이트 실패');
                     this.dbConnected = false;
+                    // 사용자에게 안내 메시지 표시
+                    alert('방문자 수 업데이트에 실패했습니다. 네트워크 상태를 확인하거나 잠시 후 다시 시도해 주세요.');
                     return false;
                 }
-                
                 // 재시도 전 대기 (exponential backoff)
                 await new Promise(resolve => setTimeout(resolve, Math.pow(2, retryCount) * 1000));
             }
         }
-        
         this.dbConnected = false;
+        if (lastError) {
+            alert('방문자 수 업데이트에 실패했습니다. 네트워크 상태를 확인하거나 잠시 후 다시 시도해 주세요.');
+        }
         return false;
     }
 
@@ -239,7 +234,7 @@ class VisitorCounter {
                         return {
                             total_visitors: Math.max(0, result.total_visitors || 0),
                             daily_visitors: Math.max(0, result.daily_visitors || 0),
-                            visit_date: result.visit_date || this.getTodayString(),
+                            visit_date: result.visit_date, // 조회만
                             last_updated: result.last_updated || new Date().toISOString()
                         };
                     }
@@ -335,6 +330,11 @@ class VisitorCounter {
 
     // 통계 리셋 (개발/테스트용) - Supabase 데이터 초기화
     async resetStats() {
+        // 운영 환경에서 사용 금지
+        if (window.location.hostname !== 'localhost' && !window.location.hostname.startsWith('127.')) {
+            alert('운영 환경에서는 통계 리셋 기능을 사용할 수 없습니다.');
+            return;
+        }
         try {
             const response = await fetch(`${this.apiUrl}/${this.tableName}?id=eq.1`, {
                 method: 'PATCH',
@@ -346,9 +346,7 @@ class VisitorCounter {
                 },
                 body: JSON.stringify({
                     total_visitors: 0,
-                    daily_visitors: 0,
-                    visit_date: this.getTodayString(),
-                    last_updated: new Date().toISOString()
+                    daily_visitors: 0
                 })
             });
             
@@ -385,21 +383,6 @@ class VisitorCounter {
 // 개발자 도구용 함수들
 window.getVisitorStats = async function() {
     return window.visitorCounter?.getCurrentStats() || null;
-};
-
-window.resetVisitorStats = async function() {
-    if (window.visitorCounter) {
-        await window.visitorCounter.resetStats();
-    }
-};
-
-// 테스트용: 강제로 방문자 수 증가
-window.forceIncrementVisitor = async function() {
-    if (window.visitorCounter) {
-        const success = await window.visitorCounter.incrementTotalVisitors();
-        await window.visitorCounter.displayStats();
-        console.log('강제 증가 결과:', success ? '성공' : '실패');
-    }
 };
 
 // DOM 로드 후 footer 로딩

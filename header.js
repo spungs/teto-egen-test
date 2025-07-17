@@ -82,7 +82,7 @@ async function loadVersionFromDatabase() {
             const data = await response.json();
             if (data && data.length > 0 && data[0].version) {
                 updateVersion(data[0].version);
-                console.log('데이터베이스에서 버전 로드:', data[0].version);
+                // console.log('데이터베이스에서 버전 로드:', data[0].version);
             } else {
                 console.warn('데이터베이스에서 버전 정보를 찾을 수 없습니다.');
             }

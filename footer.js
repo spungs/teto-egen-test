@@ -130,6 +130,19 @@ class VisitorCounter {
                String(today.getDate()).padStart(2, '0');
     }
 
+    // 오늘 0시(KST)를 UTC로 변환해 ISO 문자열 반환
+    getTodayUTCISOString() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth();
+        const date = now.getDate();
+        // 오늘 0시 KST
+        const todayKST = new Date(year, month, date, 0, 0, 0);
+        // KST → UTC 변환
+        const todayUTC = new Date(todayKST.getTime() - 9 * 60 * 60 * 1000);
+        return todayUTC.toISOString().slice(0, 10); // YYYY-MM-DD
+    }
+
     // 로컬 환경인지 확인
     isLocalEnvironment() {
         const hostname = window.location.hostname;
@@ -160,8 +173,9 @@ class VisitorCounter {
     // 오늘 방문자수 집계
     async getTodayVisitorCount() {
         try {
-            const today = this.getTodayString();
-            const response = await fetch(`${this.apiUrl}/${this.dailyTable}?created_at=gte.${today}T00:00:00&created_at=lt.${today}T23:59:59`, {
+            // 오늘 0시(KST)를 UTC로 변환
+            const todayUTC = this.getTodayUTCISOString();
+            const response = await fetch(`${this.apiUrl}/${this.dailyTable}?created_at=gte.${todayUTC}T00:00:00&created_at=lt.${todayUTC}T23:59:59`, {
                 method: 'GET',
                 headers: {
                     'apikey': this.supabaseKey,

@@ -25,7 +25,25 @@ class VisitorCounter {
         this.dailyTable = 'daily_visitors';
         this.statsTable = 'visitor_stats'; // 총 방문자수 집계용(누적)
         this.sessionKey = 'visitor_uuid_' + this.getTodayString();
+        this.cleanupOldUuids(); // 오래된 uuid 정리
         this.init();
+    }
+
+    // 오래된 uuid를 주기적으로 삭제
+    cleanupOldUuids() {
+        try {
+            const todayKey = this.sessionKey;
+            const keysToRemove = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('visitor_uuid_') && key !== todayKey) {
+                    keysToRemove.push(key);
+                }
+            }
+            keysToRemove.forEach(key => localStorage.removeItem(key));
+        } catch (e) {
+            // localStorage 접근 불가 시 무시
+        }
     }
 
     async init() {

@@ -124,7 +124,7 @@ async function updateVersionInDatabase(newVersion) {
         });
 
         if (response.ok) {
-            console.log('데이터베이스 버전 업데이트 성공:', newVersion);
+            // console.log('데이터베이스 버전 업데이트 성공:', newVersion);
             updateVersion(newVersion);
             return true;
         } else {

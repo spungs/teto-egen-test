@@ -52,7 +52,7 @@ class VisitorCounter {
         const hasVisitedToday = this.hasVisitedToday();
 
         if (isLocal) {
-            console.log('🏠 로컬 환경 - 방문자 카운트 제외');
+            // console.log('🏠 로컬 환경 - 방문자 카운트 제외');
         } else if (isMainTestPage && !hasVisitedToday) {
             // 오늘 첫 방문자라면 uuid 생성 및 insert
             await this.insertDailyVisitor();

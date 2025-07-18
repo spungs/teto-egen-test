@@ -693,11 +693,11 @@ function toggleLanguage() {
     const previousLanguage = currentLanguage;
     currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
     
-    console.log('🌐 언어 변경:', {
-        from: previousLanguage,
-        to: currentLanguage,
-        page: window.location.pathname
-    });
+    // console.log('🌐 언어 변경:', {
+    //     from: previousLanguage,
+    //     to: currentLanguage,
+    //     page: window.location.pathname
+    // });
     
     updateLanguage();
     localStorage.setItem('language-preference', currentLanguage);
@@ -814,9 +814,24 @@ function updateLanguage() {
 
 // 페이지 로딩 시 저장된 언어 설정 적용
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. 저장된 언어 설정 확인
     const savedLanguage = localStorage.getItem('language-preference');
-    if (savedLanguage && savedLanguage !== currentLanguage) {
+    
+    if (savedLanguage && (savedLanguage === 'ko' || savedLanguage === 'en')) {
+        // 저장된 언어 설정이 있으면 사용
         currentLanguage = savedLanguage;
+        // console.log('🌐 저장된 언어 설정 사용:', currentLanguage);
+    } else {
+        // 저장된 설정이 없으면 브라우저 언어 자동 감지
+        const browserLanguage = detectBrowserLanguage();
+        currentLanguage = browserLanguage;
+        
+        // 자동 감지된 언어를 localStorage에 저장
+        localStorage.setItem('language-preference', currentLanguage);
+        // console.log('🌐 브라우저 언어 자동 감지:', {
+        //     detected: navigator.language || navigator.userLanguage,
+        //     selected: currentLanguage
+        // });
     }
     
     // 100ms 지연 후 언어 업데이트 (DOM 완전 로딩 대기)
@@ -824,3 +839,39 @@ document.addEventListener('DOMContentLoaded', function() {
         updateLanguage();
     }, 100);
 });
+
+// 브라우저 언어 자동 감지 함수
+function detectBrowserLanguage() {
+    // 브라우저 언어 설정 가져오기
+    const browserLang = navigator.language || navigator.userLanguage || navigator.languages?.[0] || 'en';
+    
+    // console.log('🔍 브라우저 언어 정보:', {
+    //     language: navigator.language,
+    //     userLanguage: navigator.userLanguage,
+    //     languages: navigator.languages,
+    //     detected: browserLang
+    // });
+    
+    // 한국어 관련 언어 코드들
+    const koreanCodes = ['ko', 'ko-KR', 'ko-kr', 'korean'];
+    
+    // 영어 관련 언어 코드들  
+    const englishCodes = ['en', 'en-US', 'en-us', 'en-GB', 'en-gb', 'en-AU', 'en-au', 'en-CA', 'en-ca', 'english'];
+    
+    // 언어 코드를 소문자로 변환해서 비교
+    const lowerLang = browserLang.toLowerCase();
+    
+    // 한국어 감지
+    if (koreanCodes.some(code => lowerLang.startsWith(code.toLowerCase()))) {
+        return 'ko';
+    }
+    
+    // 영어 감지 (또는 기타 언어는 영어로 기본 설정)
+    if (englishCodes.some(code => lowerLang.startsWith(code.toLowerCase()))) {
+        return 'en';
+    }
+    
+    // 지원되지 않는 언어의 경우 영어를 기본값으로 설정
+    // (글로벌 서비스이므로 영어가 더 범용적)
+    return 'en';
+}

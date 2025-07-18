@@ -825,23 +825,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApp() {
-    // 저장된 설정 불러오기
-    const savedLanguage = localStorage.getItem('language-preference');
-    
-    if (savedLanguage) {
-        currentLanguage = savedLanguage;
-    } else {
-        // 브라우저 언어 감지
-        const browserLang = navigator.language || navigator.userLanguage;
-        if (browserLang.startsWith('en')) {
-            currentLanguage = 'en';
-        }
-    }
-    
     // 다크모드를 기본으로 적용
     document.body.classList.add('dark-mode');
     
-    updateLanguage();
+    // 언어 설정은 translations.js에서 자동으로 처리됨
+    // console.log('🚀 앱 초기화 완료');
 }
 
 function setupEventListeners() {
@@ -1070,12 +1058,12 @@ function recalculateScores() {
         }
     }
     
-    console.log('🔄 점수 재계산:', {
-        questionIndex: currentQuestionIndex,
-        tetoScore: tetoScore,
-        egenScore: egenScore,
-        answeredQuestions: answers.slice(0, currentQuestionIndex + 1).filter(Boolean).length
-    });
+    // console.log('🔄 점수 재계산:', {
+    //     questionIndex: currentQuestionIndex,
+    //     tetoScore: tetoScore,
+    //     egenScore: egenScore,
+    //     answeredQuestions: answers.slice(0, currentQuestionIndex + 1).filter(Boolean).length
+    // });
 }
 
 function showResult() {
@@ -1099,14 +1087,14 @@ function showResult() {
     
     const result = resultData[currentLanguage][currentGender][isTetoType ? 'teto' : 'egen'];
     
-    console.log('📊 결과 표시:', {
-        language: currentLanguage,
-        gender: currentGender,
-        tetoScore: tetoScore,
-        egenScore: egenScore,
-        isTetoType: isTetoType,
-        resultType: result.type
-    });
+    // console.log('📊 결과 표시:', {
+    //     language: currentLanguage,
+    //     gender: currentGender,
+    //     tetoScore: tetoScore,
+    //     egenScore: egenScore,
+    //     isTetoType: isTetoType,
+    //     resultType: result.type
+    // });
     
     // 결과 표시
     document.getElementById('result-type').textContent = result.type;
@@ -1170,12 +1158,12 @@ function renderCompatibility(compatibilityData) {
     const userTetoRatio = tetoScore / totalScore; // 0.0 ~ 1.0
     const userEgenRatio = egenScore / totalScore; // 0.0 ~ 1.0
     
-    console.log('🧮 궁합도 계산:', {
-        tetoScore: tetoScore,
-        egenScore: egenScore,
-        userTetoRatio: userTetoRatio,
-        userEgenRatio: userEgenRatio
-    });
+    // console.log('🧮 궁합도 계산:', {
+    //     tetoScore: tetoScore,
+    //     egenScore: egenScore,
+    //     userTetoRatio: userTetoRatio,
+    //     userEgenRatio: userEgenRatio
+    // });
     
     // 모든 궁합 점수를 먼저 계산
     const compatibilityScores = compatibilityData.map(item => ({
@@ -1209,10 +1197,10 @@ function renderCompatibility(compatibilityData) {
         
         container.appendChild(compatibilityItem);
         
-        console.log(`💕 ${item.type} 최종 궁합:`, {
-            rawScore: item.rawScore,
-            normalizedScore: item.normalizedScore
-        });
+        // console.log(`💕 ${item.type} 최종 궁합:`, {
+        //     rawScore: item.rawScore,
+        //     normalizedScore: item.normalizedScore
+        // });
     });
 }
 
@@ -1245,12 +1233,12 @@ function calculateCompatibilityScore(userTetoRatio, userEgenRatio, partnerType) 
     // 점수 범위 제한 (30-100%)
     const finalScore = Math.max(30, Math.min(100, Math.round(compatibilityScore)));
     
-    console.log(`💕 ${partnerType} Helen Fisher 이론 기반 궁합:`, {
-        userRatio: `테토${Math.round(userTetoRatio*100)}% / 에겐${Math.round(userEgenRatio*100)}%`,
-        isOppositeAttraction: partnerType.includes('에겐') ? '테토→에겐 끌림' : '에겐→테토 끌림',
-        finalScore: finalScore,
-        theory: 'Director(테토) ↔ Negotiator(에겐) 강한 상호 끌림'
-    });
+    // console.log(`💕 ${partnerType} Helen Fisher 이론 기반 궁합:`, {
+    //     userRatio: `테토${Math.round(userTetoRatio*100)}% / 에겐${Math.round(userEgenRatio*100)}%`,
+    //     isOppositeAttraction: partnerType.includes('에겐') ? '테토→에겐 끌림' : '에겐→테토 끌림',
+    //     finalScore: finalScore,
+    //     theory: 'Director(테토) ↔ Negotiator(에겐) 강한 상호 끌림'
+    // });
     
     return finalScore;
 }
@@ -1426,7 +1414,7 @@ function updateResultContent() {
         renderHealth(result.health);
         renderGrowth(result.growth);
         
-        console.log('✅ 결과 내용 언어 업데이트 완료:', currentLanguage);
+        // console.log('✅ 결과 내용 언어 업데이트 완료:', currentLanguage);
     }
 }
 

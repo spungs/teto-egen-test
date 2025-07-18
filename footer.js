@@ -130,17 +130,34 @@ class VisitorCounter {
                String(today.getDate()).padStart(2, '0');
     }
 
+    // KST 기준 오늘 0시 ~ 23시 59분의 UTC 범위 반환
+    getKSTTodayUTCRange() {
+        // 현재 UTC 시간을 KST로 변환해서 오늘 날짜 구하기
+        const now = new Date();
+        const kstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000); // UTC + 9시간 = KST
+        
+        const year = kstNow.getUTCFullYear();
+        const month = kstNow.getUTCMonth();
+        const date = kstNow.getUTCDate();
+        
+        // KST 기준 오늘 0시를 UTC로 변환
+        const kstTodayStart = new Date(Date.UTC(year, month, date, 0, 0, 0));
+        const utcTodayStart = new Date(kstTodayStart.getTime() - 9 * 60 * 60 * 1000);
+        
+        // KST 기준 오늘 23:59:59를 UTC로 변환
+        const kstTodayEnd = new Date(Date.UTC(year, month, date, 23, 59, 59));
+        const utcTodayEnd = new Date(kstTodayEnd.getTime() - 9 * 60 * 60 * 1000);
+        
+        return {
+            start: utcTodayStart.toISOString(),
+            end: utcTodayEnd.toISOString()
+        };
+    }
+
     // 오늘 0시(KST)를 UTC로 변환해 ISO 문자열 반환
     getTodayUTCISOString() {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth();
-        const date = now.getDate();
-        // 오늘 0시 KST
-        const todayKST = new Date(year, month, date, 0, 0, 0);
-        // KST → UTC 변환
-        const todayUTC = new Date(todayKST.getTime() - 9 * 60 * 60 * 1000);
-        return todayUTC.toISOString().slice(0, 10); // YYYY-MM-DD
+        const range = this.getKSTTodayUTCRange();
+        return range.start.slice(0, 10); // YYYY-MM-DD
     }
 
     // 로컬 환경인지 확인
@@ -173,9 +190,9 @@ class VisitorCounter {
     // 오늘 방문자수 집계
     async getTodayVisitorCount() {
         try {
-            // 오늘 0시(KST)를 UTC로 변환
-            const todayUTC = this.getTodayUTCISOString();
-            const response = await fetch(`${this.apiUrl}/${this.dailyTable}?created_at=gte.${todayUTC}T00:00:00&created_at=lt.${todayUTC}T23:59:59`, {
+            // KST 기준 오늘 0시 ~ 23:59:59의 UTC 범위
+            const range = this.getKSTTodayUTCRange();
+            const response = await fetch(`${this.apiUrl}/${this.dailyTable}?created_at=gte.${range.start}&created_at=lte.${range.end}`, {
                 method: 'GET',
                 headers: {
                     'apikey': this.supabaseKey,

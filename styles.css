@@ -1217,6 +1217,37 @@ li {
     align-items: flex-end;
     gap: 6px;
     justify-self: end;
+    position: relative;
+}
+
+/* 애니메이션 화살표 추가 */
+.other-services::before {
+    content: "👇";
+    position: absolute;
+    top: -40px;
+    right: 50px;
+    font-size: 1.8rem;
+    animation: pointingFinger 2s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes pointingFinger {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+        opacity: 0.7; 
+    }
+    25% { 
+        transform: translateY(-3px) rotate(-5deg); 
+        opacity: 1; 
+    }
+    50% { 
+        transform: translateY(-5px) rotate(0deg); 
+        opacity: 0.9; 
+    }
+    75% { 
+        transform: translateY(-3px) rotate(5deg); 
+        opacity: 1; 
+    }
 }
 
 .services-label {
@@ -1226,12 +1257,33 @@ li {
     text-align: right;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     position: relative;
+    animation: labelPulse 4s ease-in-out infinite;
+}
+
+@keyframes labelPulse {
+    0%, 100% { 
+        transform: scale(1);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    50% { 
+        transform: scale(1.05);
+        text-shadow: 0 2px 8px rgba(116, 185, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
 }
 
 .services-label::before {
     content: "🌐";
     margin-right: 5px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
+    animation: globeSpin 3s linear infinite;
+}
+
+@keyframes globeSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(90deg) scale(1.1); }
+    50% { transform: rotate(180deg) scale(1); }
+    75% { transform: rotate(270deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
 }
 
 .services-links {
@@ -1239,6 +1291,12 @@ li {
     gap: 8px;
     flex-wrap: wrap;
     justify-content: flex-end;
+    animation: linksShimmer 5s ease-in-out infinite;
+}
+
+@keyframes linksShimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
 }
 
 .service-link {
@@ -1256,12 +1314,28 @@ li {
     box-shadow: 0 2px 8px rgba(116, 185, 255, 0.2);
     position: relative;
     overflow: hidden;
+    animation: linkFloat 6s ease-in-out infinite;
 }
 
+@keyframes linkFloat {
+    0%, 100% { transform: translateY(0); }
+    33% { transform: translateY(-1px); }
+    66% { transform: translateY(1px); }
+}
+
+.service-link:nth-child(2) { animation-delay: 0.5s; }
+.service-link:nth-child(3) { animation-delay: 1s; }
+
 .service-link::before {
-    content: "🔫";
+    content: "🚀";
     margin-right: 4px;
     font-size: 0.6rem;
+    animation: rocketBounce 2s ease-in-out infinite;
+}
+
+@keyframes rocketBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
 }
 
 .service-link:hover {
@@ -1270,6 +1344,7 @@ li {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(116, 185, 255, 0.4);
     color: #74b9ff;
+    animation: none; /* 호버 시 플로팅 애니메이션 중지 */
 }
 
 /* 모바일 대응 */
@@ -1284,26 +1359,36 @@ li {
         gap: 8px;
         padding: 0 15px;
         min-height: auto;
+        align-items: stretch;
     }
     
     .stats-container {
         gap: 20px;
         order: 1;
         padding: 6px 12px;
+        align-self: center;
     }
     
     .other-services {
-        align-items: center;
+        align-items: flex-end;
         order: 2;
-        justify-self: center;
+        align-self: flex-end;
+        margin-right: 0;
+        width: auto;
+    }
+    
+    .other-services::before {
+        top: -30px;
+        right: 30px;
+        font-size: 1.5rem;
     }
     
     .services-label {
-        text-align: center;
+        text-align: right;
     }
     
     .services-links {
-        justify-content: center;
+        justify-content: flex-end;
         gap: 6px;
     }
     

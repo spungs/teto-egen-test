@@ -339,7 +339,7 @@ const translations = {
             copyright: "© 2024 테토-에겐 성격 유형 테스트. All rights reserved.",
             dailyVisitors: "오늘 방문자",
             totalVisitors: "총 방문자",
-            otherServices: "spungs's world"
+            otherServices: "spungs's other services"
         }
     },
     en: {
@@ -681,7 +681,7 @@ const translations = {
             copyright: "© 2024 Teto-Egen Personality Type Test. All rights reserved.",
             dailyVisitors: "Today's Visitors",
             totalVisitors: "Total Visitors",
-            otherServices: "spungs's world"
+            otherServices: "spungs's other services"
         }
     }
 }; 

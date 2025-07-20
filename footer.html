@@ -1,14 +1,25 @@
 <!-- 방문자 통계 footer -->
 <footer class="visitor-stats">
-    <div class="stats-container">
-        <div class="stats-item">
-            <span class="stats-label">오늘 방문자</span>
-            <span id="daily-visitors" class="stats-count">0</span>
+    <div class="footer-container">
+        <!-- 방문자 통계 (가운데) -->
+        <div class="stats-container">
+            <div class="stats-item">
+                <span class="stats-label" data-text="footer.dailyVisitors">오늘 방문자</span>
+                <span id="daily-visitors" class="stats-count">0</span>
+            </div>
+            <div class="stats-divider">|</div>
+            <div class="stats-item">
+                <span class="stats-label" data-text="footer.totalVisitors">총 방문자</span>
+                <span id="total-visitors" class="stats-count">0</span>
+            </div>
         </div>
-        <div class="stats-divider">|</div>
-        <div class="stats-item">
-            <span class="stats-label">총 방문자</span>
-            <span id="total-visitors" class="stats-count">0</span>
+        
+        <!-- 다른 서비스 링크 (오른쪽) -->
+        <div class="other-services">
+            <span class="services-label" data-text="footer.otherServices">spungs's other services</span>
+            <div class="services-links" id="services-links">
+                <!-- 서비스 링크들이 동적으로 추가됩니다 -->
+            </div>
         </div>
     </div>
 </footer> 

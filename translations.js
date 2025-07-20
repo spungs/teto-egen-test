@@ -336,7 +336,10 @@ const translations = {
         
         // Footer
         footer: {
-            copyright: "© 2024 테토-에겐 성격 유형 테스트. All rights reserved."
+            copyright: "© 2024 테토-에겐 성격 유형 테스트. All rights reserved.",
+            dailyVisitors: "오늘 방문자",
+            totalVisitors: "총 방문자",
+            otherServices: "spungs's world"
         }
     },
     en: {
@@ -675,7 +678,10 @@ const translations = {
         
         // Footer
         footer: {
-            copyright: "© 2024 Teto-Egen Personality Type Test. All rights reserved."
+            copyright: "© 2024 Teto-Egen Personality Type Test. All rights reserved.",
+            dailyVisitors: "Today's Visitors",
+            totalVisitors: "Total Visitors",
+            otherServices: "spungs's world"
         }
     }
 }; 
@@ -809,6 +815,11 @@ function updateLanguage() {
         if (typeof updateResultContent === 'function') {
             updateResultContent();
         }
+    }
+    
+    // 푸터의 다른 서비스 링크도 언어에 맞게 업데이트
+    if (typeof window !== 'undefined' && window.visitorCounter && typeof window.visitorCounter.renderServices === 'function') {
+        window.visitorCounter.renderServices();
     }
 }
 

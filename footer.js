@@ -25,8 +25,76 @@ class VisitorCounter {
         this.dailyTable = 'daily_visitors';
         this.statsTable = 'visitor_stats'; // 총 방문자수 집계용(누적)
         this.sessionKey = 'visitor_uuid_' + this.getTodayString();
+        
+        // 다른 서비스 링크 설정 (다국어 지원)
+        this.otherServices = [
+            { 
+                name: {
+                    ko: '닷지마스터',
+                    en: 'Dodge Master'
+                }, 
+                url: 'https://dodge-master.spungs-teto-egen.com' 
+            },
+            // 필요한 서비스들을 여기에 추가
+            // { 
+            //     name: {
+            //         ko: '서비스2',
+            //         en: 'Service 2'
+            //     }, 
+            //     url: 'https://example2.com' 
+            // },
+        ];
+        
         this.cleanupOldUuids(); // 오래된 uuid 정리
         this.init();
+    }
+
+    // 다른 서비스 링크 추가 (다국어 지원)
+    // addService(nameObj, url) {
+    //     // nameObj 형태: { ko: '한국어명', en: '영어명' }
+    //     this.otherServices.push({ name: nameObj, url });
+    //     this.renderServices();
+    // }
+
+    // // 다른 서비스 링크 제거 (한국어명 기준)
+    // removeService(koreanName) {
+    //     this.otherServices = this.otherServices.filter(service => service.name.ko !== koreanName);
+    //     this.renderServices();
+    // }
+
+    // 다른 서비스 링크들을 화면에 렌더링
+    renderServices() {
+        const servicesContainer = document.getElementById('services-links');
+        if (!servicesContainer) return;
+
+        servicesContainer.innerHTML = '';
+
+        this.otherServices.forEach(service => {
+            const link = document.createElement('a');
+            link.href = service.url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.className = 'service-link';
+            
+            // 현재 언어에 맞는 서비스명 표시 (translations.js의 currentLanguage 사용)
+            const lang = (typeof currentLanguage !== 'undefined') ? currentLanguage : 'ko';
+            const serviceName = service.name[lang] || service.name.ko; // 기본값은 한국어
+            
+            link.textContent = serviceName;
+            
+            // 클릭 시 분석 이벤트 (선택사항)
+            // link.addEventListener('click', () => {
+            //     console.log(`🔗 다른 서비스 이동: ${serviceName} -> ${service.url}`);
+            // });
+            
+            servicesContainer.appendChild(link);
+        });
+
+        // 서비스가 없으면 전체 섹션 숨기기
+        const otherServicesSection = document.querySelector('.other-services');
+        if (otherServicesSection) {
+            otherServicesSection.style.display = this.otherServices.length > 0 ? 'flex' : 'none';
+        }
     }
 
     // 오래된 uuid를 주기적으로 삭제
@@ -58,6 +126,10 @@ class VisitorCounter {
             await this.insertDailyVisitor();
             this.markVisitedToday();
         }
+        
+        // 다른 서비스 링크 렌더링
+        this.renderServices();
+        
         // 통계 표시
         await this.displayStats();
         setInterval(async () => {

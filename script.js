@@ -858,6 +858,12 @@ function setupEventListeners() {
         shareBtn.addEventListener('click', shareResult);
     }
 
+    // 이미지 저장 버튼
+    const saveImageBtn = document.getElementById('save-image-btn');
+    if (saveImageBtn) {
+        saveImageBtn.addEventListener('click', saveResultAsImage);
+    }
+
     // 뒤로가기 버튼
     const backBtn = document.getElementById('back-btn');
     if (backBtn) {
@@ -1344,37 +1350,241 @@ function resetTest() {
 }
 
 function shareResult() {
+    const shareUrl = window.location.href;
+    
+    // 클립보드에 복사
+    navigator.clipboard.writeText(shareUrl).then(() => {
+        const message = currentLanguage === 'ko' ? 
+            '링크가 복사되었습니다! 📋' : 
+            'Link copied to clipboard! 📋';
+        alert(message);
+    }).catch(() => {
+        // 클립보드 복사 실패시 직접 선택
+        const textarea = document.createElement('textarea');
+        textarea.value = shareUrl;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        
+        const message = currentLanguage === 'ko' ? 
+            '링크가 복사되었습니다! 📋' : 
+            'Link copied to clipboard! 📋';
+        alert(message);
+    });
+}
+
+// 🖼️ 결과를 이미지로 저장하는 함수
+async function saveResultAsImage() {
+    const saveBtn = document.getElementById('save-image-btn');
+    
+    // 원본 텍스트 미리 저장
+    const originalText = saveBtn.textContent;
+    
+    try {
+        // 버튼 로딩 상태
+        saveBtn.textContent = currentLanguage === 'ko' ? '📸 생성 중...' : '📸 Generating...';
+        saveBtn.disabled = true;
+        
+        // 캡처할 핵심 영역 선택 (헤더 + 특징 + 상세설명 + 점수 + 연애궁합)
+        const resultHeader = document.querySelector('.result-header');
+        const resultDescription = document.querySelector('.result-description');
+        const resultDetailed = document.querySelector('.result-detailed');
+        const resultScore = document.querySelector('.result-score');
+        const resultCompatibility = document.querySelector('.result-compatibility');
+        
+        // 임시 컨테이너 생성
+        const tempContainer = document.createElement('div');
+        tempContainer.className = 'temp-image-container';
+        tempContainer.style.cssText = `
+            background: #2d3436;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 550px;
+            margin: 0 auto;
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            z-index: -1;
+            color: white;
+            font-family: inherit;
+        `;
+        
+        // 핵심 요소들 복사
+        tempContainer.appendChild(resultHeader.cloneNode(true));
+        tempContainer.appendChild(resultDescription.cloneNode(true));
+        tempContainer.appendChild(resultDetailed.cloneNode(true));
+        tempContainer.appendChild(resultScore.cloneNode(true));
+        
+        // 연애궁합은 개별 아이템들만 추가 (컨테이너 제거)
+        if (resultCompatibility) {
+            const compatibilityTitle = document.createElement('h3');
+            compatibilityTitle.textContent = resultCompatibility.querySelector('h3').textContent;
+            compatibilityTitle.style.cssText = `
+                color: #74b9ff;
+                margin-bottom: 15px;
+                font-size: 1.2rem;
+                margin-top: 20px;
+            `;
+            tempContainer.appendChild(compatibilityTitle);
+            
+            const compatibilityItems = resultCompatibility.querySelectorAll('.compatibility-item');
+            compatibilityItems.forEach(item => {
+                tempContainer.appendChild(item.cloneNode(true));
+            });
+        }
+        
+        // 워터마크 추가
+        const watermark = document.createElement('div');
+        watermark.style.cssText = `
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: monospace;
+        `;
+        watermark.textContent = 'spungs-teto-egen.com';
+        tempContainer.appendChild(watermark);
+        
+        document.body.appendChild(tempContainer);
+        
+        // html2canvas로 캡처
+        const canvas = await html2canvas(tempContainer, {
+            backgroundColor: '#2d3436',
+            scale: 2, // 고해상도
+            useCORS: true,
+            allowTaint: false,
+            foreignObjectRendering: false,
+            removeContainer: true,
+            logging: false,
+            imageTimeout: 15000,
+            onclone: function(clonedDoc) {
+                // 클론된 문서에서 모든 gradient 제거
+                const allElements = clonedDoc.querySelectorAll('*');
+                allElements.forEach(el => {
+                    el.style.backgroundImage = 'none';
+                    if (el.classList.contains('score-fill')) {
+                        if (el.classList.contains('teto')) {
+                            el.style.backgroundColor = '#e17055';
+                        } else if (el.classList.contains('egen')) {
+                            el.style.backgroundColor = '#fd79a8';
+                        }
+                    }
+                });
+            }
+        });
+        
+        // 임시 컨테이너 제거
+        document.body.removeChild(tempContainer);
+        
+        // Canvas를 Blob으로 변환
+        canvas.toBlob(async (blob) => {
+            if (!blob) {
+                throw new Error('Canvas to blob conversion failed');
+            }
+            
+            const resultType = document.getElementById('result-type').textContent;
+            const fileName = `teto-egen-result-${resultType}.png`;
+            
+            // 모바일/데스크톱 구분하여 처리
+            if (navigator.share && window.File) {
+                try {
+                    // 모바일: 네이티브 공유
+                    const file = new File([blob], fileName, { type: 'image/png' });
+                    
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                            title: `나는 ${resultType}!`,
+                            text: `테토-에겐 성격 유형 테스트 결과: ${resultType}`,
+                            files: [file]
+                        });
+                    } else {
+                        // File API 미지원시 폴백
+                        throw new Error('File sharing not supported');
+                    }
+                } catch (shareError) {
+                    console.error('네이티브 공유 실패, 다운로드로 전환:', shareError);
+                    downloadImage(blob, fileName);
+                }
+            } else {
+                // 데스크톱: 다운로드
+                downloadImage(blob, fileName);
+            }
+        }, 'image/png', 0.9);
+        
+    } catch (error) {
+        console.error('이미지 저장 실패:', error);
+        const message = currentLanguage === 'ko' ? 
+            '이미지 저장에 실패했습니다. 다시 시도해주세요.' : 
+            'Failed to save image. Please try again.';
+        alert(message);
+    } finally {
+        // 버튼 복원
+        saveBtn.textContent = originalText;
+        saveBtn.disabled = false;
+    }
+}
+
+// 이미지 다운로드 헬퍼 함수
+function downloadImage(blob, fileName) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    const message = currentLanguage === 'ko' ? 
+        '이미지가 다운로드되었습니다! 📥' : 
+        'Image downloaded! 📥';
+    alert(message);
+}
+
+// 📱 개선된 공유 기능 (이미지 + 텍스트)
+async function shareResultWithImage() {
     const resultType = document.getElementById('result-type').textContent;
     const resultEmoji = document.getElementById('result-emoji').textContent;
+    const resultContainer = document.querySelector('.result-container');
     
-    const shareTexts = {
-        ko: `나는 ${resultType}! ${resultEmoji}\n\n테토-에겐 성격 유형 테스트 결과입니다.\n\n테스트 해보기: ${window.location.href}`,
-        en: `I am ${resultType}! ${resultEmoji}\n\nTeto-Egen Personality Type Test Result.\n\nTake the test: ${window.location.href}`
-    };
-    
-    const shareText = shareTexts[currentLanguage];
-    
-    if (navigator.share) {
-        navigator.share({
-            title: translations[currentLanguage].title,
-            text: shareText
+    try {
+        // 이미지 생성
+        resultContainer.classList.add('result-for-image');
+        const canvas = await html2canvas(resultContainer, {
+            backgroundColor: null,
+            scale: 1.5,
+            useCORS: true
         });
-    } else {
-        // 클립보드에 복사
-        navigator.clipboard.writeText(shareText).then(() => {
-            const message = currentLanguage === 'ko' ? '결과가 클립보드에 복사되었습니다!' : 'Result copied to clipboard!';
-            alert(message);
-        }).catch(() => {
-            // 클립보드 복사 실패시 직접 선택
-            const textarea = document.createElement('textarea');
-            textarea.value = shareText;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            const message = currentLanguage === 'ko' ? '결과가 클립보드에 복사되었습니다!' : 'Result copied to clipboard!';
-            alert(message);
-        });
+        resultContainer.classList.remove('result-for-image');
+        
+        canvas.toBlob(async (blob) => {
+            const shareTexts = {
+                ko: `나는 ${resultType}! ${resultEmoji}\n\n테토-에겐 성격 유형 테스트\n${window.location.href}`,
+                en: `I am ${resultType}! ${resultEmoji}\n\nTeto-Egen Personality Test\n${window.location.href}`
+            };
+            
+            const file = new File([blob], `teto-egen-${resultType}.png`, { type: 'image/png' });
+            
+            if (navigator.share && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    title: `테토-에겐 테스트 결과: ${resultType}`,
+                    text: shareTexts[currentLanguage],
+                    files: [file]
+                });
+            } else {
+                // 폴백: 기존 텍스트 공유
+                shareResult();
+            }
+        }, 'image/png');
+        
+    } catch (error) {
+        console.error('이미지 공유 실패:', error);
+        // 폴백: 기존 텍스트 공유
+        shareResult();
     }
 }
 

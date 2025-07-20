@@ -12,7 +12,8 @@ const translations = {
         testInfo: "📋 총 25문항 | ⏱️ 약 6분 소요",
         backBtn: "← 이전 질문",
         retryBtn: "다시 테스트하기",
-        shareBtn: "결과 공유하기",
+        shareBtn: "📝 링크 복사",
+        saveImageBtn: "📷 이미지로 저장",
         traitsTitle: "당신의 성격 특징",
         detailTitle: "상세 설명",
         scoreTitle: "점수 분포",
@@ -354,7 +355,8 @@ const translations = {
         testInfo: "📋 25 Questions | ⏱️ About 6 minutes",
         backBtn: "← Previous Question",
         retryBtn: "Retry Test",
-        shareBtn: "Share Result",
+        shareBtn: "📝 Copy Link",
+        saveImageBtn: "📷 Save as Image",
         traitsTitle: "Your Personality Traits",
         detailTitle: "Detailed Description",
         scoreTitle: "Score Distribution",
@@ -821,6 +823,10 @@ function updateLanguage() {
     if (typeof window !== 'undefined' && window.visitorCounter && typeof window.visitorCounter.renderServices === 'function') {
         window.visitorCounter.renderServices();
     }
+
+    // 이미지 저장 버튼
+    const saveImageBtn = document.getElementById('save-image-btn');
+    if (saveImageBtn) saveImageBtn.textContent = texts.saveImageBtn;
 }
 
 // 페이지 로딩 시 저장된 언어 설정 적용

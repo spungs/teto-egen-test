@@ -576,10 +576,10 @@ const resultData = {
                 ],
                 careers: ["경영진", "운동선수", "군인/경찰", "영업직", "기업가", "정치인", "부동산업", "건설업"],
                 celebrities: [
-                    { name: "리더십형 축구선수", profession: "스포츠 분야" },
-                    { name: "목표지향적 운동선수", profession: "체육 분야" },
-                    { name: "진취적 엔터테이너", profession: "연예 분야" },
-                    { name: "적극적 방송인", profession: "미디어 분야" }
+                    { name: "방찬", profession: "가수" },
+                    { name: "민호", profession: "가수" },
+                    { name: "쇼누", profession: "가수" },
+                    { name: "지창욱", profession: "가수" }
                 ],
                 health: {
                     exercise: ["헬스장 웨이트 트레이닝", "축구/농구", "러닝/조깅", "등산"],
@@ -605,10 +605,10 @@ const resultData = {
                 ],
                 careers: ["디자이너", "예술가", "상담사", "교사", "의료진", "작가", "스타일리스트", "미용사"],
                 celebrities: [
-                    { name: "감성적 아티스트", profession: "음악 분야" },
-                    { name: "유머러스한 진행자", profession: "방송 분야" },
-                    { name: "섬세한 연기자", profession: "연기 분야" },
-                    { name: "로맨틱한 배우", profession: "영화 분야" }
+                    { name: "차은우", profession: "가수/배우" },
+                    { name: "휴닝카이", profession: "가수" },
+                    { name: "지민", profession: "가수" },
+                    { name: "펠릭스", profession: "가수" }
                 ],
                 health: {
                     exercise: ["요가/필라테스", "수영", "댄스", "산책"],
@@ -636,10 +636,10 @@ const resultData = {
                 ],
                 careers: ["변호사", "의사", "CEO/임원", "저널리스트", "컨설턴트", "정치인", "마케터", "투자가"],
                 celebrities: [
-                    { name: "리더십형 스포츠 스타", profession: "스포츠 분야" },
-                    { name: "자립적 아티스트", profession: "음악 분야" },
-                    { name: "목표지향적 선수", profession: "체육 분야" },
-                    { name: "진취적 미디어 인물", profession: "방송 분야" }
+                    { name: "예지", profession: "가수" },
+                    { name: "윈터", profession: "가수" },
+                    { name: "화사", profession: "가수" },
+                    { name: "리사", profession: "가수" }
                 ],
                 health: {
                     exercise: ["크로스핏", "복싱", "테니스", "골프"],
@@ -665,10 +665,10 @@ const resultData = {
                 ],
                 careers: ["간호사", "교사", "예술가", "심리상담사", "사회복지사", "HR", "미용사", "플라워 디자이너"],
                 celebrities: [
-                    { name: "감성적 배우", profession: "연기 분야" },
-                    { name: "다재다능한 엔터테이너", profession: "엔터테인먼트 분야" },
-                    { name: "섬세한 보컬리스트", profession: "음악 분야" },
-                    { name: "온화한 연기자", profession: "영화 분야" }
+                    { name: "장원영", profession: "가수" },
+                    { name: "카리나", profession: "가수" },
+                    { name: "아이유", profession: "가수" },
+                    { name: "해린", profession: "가수" }
                 ],
                 health: {
                     exercise: ["요가", "필라테스", "발레", "산책"],
@@ -698,10 +698,10 @@ const resultData = {
                 ],
                 careers: ["Executive", "Athlete", "Military/Police", "Sales", "Entrepreneur", "Politician", "Real Estate", "Construction"],
                 celebrities: [
-                    { name: "Leadership-oriented Athlete", profession: "Sports & Entertainment" },
-                    { name: "Goal-driven Sports Icon", profession: "Sports Field" },
-                    { name: "Action-oriented Actor", profession: "Entertainment Field" },
-                    { name: "Competitive Chef", profession: "Culinary Field" }
+                    { name: "Bang Chan", profession: "Singer" },
+                    { name: "Minho", profession: "Singer" },
+                    { name: "Shownu", profession: "Singer" },
+                    { name: "Jichang-wook", profession: "Singer" }
                 ],
                 health: {
                     exercise: ["Weight Training", "Soccer/Basketball", "Running/Jogging", "Hiking"],
@@ -727,10 +727,10 @@ const resultData = {
                 ],
                 careers: ["Designer", "Artist", "Counselor", "Teacher", "Healthcare", "Writer", "Stylist", "Hairdresser"],
                 celebrities: [
-                    { name: "Sensitive Artist", profession: "Acting Field" },
-                    { name: "Creative Performer", profession: "Music Field" },
-                    { name: "Emotional Actor", profession: "Film Field" },
-                    { name: "Artistic Performer", profession: "Theater Field" }
+                    { name: "Cha Eun-woo", profession: "Singer/Actor" },
+                    { name: "HueningKai", profession: "Singer" },
+                    { name: "Jimin", profession: "Singer" },
+                    { name: "Felix", profession: "Singer" }
                 ],
                 health: {
                     exercise: ["Yoga/Pilates", "Swimming", "Dancing", "Walking"],
@@ -758,10 +758,10 @@ const resultData = {
                 ],
                 careers: ["Lawyer", "Doctor", "CEO/Executive", "Journalist", "Consultant", "Politician", "Marketer", "Investor"],
                 celebrities: [
-                    { name: "Competitive Sports Leader", profession: "Athletic Field" },
-                    { name: "Strong Action Star", profession: "Entertainment Field" },
-                    { name: "Fighting Sports Pioneer", profession: "Combat Sports" },
-                    { name: "Media Leadership Figure", profession: "Broadcasting Field" }
+                    { name: "Yeji", profession: "Singer" },
+                    { name: "Winter", profession: "Singer" },
+                    { name: "Hwasa", profession: "Singer" },
+                    { name: "Lisa", profession: "Singer" }
                 ],
                 health: {
                     exercise: ["CrossFit", "Boxing", "Tennis", "Golf"],
@@ -787,10 +787,10 @@ const resultData = {
                 ],
                 careers: ["Nurse", "Teacher", "Artist", "Counselor", "Social Worker", "HR", "Hairdresser", "Floral Designer"],
                 celebrities: [
-                    { name: "Charming Actress", profession: "Film Field" },
-                    { name: "Emotional Storyteller", profession: "Music Field" },
-                    { name: "Relatable Performer", profession: "Entertainment Field" },
-                    { name: "Versatile Entertainer", profession: "Multi-talent Field" }
+                    { name: "Jang Won-young", profession: "Singer" },
+                    { name: "Karina", profession: "Singer" },
+                    { name: "IU", profession: "Singer" },
+                    { name: "Haerin", profession: "Singer" }
                 ],
                 health: {
                     exercise: ["Yoga", "Pilates", "Ballet", "Walking"],

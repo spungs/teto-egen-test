@@ -1399,86 +1399,307 @@ async function saveResultAsImage() {
         const tempContainer = document.createElement('div');
         tempContainer.className = 'temp-image-container';
         tempContainer.style.cssText = `
-            background: #2d3436;
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 550px;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 500px;
+            width: 500px;
             margin: 0 auto;
             position: fixed;
             top: -9999px;
             left: -9999px;
             z-index: -1;
             color: white;
-            font-family: inherit;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         `;
         
-        // 핵심 요소들 복사
-        tempContainer.appendChild(resultHeader.cloneNode(true));
-        tempContainer.appendChild(resultDescription.cloneNode(true));
-        tempContainer.appendChild(resultDetailed.cloneNode(true));
-        tempContainer.appendChild(resultScore.cloneNode(true));
+        // 메인 타이틀 추가
+        const mainTitle = document.createElement('div');
+        mainTitle.style.cssText = `
+            text-align: center;
+            margin-bottom: 30px;
+        `;
         
-        // 연애궁합은 개별 아이템들만 추가 (컨테이너 제거)
+        const resultType = document.getElementById('result-type').textContent;
+        const resultEmoji = document.getElementById('result-emoji').textContent;
+        
+        mainTitle.innerHTML = `
+            <h1 style="font-size: 2.5rem; margin: 0 0 10px 0; color: #74b9ff; font-weight: bold;">${resultType}</h1>
+            <div style="font-size: 4rem; margin-bottom: 20px;">${resultEmoji}</div>
+        `;
+        tempContainer.appendChild(mainTitle);
+        
+        // 성격 특징 태그들
+        const traitsSection = document.createElement('div');
+        traitsSection.style.cssText = `
+            margin-bottom: 25px;
+        `;
+        
+        const traitsTitle = document.createElement('h3');
+        traitsTitle.textContent = currentLanguage === 'ko' ? '당신의 성격 특징' : 'Your Personality Traits';
+        traitsTitle.style.cssText = `
+            color: #74b9ff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        `;
+        traitsSection.appendChild(traitsTitle);
+        
+        const traitsContainer = document.createElement('div');
+        traitsContainer.style.cssText = `
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        `;
+        
+        const traits = document.querySelectorAll('#result-traits .trait-tag');
+        traits.forEach(trait => {
+            const tag = document.createElement('span');
+            tag.textContent = trait.textContent;
+            tag.style.cssText = `
+                background: rgba(116, 185, 255, 0.2);
+                color: #74b9ff;
+                padding: 6px 12px;
+                border-radius: 15px;
+                font-size: 0.85rem;
+                border: 1px solid rgba(116, 185, 255, 0.3);
+                white-space: nowrap;
+            `;
+            traitsContainer.appendChild(tag);
+        });
+        traitsSection.appendChild(traitsContainer);
+        tempContainer.appendChild(traitsSection);
+        
+        // 상세 설명
+        const descSection = document.createElement('div');
+        descSection.style.cssText = `
+            margin-bottom: 25px;
+        `;
+        
+        const descTitle = document.createElement('h3');
+        descTitle.textContent = currentLanguage === 'ko' ? '상세 설명' : 'Detailed Description';
+        descTitle.style.cssText = `
+            color: #74b9ff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        `;
+        descSection.appendChild(descTitle);
+        
+        const description = document.createElement('p');
+        description.textContent = document.getElementById('result-detail').textContent;
+        description.style.cssText = `
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin: 0;
+        `;
+        descSection.appendChild(description);
+        tempContainer.appendChild(descSection);
+        
+        // 점수 분포
+        const scoreSection = document.createElement('div');
+        scoreSection.style.cssText = `
+            margin-bottom: 25px;
+        `;
+        
+        const scoreTitle = document.createElement('h3');
+        scoreTitle.textContent = currentLanguage === 'ko' ? '점수 분포' : 'Score Distribution';
+        scoreTitle.style.cssText = `
+            color: #74b9ff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        `;
+        scoreSection.appendChild(scoreTitle);
+        
+        // 테토 점수
+        const tetoPercent = document.getElementById('type1-percent').textContent;
+        const tetoLabel = document.getElementById('type1-label').textContent;
+        const tetoBar = document.createElement('div');
+        tetoBar.style.cssText = `
+            margin-bottom: 15px;
+        `;
+        tetoBar.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="color: white; font-weight: bold;">${tetoLabel}</span>
+                <span style="color: #e17055; font-weight: bold; font-size: 1.1rem;">${tetoPercent}</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.1); border-radius: 10px; height: 12px; overflow: hidden;">
+                <div style="background: #e17055; height: 100%; width: ${tetoPercent}; border-radius: 10px; transition: width 0.3s ease;"></div>
+            </div>
+        `;
+        scoreSection.appendChild(tetoBar);
+        
+        // 에겐 점수
+        const egenPercent = document.getElementById('type2-percent').textContent;
+        const egenLabel = document.getElementById('type2-label').textContent;
+        const egenBar = document.createElement('div');
+        egenBar.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="color: white; font-weight: bold;">${egenLabel}</span>
+                <span style="color: #fd79a8; font-weight: bold; font-size: 1.1rem;">${egenPercent}</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.1); border-radius: 10px; height: 12px; overflow: hidden;">
+                <div style="background: #fd79a8; height: 100%; width: ${egenPercent}; border-radius: 10px; transition: width 0.3s ease;"></div>
+            </div>
+        `;
+        scoreSection.appendChild(egenBar);
+        tempContainer.appendChild(scoreSection);
+        
+        // 연애 궁합
         if (resultCompatibility) {
+            const compatibilitySection = document.createElement('div');
+            compatibilitySection.style.cssText = `
+                margin-bottom: 25px;
+            `;
+            
             const compatibilityTitle = document.createElement('h3');
-            compatibilityTitle.textContent = resultCompatibility.querySelector('h3').textContent;
+            compatibilityTitle.innerHTML = '💕 ' + (currentLanguage === 'ko' ? '연애 궁합' : 'Love Compatibility');
             compatibilityTitle.style.cssText = `
                 color: #74b9ff;
-                margin-bottom: 15px;
                 font-size: 1.2rem;
-                margin-top: 20px;
+                margin-bottom: 15px;
+                font-weight: bold;
             `;
-            tempContainer.appendChild(compatibilityTitle);
+            compatibilitySection.appendChild(compatibilityTitle);
             
             const compatibilityItems = resultCompatibility.querySelectorAll('.compatibility-item');
             compatibilityItems.forEach(item => {
-                tempContainer.appendChild(item.cloneNode(true));
+                const compItem = document.createElement('div');
+                compItem.style.cssText = `
+                    background: rgba(255,255,255,0.05);
+                    border-radius: 15px;
+                    padding: 15px;
+                    margin-bottom: 10px;
+                    border: 1px solid rgba(255,255,255,0.1);
+                `;
+                
+                const typeText = item.querySelector('.compatibility-type').textContent;
+                const reasonText = item.querySelector('.compatibility-reason').textContent;
+                const scoreText = item.querySelector('.compatibility-score span:last-child').textContent;
+                const emoji = item.querySelector('.compatibility-emoji').textContent;
+                
+                compItem.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="color: white; font-weight: bold;">${typeText}</span>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.2rem;">${emoji}</span>
+                            <span style="color: #74b9ff; font-weight: bold;">${scoreText}</span>
+                        </div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; line-height: 1.4;">${reasonText}</p>
+                `;
+                
+                compatibilitySection.appendChild(compItem);
             });
+            
+            tempContainer.appendChild(compatibilitySection);
         }
         
         // 워터마크 추가
         const watermark = document.createElement('div');
         watermark.style.cssText = `
             text-align: center;
-            margin-top: 20px;
-            font-size: 0.8rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.6);
             font-family: monospace;
+            font-weight: bold;
         `;
         watermark.textContent = 'spungs-teto-egen.com';
         tempContainer.appendChild(watermark);
         
         document.body.appendChild(tempContainer);
         
-        // html2canvas로 캡처 (윈도우 호환성 개선)
-        const canvas = await html2canvas(tempContainer, {
-            backgroundColor: '#2d3436',
-            scale: 2, // 고해상도
-            useCORS: true,
-            allowTaint: true, // 윈도우 호환성을 위해 true로 변경
-            foreignObjectRendering: true, // 윈도우 호환성을 위해 true로 변경
-            removeContainer: true,
-            logging: false,
-            imageTimeout: 30000, // 타임아웃 증가
-            width: tempContainer.offsetWidth,
-            height: tempContainer.offsetHeight,
-            scrollX: 0,
-            scrollY: 0,
-            onclone: function(clonedDoc) {
-                // 클론된 문서에서 모든 gradient 제거
-                const allElements = clonedDoc.querySelectorAll('*');
-                allElements.forEach(el => {
-                    el.style.backgroundImage = 'none';
-                    if (el.classList.contains('score-fill')) {
-                        if (el.classList.contains('teto')) {
-                            el.style.backgroundColor = '#e17055';
-                        } else if (el.classList.contains('egen')) {
-                            el.style.backgroundColor = '#fd79a8';
-                        }
+        // 컨테이너를 DOM에 잠시 추가하여 크기 계산
+        document.body.appendChild(tempContainer);
+        
+        // 실제 크기 측정 후 다시 숨김
+        const containerWidth = tempContainer.offsetWidth;
+        const containerHeight = tempContainer.offsetHeight;
+        
+        // 윈도우별 Canvas 설정
+        let canvas;
+        try {
+            // 첫 번째 시도: 표준 설정
+            const canvasOptions = {
+                backgroundColor: '#2c3e50',
+                scale: 2,
+                logging: false,
+                imageTimeout: 45000,
+                width: containerWidth,
+                height: containerHeight,
+                x: 0,
+                y: 0,
+                scrollX: 0,
+                scrollY: 0,
+                onclone: function(clonedDoc) {
+                    // 모든 복잡한 스타일 제거
+                    const allElements = clonedDoc.querySelectorAll('*');
+                    allElements.forEach(el => {
+                        // 복잡한 CSS 속성들 제거
+                        el.style.backgroundImage = 'none';
+                        el.style.boxShadow = 'none';
+                        el.style.textShadow = 'none';
+                        el.style.filter = 'none';
+                        el.style.webkitBackgroundClip = 'unset';
+                        el.style.backgroundClip = 'unset';
+                        el.style.transform = 'none';
+                        el.style.transition = 'none';
+                        el.style.animation = 'none';
+                    });
+                }
+            };
+            
+            // 플랫폼별 설정
+            if (isWindows) {
+                canvasOptions.useCORS = false;
+                canvasOptions.allowTaint = true;
+                canvasOptions.foreignObjectRendering = false;
+                canvasOptions.scale = 1.5; // 윈도우에서는 스케일 줄임
+            } else {
+                canvasOptions.useCORS = true;
+                canvasOptions.allowTaint = false;
+                canvasOptions.foreignObjectRendering = true;
+            }
+            
+            canvas = await html2canvas(tempContainer, canvasOptions);
+            
+        } catch (error) {
+            console.error('첫 번째 Canvas 생성 실패, 안전 모드로 재시도:', error);
+            
+            // 두 번째 시도: 안전 모드 (윈도우용)
+            try {
+                canvas = await html2canvas(tempContainer, {
+                    backgroundColor: '#2c3e50',
+                    scale: 1,
+                    useCORS: false,
+                    allowTaint: true,
+                    foreignObjectRendering: false,
+                    logging: false,
+                    imageTimeout: 60000,
+                    width: containerWidth,
+                    height: containerHeight,
+                    onclone: function(clonedDoc) {
+                        // 최소한의 스타일만 유지
+                        const allElements = clonedDoc.querySelectorAll('*');
+                        allElements.forEach(el => {
+                            const computedStyle = window.getComputedStyle(el);
+                            el.style.backgroundImage = 'none';
+                            el.style.background = computedStyle.backgroundColor || 'transparent';
+                        });
                     }
                 });
+            } catch (secondError) {
+                console.error('두 번째 Canvas 생성도 실패:', secondError);
+                throw new Error('Canvas 생성에 실패했습니다.');
             }
-        });
+        }
         
         // 임시 컨테이너 제거
         document.body.removeChild(tempContainer);
@@ -1549,56 +1770,118 @@ async function saveResultAsImage() {
 
 // 이미지 다운로드 헬퍼 함수 (크로스 플랫폼 호환성 개선)
 function downloadImage(blob, fileName) {
+    const isWindows = navigator.platform.indexOf('Win') > -1;
+    
     try {
-        // 방법 1: 표준 다운로드 방식
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        
-        // 메모리 정리
-        setTimeout(() => {
-            URL.revokeObjectURL(url);
-        }, 1000);
-        
-        const message = currentLanguage === 'ko' ? 
-            '이미지가 다운로드되었습니다! 📥' : 
-            'Image downloaded! 📥';
-        alert(message);
-        
-    } catch (error) {
-        console.error('표준 다운로드 실패, 대체 방법 시도:', error);
-        
-        // 방법 2: 새 창에서 열기 (일부 브라우저에서 다운로드가 차단된 경우)
-        try {
+        // 윈도우 전용 다운로드 방식
+        if (isWindows) {
+            // 방법 1: 윈도우용 안전한 다운로드
             const url = URL.createObjectURL(blob);
-            const newWindow = window.open(url, '_blank');
             
-            if (newWindow) {
-                const message = currentLanguage === 'ko' ? 
-                    '새 창에서 이미지가 열렸습니다. 우클릭하여 저장하세요.' : 
-                    'Image opened in new window. Right-click to save.';
-                alert(message);
-            } else {
-                throw new Error('팝업이 차단됨');
-            }
+            // 사용자 제스처를 시뮬레이션하기 위해 임시 버튼 생성
+            const tempButton = document.createElement('button');
+            tempButton.style.display = 'none';
+            document.body.appendChild(tempButton);
+            
+            tempButton.addEventListener('click', function() {
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                a.style.display = 'none';
+                a.target = '_self'; // 윈도우에서 더 안전한 타겟
+                document.body.appendChild(a);
+                
+                // 강제 클릭 이벤트
+                if (a.click) {
+                    a.click();
+                } else {
+                    // IE 호환성
+                    const event = document.createEvent('MouseEvents');
+                    event.initEvent('click', true, true);
+                    a.dispatchEvent(event);
+                }
+                
+                document.body.removeChild(a);
+            });
+            
+            // 임시 버튼 클릭
+            tempButton.click();
+            document.body.removeChild(tempButton);
+            
+            // 메모리 정리
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+            }, 2000);
+            
+        } else {
+            // 다른 플랫폼용 표준 다운로드
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
             
             // 메모리 정리
             setTimeout(() => {
                 URL.revokeObjectURL(url);
             }, 1000);
+        }
+        
+        const message = currentLanguage === 'ko' ? 
+            '이미지가 다운로드되었습니다! 📥' : 
+            'Image downloaded! 📥';
+        
+        // 다운로드 성공 메시지를 약간 지연 후 표시
+        setTimeout(() => {
+            alert(message);
+        }, 500);
+        
+    } catch (error) {
+        console.error('다운로드 실패, 대체 방법 시도:', error);
+        
+        // 방법 2: 새 창에서 열기
+        try {
+            const url = URL.createObjectURL(blob);
+            
+            // 윈도우에서는 window.open 대신 location.href 사용
+            if (isWindows) {
+                const newTab = window.open('', '_blank');
+                if (newTab) {
+                    newTab.location.href = url;
+                    const message = currentLanguage === 'ko' ? 
+                        '새 탭에서 이미지가 열렸습니다. 우클릭하여 저장하세요.' : 
+                        'Image opened in new tab. Right-click to save.';
+                    alert(message);
+                } else {
+                    throw new Error('새 탭 열기 실패');
+                }
+            } else {
+                const newWindow = window.open(url, '_blank');
+                if (newWindow) {
+                    const message = currentLanguage === 'ko' ? 
+                        '새 창에서 이미지가 열렸습니다. 우클릭하여 저장하세요.' : 
+                        'Image opened in new window. Right-click to save.';
+                    alert(message);
+                } else {
+                    throw new Error('팝업이 차단됨');
+                }
+            }
+            
+            // 메모리 정리
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+            }, 5000);
             
         } catch (fallbackError) {
             console.error('대체 방법도 실패:', fallbackError);
             
-            // 방법 3: 클립보드에 복사 (최후의 수단)
+            // 방법 3: 사용자에게 안내
             const message = currentLanguage === 'ko' ? 
-                '다운로드에 실패했습니다. 브라우저 설정을 확인해주세요.' : 
-                'Download failed. Please check browser settings.';
+                '자동 다운로드에 실패했습니다.\n\n해결 방법:\n1. 브라우저 설정에서 다운로드 허용\n2. 팝업 차단 해제\n3. 다른 브라우저 시도 (Chrome 권장)' : 
+                'Auto download failed.\n\nSolutions:\n1. Allow downloads in browser settings\n2. Disable popup blocker\n3. Try different browser (Chrome recommended)';
             alert(message);
         }
     }

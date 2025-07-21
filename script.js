@@ -578,7 +578,7 @@ const resultData = {
                 celebrities: [
                     { name: "방찬", profession: "가수" },
                     { name: "민호", profession: "가수" },
-                    { name: "쇼누", profession: "가수" },
+                    { name: "셔누", profession: "가수" },
                     { name: "지창욱", profession: "가수" }
                 ],
                 health: {

@@ -1138,7 +1138,7 @@ function showResult() {
     // 💼 추천 직업 렌더링
     renderCareers(result.careers);
     
-    // ⭐ 유명인 렌더링
+    // ⭐ 아이돌 렌더링
     renderCelebrities(result.celebrities);
     
     // 🏥 건강 & 스트레스 관리 렌더링
@@ -1262,7 +1262,7 @@ function renderCareers(careersData) {
     });
 }
 
-// ⭐ 유명인 렌더링 함수
+// ⭐ 아이돌 렌더링 함수
 function renderCelebrities(celebritiesData) {
     const container = document.getElementById('celebrity-list');
     container.innerHTML = '';

@@ -1450,16 +1450,20 @@ async function saveResultAsImage() {
         
         document.body.appendChild(tempContainer);
         
-        // html2canvas로 캡처
+        // html2canvas로 캡처 (윈도우 호환성 개선)
         const canvas = await html2canvas(tempContainer, {
             backgroundColor: '#2d3436',
             scale: 2, // 고해상도
             useCORS: true,
-            allowTaint: false,
-            foreignObjectRendering: false,
+            allowTaint: true, // 윈도우 호환성을 위해 true로 변경
+            foreignObjectRendering: true, // 윈도우 호환성을 위해 true로 변경
             removeContainer: true,
             logging: false,
-            imageTimeout: 15000,
+            imageTimeout: 30000, // 타임아웃 증가
+            width: tempContainer.offsetWidth,
+            height: tempContainer.offsetHeight,
+            scrollX: 0,
+            scrollY: 0,
             onclone: function(clonedDoc) {
                 // 클론된 문서에서 모든 gradient 제거
                 const allElements = clonedDoc.querySelectorAll('*');
@@ -1488,30 +1492,46 @@ async function saveResultAsImage() {
             const resultType = document.getElementById('result-type').textContent;
             const fileName = `teto-egen-result-${resultType}.png`;
             
-            // 모바일/데스크톱 구분하여 처리
-            if (navigator.share && window.File) {
+            // 플랫폼 감지 및 통일된 처리 방식
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const isWindows = navigator.platform.indexOf('Win') > -1;
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+            
+            // 디버깅 정보 (개발 중에만 사용)
+            // console.log('🔍 플랫폼 정보:', {
+            //     userAgent: navigator.userAgent,
+            //     platform: navigator.platform,
+            //     isMobile: isMobile,
+            //     isWindows: isWindows,
+            //     isIOS: isIOS,
+            //     isAndroid: isAndroid,
+            //     hasShareAPI: !!navigator.share,
+            //     hasFileAPI: !!window.File,
+            //     hasCanShare: !!navigator.canShare
+            // });
+            
+            // 모바일에서 네이티브 공유 지원하는 경우 (iOS Safari, Android Chrome 등)
+            if (isMobile && navigator.share && window.File && navigator.canShare && (isIOS || isAndroid)) {
                 try {
-                    // 모바일: 네이티브 공유
                     const file = new File([blob], fileName, { type: 'image/png' });
                     
-                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    if (navigator.canShare({ files: [file] })) {
                         await navigator.share({
                             title: `나는 ${resultType}!`,
                             text: `테토-에겐 성격 유형 테스트 결과: ${resultType}`,
                             files: [file]
                         });
-                    } else {
-                        // File API 미지원시 폴백
-                        throw new Error('File sharing not supported');
+                        return; // 성공시 함수 종료
                     }
                 } catch (shareError) {
                     console.error('네이티브 공유 실패, 다운로드로 전환:', shareError);
-                    downloadImage(blob, fileName);
                 }
-            } else {
-                // 데스크톱: 다운로드
-                downloadImage(blob, fileName);
             }
+            
+            // 데스크톱 또는 네이티브 공유 실패시: 통일된 다운로드 방식
+            downloadImage(blob, fileName);
+            
         }, 'image/png', 0.9);
         
     } catch (error) {
@@ -1527,22 +1547,61 @@ async function saveResultAsImage() {
     }
 }
 
-// 이미지 다운로드 헬퍼 함수
+// 이미지 다운로드 헬퍼 함수 (크로스 플랫폼 호환성 개선)
 function downloadImage(blob, fileName) {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = fileName;
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    
-    const message = currentLanguage === 'ko' ? 
-        '이미지가 다운로드되었습니다! 📥' : 
-        'Image downloaded! 📥';
-    alert(message);
+    try {
+        // 방법 1: 표준 다운로드 방식
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        
+        // 메모리 정리
+        setTimeout(() => {
+            URL.revokeObjectURL(url);
+        }, 1000);
+        
+        const message = currentLanguage === 'ko' ? 
+            '이미지가 다운로드되었습니다! 📥' : 
+            'Image downloaded! 📥';
+        alert(message);
+        
+    } catch (error) {
+        console.error('표준 다운로드 실패, 대체 방법 시도:', error);
+        
+        // 방법 2: 새 창에서 열기 (일부 브라우저에서 다운로드가 차단된 경우)
+        try {
+            const url = URL.createObjectURL(blob);
+            const newWindow = window.open(url, '_blank');
+            
+            if (newWindow) {
+                const message = currentLanguage === 'ko' ? 
+                    '새 창에서 이미지가 열렸습니다. 우클릭하여 저장하세요.' : 
+                    'Image opened in new window. Right-click to save.';
+                alert(message);
+            } else {
+                throw new Error('팝업이 차단됨');
+            }
+            
+            // 메모리 정리
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+            }, 1000);
+            
+        } catch (fallbackError) {
+            console.error('대체 방법도 실패:', fallbackError);
+            
+            // 방법 3: 클립보드에 복사 (최후의 수단)
+            const message = currentLanguage === 'ko' ? 
+                '다운로드에 실패했습니다. 브라우저 설정을 확인해주세요.' : 
+                'Download failed. Please check browser settings.';
+            alert(message);
+        }
+    }
 }
 
 // 📱 개선된 공유 기능 (이미지 + 텍스트)

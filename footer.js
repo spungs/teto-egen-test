@@ -35,32 +35,19 @@ class VisitorCounter {
                 }, 
                 url: 'https://dodge-master.spungs-teto-egen.com' 
             },
+            { 
+                name: {
+                    ko: '룰렛',
+                    en: 'Roulette'
+                }, 
+                url: 'https://roulette.spungs-teto-egen.com' 
+            },
             // 필요한 서비스들을 여기에 추가
-            // { 
-            //     name: {
-            //         ko: '서비스2',
-            //         en: 'Service 2'
-            //     }, 
-            //     url: 'https://example2.com' 
-            // },
         ];
         
         this.cleanupOldUuids(); // 오래된 uuid 정리
         this.init();
     }
-
-    // 다른 서비스 링크 추가 (다국어 지원)
-    // addService(nameObj, url) {
-    //     // nameObj 형태: { ko: '한국어명', en: '영어명' }
-    //     this.otherServices.push({ name: nameObj, url });
-    //     this.renderServices();
-    // }
-
-    // // 다른 서비스 링크 제거 (한국어명 기준)
-    // removeService(koreanName) {
-    //     this.otherServices = this.otherServices.filter(service => service.name.ko !== koreanName);
-    //     this.renderServices();
-    // }
 
     // 다른 서비스 링크들을 화면에 렌더링
     renderServices() {
@@ -81,11 +68,6 @@ class VisitorCounter {
             const serviceName = service.name[lang] || service.name.ko; // 기본값은 한국어
             
             link.textContent = serviceName;
-            
-            // 클릭 시 분석 이벤트 (선택사항)
-            // link.addEventListener('click', () => {
-            //     console.log(`🔗 다른 서비스 이동: ${serviceName} -> ${service.url}`);
-            // });
             
             servicesContainer.appendChild(link);
         });

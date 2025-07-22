@@ -33,14 +33,16 @@ class VisitorCounter {
                     ko: '닷지마스터',
                     en: 'Dodge Master'
                 }, 
-                url: 'https://dodge-master.spungs-teto-egen.com' 
+                url: 'https://dodge-master.spungs-teto-egen.com',
+                icon: '🚀'
             },
             { 
                 name: {
                     ko: '룰렛',
                     en: 'Roulette'
                 }, 
-                url: 'https://roulette.spungs-teto-egen.com' 
+                url: 'https://roulette.spungs-teto-egen.com',
+                icon: '🎲'
             },
             // 필요한 서비스들을 여기에 추가
         ];
@@ -67,7 +69,8 @@ class VisitorCounter {
             const lang = (typeof currentLanguage !== 'undefined') ? currentLanguage : 'ko';
             const serviceName = service.name[lang] || service.name.ko; // 기본값은 한국어
             
-            link.textContent = serviceName;
+            // 아이콘이 있으면 앞에 붙여줌
+            link.innerHTML = (service.icon ? `<span class="service-icon">${service.icon}</span> ` : '') + serviceName;
             
             servicesContainer.appendChild(link);
         });

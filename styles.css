@@ -529,7 +529,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* 궁합, 직업, 유명인 섹션 */
+/* 궁합, 직업, 아이돌 섹션 */
 .result-compatibility,
 .result-careers,
 .result-celebrities,
@@ -1327,7 +1327,7 @@ li {
 .service-link:nth-child(3) { animation-delay: 1s; }
 
 .service-link::before {
-    content: "🚀";
+    content: "";
     margin-right: 4px;
     font-size: 0.6rem;
     animation: rocketBounce 2s ease-in-out infinite;

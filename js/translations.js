@@ -2,13 +2,19 @@
 const translations = {
     ko: {
         // 메인 페이지
-        title: "테토-에겐 성격 유형 테스트",
-        subtitle: "나는 테토형? 에겐형?",
-        description: "테스토스테론과 에스트로겐 호르몬의 일반적 특성에서 영감을 받은 재미있는 성격 유형 테스트입니다.<br>간단한 질문을 통해 당신의 성격 경향을 알아보세요!",
-        genderTitle: "성별을 선택해주세요",
+        title: "Teto-Egen Platform",
+        subtitle: "✨ 내 안의 숨겨진 호르몬 본능을 깨우다",
+        description: "테스토스테론과 에스트로겐 호르몬의 심오한 조화...<br>당신은 어떤 티어의 본능을 가지고 있나요? 지금 바로 확인하세요!",
+        genderTitle: "1️⃣ 성별을 선택해주세요",
+        ageTitle: "2️⃣ 연령대를 선택해주세요",
+        age10: "10대",
+        age20: "20대",
+        age30: "30대",
+        age40: "40대",
+        age50: "50대+",
         male: "남성",
         female: "여성",
-        startBtn: "테스트 시작하기",
+        startBtn: "무료 테스트 시작하기",
         testInfo: "📋 총 25문항 | ⏱️ 약 6분 소요",
         backBtn: "← 이전 질문",
         retryBtn: "다시 테스트하기",
@@ -337,21 +343,42 @@ const translations = {
 
         // Footer
         footer: {
-            copyright: "© 2024 테토-에겐 성격 유형 테스트. All rights reserved.",
+            copyright: "© 2024 Teto-Egen Platform. All rights reserved.",
             dailyVisitors: "오늘 방문자",
             totalVisitors: "총 방문자",
             otherServices: "spungs's other services"
+        },
+
+        // More Tests
+        moreTests: {
+            title: "🔥 다른 성격 테스트도 즐겨보세요!",
+            loveTest: {
+                title: "마라맛 연애 성향 테스트",
+                desc: "나의 연애 본능은 어떤 수준일까? 지금 바로 확인해보세요!",
+                badge: "Hot & New"
+            },
+            comingSoon: {
+                title: "새로운 테스트 준비 중",
+                desc: "곧 더 흥미진진한 테스트가 찾아옵니다.",
+                badge: "Coming Soon"
+            }
         }
     },
     en: {
         // Main page
-        title: "Teto-Egen Personality Type Test",
-        subtitle: "Am I Teto or Egen Type?",
-        description: "A fun personality type test inspired by general characteristics of testosterone and estrogen hormones.<br>Discover your personality tendencies through simple questions!",
-        genderTitle: "Please select your gender",
+        title: "Teto-Egen Platform",
+        subtitle: "✨ Awaken your hidden hormonal instincts",
+        description: "The profound harmony of testosterone and estrogen...<br>What tier of instinct do you possess? Find out now!",
+        genderTitle: "1️⃣ Please select your gender",
+        ageTitle: "2️⃣ Please select your age group",
+        age10: "10s",
+        age20: "20s",
+        age30: "30s",
+        age40: "40s",
+        age50: "50s+",
         male: "Male",
         female: "Female",
-        startBtn: "Start Test",
+        startBtn: "Start Free Test",
         testInfo: "📋 25 Questions | ⏱️ About 6 minutes",
         backBtn: "← Previous Question",
         retryBtn: "Retry Test",
@@ -680,10 +707,25 @@ const translations = {
 
         // Footer
         footer: {
-            copyright: "© 2024 Teto-Egen Personality Type Test. All rights reserved.",
+            copyright: "© 2024 Teto-Egen Platform. All rights reserved.",
             dailyVisitors: "Today's Visitors",
             totalVisitors: "Total Visitors",
             otherServices: "spungs's other services"
+        },
+
+        // More Tests
+        moreTests: {
+            title: "🔥 Discover More Tests!",
+            loveTest: {
+                title: "Spicy Love Tendency Test",
+                desc: "What is my true love instinct? Check it out now!",
+                badge: "Hot & New"
+            },
+            comingSoon: {
+                title: "New Test Coming Soon",
+                desc: "More exciting tests are on the way.",
+                badge: "Coming Soon"
+            }
         }
     }
 }; 

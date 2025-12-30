@@ -1,5 +1,6 @@
 // 테스트 상태 관리
 let currentGender = null;
+let currentAge = null;
 let currentQuestionIndex = 0;
 let answers = [];
 let tetoScore = 0;
@@ -36,6 +37,13 @@ function setupEventListeners() {
     document.querySelectorAll('.gender-btn').forEach(btn => {
         btn.addEventListener('click', function () {
             selectGender(this.dataset.gender);
+        });
+    });
+
+    // 연령대 선택 버튼
+    document.querySelectorAll('.age-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            selectAge(this.dataset.age);
         });
     });
 
@@ -76,6 +84,19 @@ function setupEventListeners() {
         languageToggle.addEventListener('click', toggleLanguage);
         languageToggle.setAttribute('data-listener-added', 'true');
     }
+
+    // 추가 테스트 클릭 이벤트 추적
+    document.querySelectorAll('.test-card').forEach(card => {
+        card.addEventListener('click', function () {
+            const testId = this.getAttribute('data-test');
+            if (testId && window.dataLayer) {
+                window.dataLayer.push({
+                    'event': 'recommendation_click',
+                    'test_id': testId
+                });
+            }
+        });
+    });
 }
 
 function selectGender(gender) {
@@ -87,12 +108,43 @@ function selectGender(gender) {
     });
     document.querySelector(`[data-gender="${gender}"]`).classList.add('selected');
 
-    // 시작 버튼 활성화
-    document.getElementById('start-btn').disabled = false;
+    // 시작 버튼 활성화 체크
+    checkStartButton();
+}
+
+function selectAge(age) {
+    currentAge = age;
+
+    // 버튼 상태 업데이트
+    document.querySelectorAll('.age-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    document.querySelector(`[data-age="${age}"]`).classList.add('selected');
+
+    // 시작 버튼 활성화 체크
+    checkStartButton();
+}
+
+function checkStartButton() {
+    const startBtn = document.getElementById('start-btn');
+    if (currentGender && currentAge) {
+        startBtn.disabled = false;
+    } else {
+        startBtn.disabled = true;
+    }
 }
 
 function startTest() {
-    if (!currentGender) return;
+    if (!currentGender || !currentAge) return;
+
+    // GA4 이벤트 추적
+    if (window.dataLayer) {
+        window.dataLayer.push({
+            'event': 'test_start',
+            'gender': currentGender,
+            'age': currentAge
+        });
+    }
 
     showScreen('test');
     currentQuestionIndex = 0;
@@ -283,7 +335,21 @@ function showResult() {
         isTetoType = tetoScore >= egenScore;
     }
 
-    const result = resultData[currentLanguage][currentGender][isTetoType ? 'teto' : 'egen'];
+    const typeKey = isTetoType ? 'teto' : 'egen';
+
+    // GA4 이벤트 추적
+    if (window.dataLayer) {
+        window.dataLayer.push({
+            'event': 'test_complete',
+            'result_type': typeKey,
+            'gender': currentGender,
+            'age': currentAge,
+            'teto_score': tetoScore,
+            'egen_score': egenScore
+        });
+    }
+
+    const result = resultData[currentLanguage][currentGender][typeKey];
 
     // 결과 표시
     document.getElementById('result-type').textContent = result.type;
@@ -499,8 +565,16 @@ function renderGrowth(growthData) {
 }
 
 function resetTest() {
+    // GA4 이벤트 추적
+    if (window.dataLayer) {
+        window.dataLayer.push({
+            'event': 'test_reset'
+        });
+    }
+
     showScreen('start');
     currentGender = null;
+    currentAge = null;
     currentQuestionIndex = 0;
     answers = [];
     tetoScore = 0;
@@ -508,6 +582,10 @@ function resetTest() {
 
     // 성별 선택 초기화
     document.querySelectorAll('.gender-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    // 연령 선택 초기화
+    document.querySelectorAll('.age-btn').forEach(btn => {
         btn.classList.remove('selected');
     });
     document.getElementById('start-btn').disabled = true;

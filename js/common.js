@@ -58,11 +58,44 @@ function updateLanguage() {
     if (genderTitle) genderTitle.textContent = texts.genderTitle;
     if (maleBtn) maleBtn.textContent = texts.male;
     if (femaleBtn) femaleBtn.textContent = texts.female;
+
+    // 연령대 선택 텍스트 업데이트
+    const ageTitle = document.querySelector('.age-selection h3');
+    if (ageTitle) ageTitle.textContent = texts.ageTitle;
+
+    const ageButtons = document.querySelectorAll('.age-btn');
+    if (ageButtons.length > 0) {
+        ageButtons.forEach(btn => {
+            const age = btn.getAttribute('data-age');
+            if (age && texts[`age${age}`]) {
+                btn.textContent = texts[`age${age}`];
+            }
+        });
+    }
+
     if (startBtn) startBtn.textContent = texts.startBtn;
     if (testInfo) testInfo.textContent = texts.testInfo;
     if (backBtn) backBtn.textContent = texts.backBtn;
     if (retryBtn) retryBtn.textContent = texts.retryBtn;
     if (shareBtn) shareBtn.textContent = texts.shareBtn;
+
+    // 추가 테스트 섹션 업데이트
+    const moreTestsTitle = document.querySelector('.more-tests-title');
+    if (moreTestsTitle) moreTestsTitle.textContent = texts.moreTests.title;
+
+    const loveTestCard = document.querySelector('.test-card[data-test="love"]');
+    if (loveTestCard) {
+        loveTestCard.querySelector('.title').textContent = texts.moreTests.loveTest.title;
+        loveTestCard.querySelector('.desc').textContent = texts.moreTests.loveTest.desc;
+        loveTestCard.querySelector('.badge').textContent = texts.moreTests.loveTest.badge;
+    }
+
+    const soonTestCard = document.querySelector('.test-card.coming-soon');
+    if (soonTestCard) {
+        soonTestCard.querySelector('.title').textContent = texts.moreTests.comingSoon.title;
+        soonTestCard.querySelector('.desc').textContent = texts.moreTests.comingSoon.desc;
+        soonTestCard.querySelector('.badge').textContent = texts.moreTests.comingSoon.badge;
+    }
 
     // 결과 화면 제목들
     const traitsTitle = document.querySelector('.result-description h3');
@@ -566,8 +599,8 @@ async function shareResultWithImage() {
 
         canvas.toBlob(async (blob) => {
             const shareTexts = {
-                ko: `나는 ${resultType}! ${resultEmoji}\n\n테토-에겐 성격 유형 테스트\n${window.location.href}`,
-                en: `I am ${resultType}! ${resultEmoji}\n\nTeto-Egen Personality Test\n${window.location.href}`
+                ko: `[충격] 나의 본능 티어가 공개됐습니다... 🦁\n\n결과: ${resultType} ${resultEmoji}\n\n당신은 어떤 티어인지 지금 바로 확인해보세요! 👇\n${window.location.href}`,
+                en: `[BREAKING] My instinct tier has been revealed... 🦁\n\nResult: ${resultType} ${resultEmoji}\n\nCheck your tier right now! 👇\n${window.location.href}`
             };
 
             const file = new File([blob], `teto-egen-${resultType}.png`, { type: 'image/png' });

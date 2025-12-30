@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>테토-에겐 성격 유형 테스트</title>
     <meta name="description" content="테스토스테론과 에스트로겐 호르몬 성향을 바탕으로 한 성격 유형 테스트. 테토남/에겐남, 테토녀/에겐녀 결과를 확인해보세요!">
     <meta name="keywords" content="테토 에겐, 성격 테스트, MBTI, 테토남, 에겐남, 테토녀, 에겐녀, 호르몬, 성격유형">
-    
+
     <!-- Open Graph / 소셜 미디어 공유 메타 태그 -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="테토-에겐 성격 유형 테스트 | 나는 테토형? 에겐형?">
@@ -14,238 +15,240 @@
     <meta property="og:url" content="https://spungs-teto-egen.com">
     <meta property="og:site_name" content="테토-에겐 테스트">
     <meta property="og:locale" content="ko_KR">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="테토-에겐 성격 유형 테스트">
     <meta name="twitter:description" content="나는 테토형? 에겐형? 25개 질문으로 알아보는 성격 유형 테스트!">
-    
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6002876774605337"
-     crossorigin="anonymous"></script>
-     <script async custom-element="amp-auto-ads"
-        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+        crossorigin="anonymous"></script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
     </script>
     <meta name="google-adsense-account" content="ca-pub-6002876774605337">
-    
+
     <!-- html2canvas 라이브러리 추가 -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    
-    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    <amp-auto-ads type="adsense"
-        data-ad-client="ca-pub-6002876774605337">
+    <amp-auto-ads type="adsense" data-ad-client="ca-pub-6002876774605337">
     </amp-auto-ads>
 
     <main class="main-content">
-    <div class="container">
-        <!-- 시작 화면 -->
-        <div id="start-screen" class="screen active">
-            <div class="hero">
-                <h1>테토-에겐 성격 유형 테스트</h1>
-                <p class="subtitle">나는 테토형? 에겐형?</p>
-                <p class="description">
-                    테스토스테론과 에스트로겐 호르몬 성향을 바탕으로 한 성격 유형 테스트입니다.<br>
-                    간단한 질문을 통해 당신의 성격 유형을 알아보세요!
-                </p>
-                
-                <div class="gender-selection">
-                    <h3>성별을 선택해주세요</h3>
-                    <div class="gender-buttons">
-                        <button class="gender-btn" data-gender="male">
-                            <span class="emoji">👨</span>
-                            <span>남성</span>
-                        </button>
-                        <button class="gender-btn" data-gender="female">
-                            <span class="emoji">👩</span>
-                            <span>여성</span>
-                        </button>
+        <div class="container">
+            <!-- 시작 화면 -->
+            <div id="start-screen" class="screen active">
+                <div class="hero">
+                    <h1>테토-에겐 성격 유형 테스트</h1>
+                    <p class="subtitle">나는 테토형? 에겐형?</p>
+                    <p class="description">
+                        테스토스테론과 에스트로겐 호르몬 성향을 바탕으로 한 성격 유형 테스트입니다.<br>
+                        간단한 질문을 통해 당신의 성격 유형을 알아보세요!
+                    </p>
+
+                    <div class="gender-selection">
+                        <h3>성별을 선택해주세요</h3>
+                        <div class="gender-buttons">
+                            <button class="gender-btn" data-gender="male">
+                                <span class="emoji">👨</span>
+                                <span>남성</span>
+                            </button>
+                            <button class="gender-btn" data-gender="female">
+                                <span class="emoji">👩</span>
+                                <span>여성</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                
-                <button id="start-btn" class="btn btn-primary" disabled>
-                    테스트 시작하기
-                </button>
-                
-                <div class="test-info">
-                    <p>📋 총 25문항 | ⏱️ 약 6분 소요</p>
-                </div>
-            </div>
-        </div>
 
-        <!-- 테스트 화면 -->
-        <div id="test-screen" class="screen">
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div id="progress" class="progress-fill"></div>
-                </div>
-                <div class="progress-text">
-                    <span id="current-question">1</span> / <span id="total-questions">20</span>
-                </div>
-            </div>
-
-            <div class="question-container">
-                <div class="question-header">
-                    <button id="back-btn" class="btn btn-back" style="display: none;">
-                        ← 이전 질문
+                    <button id="start-btn" class="btn btn-primary" disabled>
+                        테스트 시작하기
                     </button>
+
+                    <div class="test-info">
+                        <p>📋 총 25문항 | ⏱️ 약 6분 소요</p>
+                    </div>
                 </div>
-                <h2 id="question-text"></h2>
-                <div class="options">
-                    <!-- 동적으로 생성됩니다 -->
+            </div>
+
+            <!-- 테스트 화면 -->
+            <div id="test-screen" class="screen">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progress" class="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="current-question">1</span> / <span id="total-questions">20</span>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <div class="question-header">
+                        <button id="back-btn" class="btn btn-back" style="display: none;">
+                            ← 이전 질문
+                        </button>
+                    </div>
+                    <h2 id="question-text"></h2>
+                    <div class="options">
+                        <!-- 동적으로 생성됩니다 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 결과 화면 -->
+            <div id="result-screen" class="screen">
+                <div class="result-container">
+                    <div class="result-header">
+                        <h1 id="result-type"></h1>
+                        <div id="result-emoji" class="result-emoji"></div>
+                    </div>
+
+                    <div class="result-description">
+                        <h3>당신의 성격 특징</h3>
+                        <div id="result-traits" class="traits-container"></div>
+                    </div>
+
+                    <div class="result-detailed">
+                        <h3>상세 설명</h3>
+                        <p id="result-detail"></p>
+                    </div>
+
+                    <div class="result-score">
+                        <h3>점수 분포</h3>
+                        <div class="score-bars">
+                            <div class="score-item">
+                                <span class="score-label" id="type1-label"></span>
+                                <div class="score-bar">
+                                    <div id="type1-score" class="score-fill"></div>
+                                </div>
+                                <span id="type1-percent" class="score-percent"></span>
+                            </div>
+                            <div class="score-item">
+                                <span class="score-label" id="type2-label"></span>
+                                <div class="score-bar">
+                                    <div id="type2-score" class="score-fill"></div>
+                                </div>
+                                <span id="type2-percent" class="score-percent"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 💕 연애 궁합 섹션 -->
+                    <div class="result-compatibility">
+                        <h3>💕 연애 궁합</h3>
+                        <div id="compatibility-list" class="compatibility-container">
+                            <div class="compatibility-item">
+                                <span class="emoji">💕</span>
+                                <span>에겐녀 98% 💕 완벽한 조화!</span>
+                            </div>
+                            <div class="compatibility-item">
+                                <span class="emoji">🔥</span>
+                                <span>테토녀 72% 🔥 역동적 관계!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 💼 추천 직업 섹션 -->
+                    <div class="result-careers">
+                        <h3>💼 추천 직업</h3>
+                        <div id="career-list" class="career-container">
+                            <div class="career-item">경영진</div>
+                            <div class="career-item">운동선수</div>
+                            <div class="career-item">군인/경찰</div>
+                            <div class="career-item">영업직</div>
+                            <div class="career-item">기업가</div>
+                        </div>
+                    </div>
+
+                    <!-- ⭐ 아이돌 섹션 -->
+                    <div class="result-celebrities">
+                        <h3>⭐ 같은 유형 아이돌</h3>
+                        <div id="celebrity-list" class="celebrity-container">
+                            <div class="celebrity-item">
+                                <span class="emoji">👨</span>
+                                <span></span>
+                            </div>
+                            <div class="celebrity-item">
+                                <span class="emoji">👨</span>
+                                <span></span>
+                            </div>
+                            <div class="celebrity-item">
+                                <span class="emoji">👨</span>
+                                <span></span>
+                            </div>
+                            <div class="celebrity-item">
+                                <span class="emoji">👨</span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 🏥 건강 & 스트레스 관리 섹션 -->
+                    <div class="result-health">
+                        <h3>🏥 건강 & 스트레스 관리</h3>
+                        <div class="health-tips">
+                            <div class="health-category">
+                                <h4>💪 추천 운동</h4>
+                                <div id="exercise-tips" class="tip-list">
+                                    <div class="tip-item">헬스장 웨이트 트레이닝</div>
+                                    <div class="tip-item">축구/농구</div>
+                                </div>
+                            </div>
+                            <div class="health-category">
+                                <h4>🥗 식단 관리</h4>
+                                <div id="diet-tips" class="tip-list">
+                                    <div class="tip-item">고단백 식단</div>
+                                    <div class="tip-item">규칙적인 식사</div>
+                                </div>
+                            </div>
+                            <div class="health-category">
+                                <h4>😌 스트레스 해소</h4>
+                                <div id="stress-tips" class="tip-list">
+                                    <div class="tip-item">목표 달성 활동</div>
+                                    <div class="tip-item">친구들과 운동</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 🎯 성장 방향 섹션 -->
+                    <div class="result-growth">
+                        <h3>🎯 성장 방향</h3>
+                        <div id="growth-tips" class="growth-container">
+                            <div class="growth-item">
+                                <span class="emoji">❤️</span>
+                                <span>감정 표현력 향상</span>
+                            </div>
+                            <div class="growth-item">
+                                <span class="emoji">👂</span>
+                                <span>경청 능력 개발</span>
+                            </div>
+                            <div class="growth-item">
+                                <span class="emoji">🎯</span>
+                                <span>세심함 기르기</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-actions">
+                        <button id="retry-btn" class="btn btn-secondary">다시 테스트하기</button>
+                        <button id="save-image-btn" class="btn btn-primary">📷 이미지로 저장</button>
+                        <button id="share-btn" class="btn btn-text">📝 링크 복사</button>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- 결과 화면 -->
-        <div id="result-screen" class="screen">
-            <div class="result-container">
-                <div class="result-header">
-                    <h1 id="result-type"></h1>
-                    <div id="result-emoji" class="result-emoji"></div>
-                </div>
-                
-                <div class="result-description">
-                    <h3>당신의 성격 특징</h3>
-                    <div id="result-traits" class="traits-container"></div>
-                </div>
-                
-                <div class="result-detailed">
-                    <h3>상세 설명</h3>
-                    <p id="result-detail"></p>
-                </div>
-                
-                <div class="result-score">
-                    <h3>점수 분포</h3>
-                    <div class="score-bars">
-                        <div class="score-item">
-                            <span class="score-label" id="type1-label"></span>
-                            <div class="score-bar">
-                                <div id="type1-score" class="score-fill"></div>
-                            </div>
-                            <span id="type1-percent" class="score-percent"></span>
-                        </div>
-                        <div class="score-item">
-                            <span class="score-label" id="type2-label"></span>
-                            <div class="score-bar">
-                                <div id="type2-score" class="score-fill"></div>
-                            </div>
-                            <span id="type2-percent" class="score-percent"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 💕 연애 궁합 섹션 -->
-                <div class="result-compatibility">
-                    <h3>💕 연애 궁합</h3>
-                    <div id="compatibility-list" class="compatibility-container">
-                        <div class="compatibility-item">
-                            <span class="emoji">💕</span>
-                            <span>에겐녀 98% 💕 완벽한 조화!</span>
-                        </div>
-                        <div class="compatibility-item">
-                            <span class="emoji">🔥</span>
-                            <span>테토녀 72% 🔥 역동적 관계!</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 💼 추천 직업 섹션 -->
-                <div class="result-careers">
-                    <h3>💼 추천 직업</h3>
-                    <div id="career-list" class="career-container">
-                        <div class="career-item">경영진</div>
-                        <div class="career-item">운동선수</div>
-                        <div class="career-item">군인/경찰</div>
-                        <div class="career-item">영업직</div>
-                        <div class="career-item">기업가</div>
-                    </div>
-                </div>
-
-                <!-- ⭐ 아이돌 섹션 -->
-                <div class="result-celebrities">
-                    <h3>⭐ 같은 유형 아이돌</h3>
-                    <div id="celebrity-list" class="celebrity-container">
-                        <div class="celebrity-item">
-                            <span class="emoji">👨</span>
-                            <span></span>
-                        </div>
-                        <div class="celebrity-item">
-                            <span class="emoji">👨</span>
-                            <span></span>
-                        </div>
-                        <div class="celebrity-item">
-                            <span class="emoji">👨</span>
-                            <span></span>
-                        </div>
-                        <div class="celebrity-item">
-                            <span class="emoji">👨</span>
-                            <span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 🏥 건강 & 스트레스 관리 섹션 -->
-                <div class="result-health">
-                    <h3>🏥 건강 & 스트레스 관리</h3>
-                    <div class="health-tips">
-                        <div class="health-category">
-                            <h4>💪 추천 운동</h4>
-                            <div id="exercise-tips" class="tip-list">
-                                <div class="tip-item">헬스장 웨이트 트레이닝</div>
-                                <div class="tip-item">축구/농구</div>
-                            </div>
-                        </div>
-                        <div class="health-category">
-                            <h4>🥗 식단 관리</h4>
-                            <div id="diet-tips" class="tip-list">
-                                <div class="tip-item">고단백 식단</div>
-                                <div class="tip-item">규칙적인 식사</div>
-                            </div>
-                        </div>
-                        <div class="health-category">
-                            <h4>😌 스트레스 해소</h4>
-                            <div id="stress-tips" class="tip-list">
-                                <div class="tip-item">목표 달성 활동</div>
-                                <div class="tip-item">친구들과 운동</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 🎯 성장 방향 섹션 -->
-                <div class="result-growth">
-                    <h3>🎯 성장 방향</h3>
-                    <div id="growth-tips" class="growth-container">
-                        <div class="growth-item">
-                            <span class="emoji">❤️</span>
-                            <span>감정 표현력 향상</span>
-                        </div>
-                        <div class="growth-item">
-                            <span class="emoji">👂</span>
-                            <span>경청 능력 개발</span>
-                        </div>
-                        <div class="growth-item">
-                            <span class="emoji">🎯</span>
-                            <span>세심함 기르기</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="result-actions">
-                    <button id="retry-btn" class="btn btn-secondary">다시 테스트하기</button>
-                    <button id="save-image-btn" class="btn btn-primary">📷 이미지로 저장</button>
-                    <button id="share-btn" class="btn btn-text">📝 링크 복사</button>
-                </div>
-            </div>
-        </div>
-    </div>
     </main>
 
-    <script src="header.js"></script>
-    <script src="translations.js"></script>
-    <script src="config.js"></script>
-    <script src="footer.js"></script>
-    <script src="script.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/teto-data.js"></script>
+    <script src="js/script.js"></script>
 </body>
-</html> 
+
+</html>

@@ -25,7 +25,7 @@ const translations = {
         exerciseTitle: "💪 추천 운동",
         dietTitle: "🥗 식단 관리",
         stressTitle: "😌 스트레스 해소",
-        
+
         // About 페이지
         about: {
             title: "테토-에겐 성격 유형 테스트란?",
@@ -106,7 +106,7 @@ const translations = {
                 button: "테스트로 돌아가기"
             }
         },
-        
+
         // Guide 페이지
         guide: {
             title: "테토-에겐 성격 유형 가이드",
@@ -209,7 +209,7 @@ const translations = {
                     love1: "깊은 정서적 연결 추구",
                     love2: "세심한 관찰과 배려 표현",
                     love3: "안정적이고 따뜻한 관계 선호",
-                    love4: "파트너의 감정 변화에 민감",
+                    love4: "Sensitive to partner's emotional changes",
                     growth: "🎯 성장 방향",
                     growth1: "자기주장 강화: 타인 배려와 함께 자신의 의견도 적극 표현",
                     growth2: "논리적 사고: 감정과 직관에 더해 논리적 분석 능력 기르기",
@@ -266,7 +266,7 @@ const translations = {
                 button: "테스트로 돌아가기"
             }
         },
-        
+
         // Privacy Policy 페이지
         privacy: {
             title: "개인정보보호정책",
@@ -334,7 +334,7 @@ const translations = {
                 button: "테스트로 돌아가기"
             }
         },
-        
+
         // Footer
         footer: {
             copyright: "© 2024 테토-에겐 성격 유형 테스트. All rights reserved.",
@@ -350,7 +350,7 @@ const translations = {
         description: "A fun personality type test inspired by general characteristics of testosterone and estrogen hormones.<br>Discover your personality tendencies through simple questions!",
         genderTitle: "Please select your gender",
         male: "Male",
-        female: "Female", 
+        female: "Female",
         startBtn: "Start Test",
         testInfo: "📋 25 Questions | ⏱️ About 6 minutes",
         backBtn: "← Previous Question",
@@ -368,7 +368,7 @@ const translations = {
         exerciseTitle: "💪 Recommended Exercise",
         dietTitle: "🥗 Diet Management",
         stressTitle: "😌 Stress Relief",
-        
+
         // About page
         about: {
             title: "What is Teto-Egen Personality Type Test?",
@@ -449,7 +449,7 @@ const translations = {
                 button: "Back to Test"
             }
         },
-        
+
         // Guide page
         guide: {
             title: "Teto-Egen Personality Type Guide",
@@ -609,7 +609,7 @@ const translations = {
                 button: "Back to Test"
             }
         },
-        
+
         // Privacy Policy page
         privacy: {
             title: "Privacy Policy",
@@ -677,7 +677,7 @@ const translations = {
                 button: "Back to Test"
             }
         },
-        
+
         // Footer
         footer: {
             copyright: "© 2024 Teto-Egen Personality Type Test. All rights reserved.",
@@ -687,208 +687,3 @@ const translations = {
         }
     }
 }; 
-
-// 현재 언어 설정
-let currentLanguage = 'ko';
-
-// 공통 언어 관련 함수들
-function getNestedValue(obj, path) {
-    return path.split('.').reduce((curr, key) => curr && curr[key], obj);
-}
-
-// 공통 언어 토글 함수
-function toggleLanguage() {
-    const previousLanguage = currentLanguage;
-    currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
-    
-    // console.log('🌐 언어 변경:', {
-    //     from: previousLanguage,
-    //     to: currentLanguage,
-    //     page: window.location.pathname
-    // });
-    
-    updateLanguage();
-    localStorage.setItem('language-preference', currentLanguage);
-}
-
-// 공통 언어 업데이트 함수
-function updateLanguage() {
-    const texts = translations[currentLanguage];
-    
-    // data-text 속성을 가진 요소들 업데이트
-    const elements = document.querySelectorAll('[data-text]');
-    elements.forEach(element => {
-        const key = element.getAttribute('data-text');
-        if (key) {
-            const text = getNestedValue(translations[currentLanguage], key);
-            if (text) {
-                element.innerHTML = text;
-            }
-        }
-    });
-    
-    // index.html 하드코딩된 텍스트들 업데이트 (script.js의 updateLanguage 로직 통합)
-    const heroTitle = document.querySelector('.hero h1');
-    const heroSubtitle = document.querySelector('.hero .subtitle');
-    const heroDescription = document.querySelector('.hero .description');
-    const genderTitle = document.querySelector('.gender-selection h3');
-    const maleBtn = document.querySelector('.gender-btn[data-gender="male"] span:last-child');
-    const femaleBtn = document.querySelector('.gender-btn[data-gender="female"] span:last-child');
-    const startBtn = document.getElementById('start-btn');
-    const testInfo = document.querySelector('.test-info p');
-    const backBtn = document.getElementById('back-btn');
-    const retryBtn = document.getElementById('retry-btn');
-    const shareBtn = document.getElementById('share-btn');
-    
-    if (heroTitle) heroTitle.textContent = texts.title;
-    if (heroSubtitle) heroSubtitle.textContent = texts.subtitle;
-    if (heroDescription) heroDescription.innerHTML = texts.description;
-    if (genderTitle) genderTitle.textContent = texts.genderTitle;
-    if (maleBtn) maleBtn.textContent = texts.male;
-    if (femaleBtn) femaleBtn.textContent = texts.female;
-    if (startBtn) startBtn.textContent = texts.startBtn;
-    if (testInfo) testInfo.textContent = texts.testInfo;
-    if (backBtn) backBtn.textContent = texts.backBtn;
-    if (retryBtn) retryBtn.textContent = texts.retryBtn;
-    if (shareBtn) shareBtn.textContent = texts.shareBtn;
-    
-    // 결과 화면 제목들
-    const traitsTitle = document.querySelector('.result-description h3');
-    const detailTitle = document.querySelector('.result-detailed h3');
-    const scoreTitle = document.querySelector('.result-score h3');
-    const compatibilityTitle = document.querySelector('.result-compatibility h3');
-    const careersTitle = document.querySelector('.result-careers h3');
-    const celebritiesTitle = document.querySelector('.result-celebrities h3');
-    const healthTitle = document.querySelector('.result-health h3');
-    const growthTitle = document.querySelector('.result-growth h3');
-    const exerciseTitle = document.querySelector('.health-category:nth-child(1) h4');
-    const dietTitle = document.querySelector('.health-category:nth-child(2) h4');
-    const stressTitle = document.querySelector('.health-category:nth-child(3) h4');
-    
-    if (traitsTitle) traitsTitle.textContent = texts.traitsTitle;
-    if (detailTitle) detailTitle.textContent = texts.detailTitle;
-    if (scoreTitle) scoreTitle.textContent = texts.scoreTitle;
-    if (compatibilityTitle) compatibilityTitle.textContent = texts.compatibilityTitle;
-    if (careersTitle) careersTitle.textContent = texts.careersTitle;
-    if (celebritiesTitle) celebritiesTitle.textContent = texts.celebritiesTitle;
-    if (healthTitle) healthTitle.textContent = texts.healthTitle;
-    if (growthTitle) growthTitle.textContent = texts.growthTitle;
-    if (exerciseTitle) exerciseTitle.textContent = texts.exerciseTitle;
-    if (dietTitle) dietTitle.textContent = texts.dietTitle;
-    if (stressTitle) stressTitle.textContent = texts.stressTitle;
-    
-    // 페이지 제목 업데이트
-    const titleKey = document.querySelector('title[data-text]')?.getAttribute('data-text');
-    if (titleKey) {
-        const titleText = getNestedValue(translations[currentLanguage], titleKey);
-        if (titleText) {
-            document.title = titleText;
-        }
-    } else {
-        // 페이지별 기본 제목 설정
-        const pageTitles = {
-            'index.html': translations[currentLanguage].title,
-            'about.html': translations[currentLanguage].about?.title,
-            'guide.html': translations[currentLanguage].guide?.title,
-            'privacy-policy.html': translations[currentLanguage].privacy?.title
-        };
-        
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const pageTitle = pageTitles[currentPage];
-        if (pageTitle) {
-            document.title = pageTitle;
-        }
-    }
-    
-    // 언어 토글 버튼 텍스트 업데이트
-    const languageBtn = document.getElementById('language-toggle');
-    if (languageBtn) {
-        languageBtn.textContent = currentLanguage === 'ko' ? 'EN' : '한국어';
-    }
-    
-    // index.html의 화면별 업데이트 (script.js의 로직)
-    if (typeof screens !== 'undefined' && screens.test && screens.test.classList.contains('active')) {
-        // 테스트 진행 중이면 현재 질문 업데이트
-        if (typeof showQuestion === 'function') {
-            showQuestion();
-        }
-    } else if (typeof screens !== 'undefined' && screens.result && screens.result.classList.contains('active')) {
-        // 결과 화면에 있는 경우 결과 내용도 업데이트
-        if (typeof updateResultContent === 'function') {
-            updateResultContent();
-        }
-    }
-    
-    // 푸터의 다른 서비스 링크도 언어에 맞게 업데이트
-    if (typeof window !== 'undefined' && window.visitorCounter && typeof window.visitorCounter.renderServices === 'function') {
-        window.visitorCounter.renderServices();
-    }
-
-    // 이미지 저장 버튼
-    const saveImageBtn = document.getElementById('save-image-btn');
-    if (saveImageBtn) saveImageBtn.textContent = texts.saveImageBtn;
-}
-
-// 페이지 로딩 시 저장된 언어 설정 적용
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. 저장된 언어 설정 확인
-    const savedLanguage = localStorage.getItem('language-preference');
-    
-    if (savedLanguage && (savedLanguage === 'ko' || savedLanguage === 'en')) {
-        // 저장된 언어 설정이 있으면 사용
-        currentLanguage = savedLanguage;
-        // console.log('🌐 저장된 언어 설정 사용:', currentLanguage);
-    } else {
-        // 저장된 설정이 없으면 브라우저 언어 자동 감지
-        const browserLanguage = detectBrowserLanguage();
-        currentLanguage = browserLanguage;
-        
-        // 자동 감지된 언어를 localStorage에 저장
-        localStorage.setItem('language-preference', currentLanguage);
-        // console.log('🌐 브라우저 언어 자동 감지:', {
-        //     detected: navigator.language || navigator.userLanguage,
-        //     selected: currentLanguage
-        // });
-    }
-    
-    // 100ms 지연 후 언어 업데이트 (DOM 완전 로딩 대기)
-    setTimeout(() => {
-        updateLanguage();
-    }, 100);
-});
-
-// 브라우저 언어 자동 감지 함수
-function detectBrowserLanguage() {
-    // 브라우저 언어 설정 가져오기
-    const browserLang = navigator.language || navigator.userLanguage || navigator.languages?.[0] || 'en';
-    
-    // console.log('🔍 브라우저 언어 정보:', {
-    //     language: navigator.language,
-    //     userLanguage: navigator.userLanguage,
-    //     languages: navigator.languages,
-    //     detected: browserLang
-    // });
-    
-    // 한국어 관련 언어 코드들
-    const koreanCodes = ['ko', 'ko-KR', 'ko-kr', 'korean'];
-    
-    // 영어 관련 언어 코드들  
-    const englishCodes = ['en', 'en-US', 'en-us', 'en-GB', 'en-gb', 'en-AU', 'en-au', 'en-CA', 'en-ca', 'english'];
-    
-    // 언어 코드를 소문자로 변환해서 비교
-    const lowerLang = browserLang.toLowerCase();
-    
-    // 한국어 감지
-    if (koreanCodes.some(code => lowerLang.startsWith(code.toLowerCase()))) {
-        return 'ko';
-    }
-    
-    // 영어 감지 (또는 기타 언어는 영어로 기본 설정)
-    if (englishCodes.some(code => lowerLang.startsWith(code.toLowerCase()))) {
-        return 'en';
-    }
-    
-    // 지원되지 않는 언어의 경우 영어를 기본값으로 설정
-    // (글로벌 서비스이므로 영어가 더 범용적)
-    return 'en';
-}

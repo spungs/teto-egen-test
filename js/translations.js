@@ -347,21 +347,6 @@ const translations = {
             dailyVisitors: "오늘 방문자",
             totalVisitors: "총 방문자",
             otherServices: "spungs's other services"
-        },
-
-        // More Tests
-        moreTests: {
-            title: "🔥 다른 성격 테스트도 즐겨보세요!",
-            loveTest: {
-                title: "마라맛 연애 성향 테스트",
-                desc: "나의 연애 본능은 어떤 수준일까? 지금 바로 확인해보세요!",
-                badge: "Hot & New"
-            },
-            comingSoon: {
-                title: "새로운 테스트 준비 중",
-                desc: "곧 더 흥미진진한 테스트가 찾아옵니다.",
-                badge: "Coming Soon"
-            }
         }
     },
     en: {
@@ -711,21 +696,6 @@ const translations = {
             dailyVisitors: "Today's Visitors",
             totalVisitors: "Total Visitors",
             otherServices: "spungs's other services"
-        },
-
-        // More Tests
-        moreTests: {
-            title: "🔥 Discover More Tests!",
-            loveTest: {
-                title: "Spicy Love Tendency Test",
-                desc: "What is my true love instinct? Check it out now!",
-                badge: "Hot & New"
-            },
-            comingSoon: {
-                title: "New Test Coming Soon",
-                desc: "More exciting tests are on the way.",
-                badge: "Coming Soon"
-            }
         }
     }
-}; 
+};

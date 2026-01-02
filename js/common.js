@@ -79,23 +79,6 @@ function updateLanguage() {
     if (retryBtn) retryBtn.textContent = texts.retryBtn;
     if (shareBtn) shareBtn.textContent = texts.shareBtn;
 
-    // 추가 테스트 섹션 업데이트
-    const moreTestsTitle = document.querySelector('.more-tests-title');
-    if (moreTestsTitle) moreTestsTitle.textContent = texts.moreTests.title;
-
-    const loveTestCard = document.querySelector('.test-card[data-test="love"]');
-    if (loveTestCard) {
-        loveTestCard.querySelector('.title').textContent = texts.moreTests.loveTest.title;
-        loveTestCard.querySelector('.desc').textContent = texts.moreTests.loveTest.desc;
-        loveTestCard.querySelector('.badge').textContent = texts.moreTests.loveTest.badge;
-    }
-
-    const soonTestCard = document.querySelector('.test-card.coming-soon');
-    if (soonTestCard) {
-        soonTestCard.querySelector('.title').textContent = texts.moreTests.comingSoon.title;
-        soonTestCard.querySelector('.desc').textContent = texts.moreTests.comingSoon.desc;
-        soonTestCard.querySelector('.badge').textContent = texts.moreTests.comingSoon.badge;
-    }
 
     // 결과 화면 제목들
     const traitsTitle = document.querySelector('.result-description h3');
@@ -473,9 +456,11 @@ async function saveResultAsImage() {
                 canvasOptions.foreignObjectRendering = false;
                 canvasOptions.scale = 1.5;
             } else {
+                // Mac, iOS 등에서는 foreignObjectRendering이 불안정할 수 있음
+                // CORS와 함께 사용할 때 빈 이미지가 나오는 문제 해결 위함
                 canvasOptions.useCORS = true;
                 canvasOptions.allowTaint = false;
-                canvasOptions.foreignObjectRendering = true;
+                canvasOptions.foreignObjectRendering = false; // true -> false로 변경
             }
 
             canvas = await html2canvas(tempContainer, canvasOptions);

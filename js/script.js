@@ -86,17 +86,6 @@ function setupEventListeners() {
     }
 
     // 추가 테스트 클릭 이벤트 추적
-    document.querySelectorAll('.test-card').forEach(card => {
-        card.addEventListener('click', function () {
-            const testId = this.getAttribute('data-test');
-            if (testId && window.dataLayer) {
-                window.dataLayer.push({
-                    'event': 'recommendation_click',
-                    'test_id': testId
-                });
-            }
-        });
-    });
 }
 
 function selectGender(gender) {

@@ -19,35 +19,40 @@ function initializeVisitorCounter() {
 // 방문자 카운터 관리 클래스 (daily_visitors 테이블 기반)
 class VisitorCounter {
     constructor() {
-        this.supabaseUrl = config.supabaseUrl;
-        this.supabaseKey = config.supabaseKey;
+        // config 객체 존재 여부 확인
+        const hasConfig = typeof config !== 'undefined';
+
+        this.supabaseUrl = hasConfig ? config.supabaseUrl : '';
+        this.supabaseKey = hasConfig ? config.supabaseKey : '';
         this.apiUrl = `${this.supabaseUrl}/rest/v1`;
         this.dailyTable = 'daily_visitors';
         this.statsTable = 'visitor_stats'; // 총 방문자수 집계용(누적)
         this.sessionKey = 'visitor_uuid_' + this.getTodayString();
-        
+
         // 다른 서비스 링크 설정 (다국어 지원)
         this.otherServices = [
-            { 
+            {
                 name: {
                     ko: '닷지마스터',
                     en: 'Dodge Master'
-                }, 
+                },
                 url: 'https://dodge-master.spungs-teto-egen.com',
                 icon: '🚀'
             },
-            { 
+            {
                 name: {
                     ko: '룰렛',
                     en: 'Roulette'
-                }, 
+                },
                 url: 'https://roulette.spungs-teto-egen.com',
                 icon: '🎲'
             },
             // 필요한 서비스들을 여기에 추가
         ];
-        
-        this.cleanupOldUuids(); // 오래된 uuid 정리
+
+        if (hasConfig) {
+            this.cleanupOldUuids(); // 오래된 uuid 정리
+        }
         this.init();
     }
 
@@ -64,14 +69,14 @@ class VisitorCounter {
             link.target = '_blank';
             link.rel = 'noopener noreferrer';
             link.className = 'service-link';
-            
+
             // 현재 언어에 맞는 서비스명 표시 (translations.js의 currentLanguage 사용)
             const lang = (typeof currentLanguage !== 'undefined') ? currentLanguage : 'ko';
             const serviceName = service.name[lang] || service.name.ko; // 기본값은 한국어
-            
+
             // 아이콘이 있으면 앞에 붙여줌
             link.innerHTML = (service.icon ? `<span class="service-icon">${service.icon}</span> ` : '') + serviceName;
-            
+
             servicesContainer.appendChild(link);
         });
 
@@ -111,10 +116,10 @@ class VisitorCounter {
             await this.insertDailyVisitor();
             this.markVisitedToday();
         }
-        
+
         // 다른 서비스 링크 렌더링
         this.renderServices();
-        
+
         // 통계 표시
         await this.displayStats();
         setInterval(async () => {
@@ -182,9 +187,9 @@ class VisitorCounter {
     // 오늘 날짜 문자열 반환 (YYYY-MM-DD)
     getTodayString() {
         const today = new Date();
-        return today.getFullYear() + '-' + 
-               String(today.getMonth() + 1).padStart(2, '0') + '-' + 
-               String(today.getDate()).padStart(2, '0');
+        return today.getFullYear() + '-' +
+            String(today.getMonth() + 1).padStart(2, '0') + '-' +
+            String(today.getDate()).padStart(2, '0');
     }
 
     // KST 기준 오늘 0시 ~ 23시 59분의 UTC 범위 반환
@@ -192,19 +197,19 @@ class VisitorCounter {
         // 현재 UTC 시간을 KST로 변환해서 오늘 날짜 구하기
         const now = new Date();
         const kstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000); // UTC + 9시간 = KST
-        
+
         const year = kstNow.getUTCFullYear();
         const month = kstNow.getUTCMonth();
         const date = kstNow.getUTCDate();
-        
+
         // KST 기준 오늘 0시를 UTC로 변환
         const kstTodayStart = new Date(Date.UTC(year, month, date, 0, 0, 0));
         const utcTodayStart = new Date(kstTodayStart.getTime() - 9 * 60 * 60 * 1000);
-        
+
         // KST 기준 오늘 23:59:59를 UTC로 변환
         const kstTodayEnd = new Date(Date.UTC(year, month, date, 23, 59, 59));
         const utcTodayEnd = new Date(kstTodayEnd.getTime() - 9 * 60 * 60 * 1000);
-        
+
         return {
             start: utcTodayStart.toISOString(),
             end: utcTodayEnd.toISOString()
@@ -236,7 +241,7 @@ class VisitorCounter {
         const currentPath = window.location.pathname;
         const currentPage = window.location.href;
         return (
-            currentPath === '/' || 
+            currentPath === '/' ||
             currentPath.endsWith('/index.html') ||
             currentPath.endsWith('/teto-egen-test/') ||
             currentPath.endsWith('/teto-egen-test/index.html') ||

@@ -80,17 +80,17 @@ const questionData = {
             ]
         },
         {
-            situation: "취미나 여가 활동을 선택할 때",
+            situation: "🎮 '노는 물'이 다르다! 나에게 딱 맞는 힐링 타임은?",
             options: {
                 male: [
-                    { text: "경쟁적이고 도전적인 활동을 선호한다", type: "teto", score: 3 },
-                    { text: "기분에 따라 다양한 활동을 즐긴다", type: "balanced", score: 1 },
-                    { text: "창작이나 예술적 표현 활동을 좋아한다", type: "egen", score: 3 }
+                    { text: "땀 흘려야 제맛! 축구나 게임으로 승부욕을 불태운다", type: "teto", score: 3 },
+                    { text: "그때그때 달라요. 삘 꽂히는 대로 자유롭게 즐긴다", type: "balanced", score: 1 },
+                    { text: "나만의 아지트에서 음악을 듣거나 그림을 그리며 감성을 충전한다", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "활동적이고 사교적인 취미를 선호한다", type: "teto", score: 3 },
-                    { text: "그때그때 끌리는 활동을 선택한다", type: "balanced", score: 1 },
-                    { text: "조용하고 개인적인 취미를 즐긴다", type: "egen", score: 3 }
+                    { text: "가만히 있으면 병난다! 친구들과 핫플을 투어하며 에너지를 발산한다", type: "teto", score: 3 },
+                    { text: "기분이죠! 내 텐션에 맞춰 활동적이거나 조용한 것을 고른다", type: "balanced", score: 1 },
+                    { text: "방해받고 싶지 않아. 혼자 소소하게 다이어리를 꾸미거나 취미를 즐긴다", type: "egen", score: 3 }
                 ]
             }
         },
@@ -103,35 +103,35 @@ const questionData = {
             ]
         },
         {
-            situation: "실패나 좌절을 경험했을 때",
+            situation: "🌪️ 멘탈 바사삭... 인생의 쓴맛을 제대로 봤을 때 나는?",
             options: [
-                { text: "빠르게 원인을 분석하고 다음 도전을 준비한다", type: "teto", score: 3 },
-                { text: "적당한 시간을 두고 차근차근 회복한다", type: "balanced", score: 1 },
-                { text: "충분히 감정을 느끼고 내면의 힘을 기른다", type: "egen", score: 3 }
+                { text: "패배는 없다! 원인을 살벌하게 분석하고 '두고 보자'며 칼을 간다", type: "teto", score: 3 },
+                { text: "시간이 약이다. 맛있는 거나 먹으며 자연스럽게 잊혀지길 기다린다", type: "balanced", score: 1 },
+                { text: "세상이 무너진 듯... 방구석에서 슬픈 노래를 들으며 눈물을 한 바가지 쏟는다", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "의견이 다른 상황에서",
+            situation: "⚔️ 의견 충돌 발생! 상대방이 말도 안 되는 소리를 한다면?",
             options: [
-                { text: "논리적 근거로 내 의견을 설득력 있게 제시한다", type: "teto", score: 3 },
-                { text: "서로의 의견을 종합하여 절충안을 찾는다", type: "balanced", score: 1 },
-                { text: "상대방의 입장을 이해하고 공감대를 형성한다", type: "egen", score: 3 }
+                { text: "팩폭 폭격기 가동! 논리로 상대방의 뼈를 때리며 참교육 시전한다", type: "teto", score: 3 },
+                { text: "좋은 게 좋은 거지. 적당히 맞춰주며 상황을 유연하게 넘긴다", type: "balanced", score: 1 },
+                { text: "저 사람은 왜 저럴까... 상대의 입장을 이해해보려 노력하며 속으로 삭힌다", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "미래 계획을 세울 때",
+            situation: "🗺️ 10년 후의 나, 어떤 모습일까?",
             options: [
-                { text: "구체적인 목표와 실행 계획을 체계적으로 수립한다", type: "teto", score: 3 },
-                { text: "큰 방향은 정하되 유연성을 유지한다", type: "balanced", score: 1 },
-                { text: "직감과 흐름에 맞춰 자연스럽게 진행한다", type: "egen", score: 3 }
+                { text: "야망 로드맵 완비! 연도별 달성 목표가 엑셀 파일로 정리되어 있다", type: "teto", score: 3 },
+                { text: "큰 그림은 있지. 근데 인생이 계획대로 되나? 그때 가서 수정하면 된다", type: "balanced", score: 1 },
+                { text: "그냥 행복했으면 좋겠어... 구체적 목표보다는 내 마음이 이끄는 대로 살고 싶다", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "성취감을 느끼는 순간",
+            situation: "🏆 내가 생각하는 '갓생'의 기준은?",
             options: [
-                { text: "목표 달성과 성과 창출을 이루었을 때", type: "teto", score: 3 },
-                { text: "균형잡힌 삶을 유지할 때", type: "balanced", score: 1 },
-                { text: "타인과의 관계나 감정적 연결이 깊어질 때", type: "egen", score: 3 }
+                { text: "통장 잔고와 명함! 눈에 보이는 성과와 지위가 빵빵해야 한다", type: "teto", score: 3 },
+                { text: "워라밸이 최고! 일과 삶이 적절히 조화를 이루는 안정적인 삶", type: "balanced", score: 1 },
+                { text: "사랑과 평화! 소중한 사람들과 깊은 정을 나누며 마음 편히 사는 삶", type: "egen", score: 3 }
             ]
         },
         {
@@ -143,33 +143,33 @@ const questionData = {
             ]
         },
         {
-            situation: "예상치 못한 변화에 직면했을 때",
+            situation: "🌪️ 갑작스런 계획 변경! 내 반응은?",
             options: [
-                { text: "빠르게 상황을 파악하고 적극적으로 대응한다", type: "teto", score: 3 },
-                { text: "신중하게 상황을 관찰한 후 점진적으로 적응한다", type: "balanced", score: 1 },
-                { text: "변화로 인한 감정을 충분히 받아들인 후 대응한다", type: "egen", score: 3 }
+                { text: "오히려 좋아! 즉각 플랜 B를 가동하며 상황을 주도한다", type: "teto", score: 3 },
+                { text: "일단 지켜본다. 상황이 어떻게 흘러가는지 보고 천천히 움직인다", type: "balanced", score: 1 },
+                { text: "아 멘붕... 마음의 준비가 안 됐는데 당황해서 어쩔 줄 모른다", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "리더십을 발휘해야 하는 상황에서",
+            situation: "👑 내가 리더가 된다면 어떤 스타일?",
             options: [
-                { text: "명확한 방향성과 강력한 추진력으로 이끈다", type: "teto", score: 3 },
-                { text: "상황에 맞는 적절한 리더십 스타일을 택한다", type: "balanced", score: 1 },
-                { text: "구성원들의 의견을 수렴하며 협력적으로 이끈다", type: "egen", score: 3 }
+                { text: "나를 따르라! 확실한 비전을 제시하며 앞장서서 돌격하는 장군형", type: "teto", score: 3 },
+                { text: "유연한 조율자. 상황에 따라 밀고 당기며 균형을 맞춘다", type: "balanced", score: 1 },
+                { text: "따뜻한 엄마 리더십. 팀원들의 고충을 들어주며 다독이는 서포트형", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "여가 시간 활용 방식",
+            situation: "⛱️ 모처럼 생긴 꿀 같은 휴일, 나는?",
             options: {
                 male: [
-                    { text: "스포츠나 게임 등 경쟁적 활동을 선호한다", type: "teto", score: 3 },
-                    { text: "그때 기분에 따라 다양하게 보낸다", type: "balanced", score: 1 },
-                    { text: "혼자만의 조용한 시간이나 문화 활동을 즐긴다", type: "egen", score: 3 }
+                    { text: "가만히 있으면 몸이 쑤신다. 풋살이든 롤이든 승부를 봐야 직성이 풀린다", type: "teto", score: 3 },
+                    { text: "그날 기분에 따라! 나가 놀 수도 있고 집에서 쉴 수도 있다", type: "balanced", score: 1 },
+                    { text: "이불 밖은 위험해. 집에서 혼자만의 시간을 즐기거나 전시회를 간다", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "친구들과 활발한 사교 활동을 즐긴다", type: "teto", score: 3 },
-                    { text: "때로는 활발하게, 때로는 조용하게 보낸다", type: "balanced", score: 1 },
-                    { text: "개인적인 취미나 자기계발에 시간을 투자한다", type: "egen", score: 3 }
+                    { text: "인싸력 폭발! 친구들 모아서 맛집 탐방 가고 쇼핑하며 활개 친다", type: "teto", score: 3 },
+                    { text: "반반 치킨처럼! 낮엔 놀고 밤엔 쉬는 하이브리드 전략을 쓴다", type: "balanced", score: 1 },
+                    { text: "밀린 넷플릭스 정주행! 따뜻한 코코아 한 잔과 함께 감성에 젖는다", type: "egen", score: 3 }
                 ]
             }
         },
@@ -182,11 +182,11 @@ const questionData = {
             ]
         },
         {
-            situation: "문제 해결 접근 방식",
+            situation: "🧩 복잡한 문제가 생겼을 때 나의 해결법은?",
             options: [
-                { text: "체계적이고 단계적으로 해결책을 찾는다", type: "teto", score: 3 },
-                { text: "직관과 논리를 조합하여 접근한다", type: "balanced", score: 1 },
-                { text: "창의적이고 유연한 방법을 모색한다", type: "egen", score: 3 }
+                { text: "기계적인 두뇌 회전! 단계별로 착착 쪼개서 체계적으로 박살 낸다", type: "teto", score: 3 },
+                { text: "감과 논리의 콜라보! 적당한 직관과 팩트를 섞어본다", type: "balanced", score: 1 },
+                { text: "번뜩이는 영감! 남들이 생각지 못한 창의적인 꼼수(?)를 찾아낸다", type: "egen", score: 3 }
             ]
         }
     ],
@@ -201,11 +201,11 @@ const questionData = {
             ]
         },
         {
-            situation: "연인과의 관계에서 남성의 역할",
+            situation: "🌹 내 여자는 내가 지킨다! 연애할 때 나의 스타일은?",
             options: [
-                { text: "보호자이자 이끄는 역할을 해야 한다고 생각한다", type: "teto", score: 2 },
-                { text: "상황에 따라 역할이 바뀔 수 있다고 본다", type: "balanced", score: 1 },
-                { text: "평등한 파트너로서 감정적 교감을 중시한다", type: "egen", score: 2 }
+                { text: "상남자 특: 리드한다. '오빠 믿지?'하며 모든 코스를 계획하고 이끈다", type: "teto", score: 2 },
+                { text: "케바케지. 상황에 따라 리드하기도 하고 맞춰주기도 하는 유연함", type: "balanced", score: 1 },
+                { text: "너 하고 싶은 거 다 해! 여친의 의견을 전적으로 따르며 공감해준다", type: "egen", score: 2 }
             ]
         },
         {
@@ -217,19 +217,19 @@ const questionData = {
             ]
         },
         {
-            situation: "남성 친구들과의 우정 표현",
+            situation: "🍺 의리! 친구들과의 우정을 증명하는 방법은?",
             options: [
-                { text: "함께 활동하고 경쟁하며 우정을 쌓는다", type: "teto", score: 2 },
-                { text: "때로는 깊게, 때로는 가볍게 교류한다", type: "balanced", score: 1 },
-                { text: "깊은 대화와 감정적 교감을 나눈다", type: "egen", score: 2 }
+                { text: "몸으로 부딪혀야지! 땀 흘리며 운동하거나 술 한잔 걸치며 끈끈해진다", type: "teto", score: 2 },
+                { text: "적당한 거리 유지. 필요할 때 돕고 평소엔 각자 잘 산다", type: "balanced", score: 1 },
+                { text: "속 깊은 대화. 고민을 나누고 서로 위로하며 정서적 유대를 쌓는다", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "직업이나 성공에 대한 태도",
+            situation: "💼 남자의 자존심! 나에게 성공이란?",
             options: [
-                { text: "성취와 성공이 남성의 중요한 덕목이다", type: "teto", score: 2 },
-                { text: "성공도 중요하지만 균형있는 삶을 추구한다", type: "balanced", score: 1 },
-                { text: "개인적 만족과 의미를 더 중시한다", type: "egen", score: 2 }
+                { text: "무조건 1등! 남들 위에 서서 지배하고 성취하는 것", type: "teto", score: 2 },
+                { text: "밸런스 게임. 일도 중요하지만 내 삶의 여유도 챙기는 것", type: "balanced", score: 1 },
+                { text: "나만의 행복. 돈보다는 내가 좋아하는 일을 하며 의미를 찾는 것", type: "egen", score: 2 }
             ]
         }
     ],
@@ -243,19 +243,19 @@ const questionData = {
             ]
         },
         {
-            situation: "커리어와 가정의 균형",
+            situation: "👠 내 인생의 주인공은 나! 일과 사랑 중 나의 선택은?",
             options: [
-                { text: "커리어 성공이 우선이며 그에 따라 가정을 조율한다", type: "teto", score: 2 },
-                { text: "상황과 시기에 따라 우선순위를 조절한다", type: "balanced", score: 1 },
-                { text: "가족과의 관계와 조화를 가장 중요하게 여긴다", type: "egen", score: 2 }
+                { text: "커리어가 먼저다. 내 능력으로 인정받고 성공하는 게 최우선이다", type: "teto", score: 2 },
+                { text: "상황 봐서 조율한다. 때로는 일이, 때로는 가정이 먼저일 수 있다", type: "balanced", score: 1 },
+                { text: "사랑이 없으면 무슨 소용? 따뜻한 가정과 사랑하는 사람들과의 관계가 1순위다", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "리더십을 발휘할 때의 스타일",
+            situation: "💄 부드러운 카리스마! 내가 여왕벌이 된다면?",
             options: [
-                { text: "결단력 있고 강력한 리더십을 보여준다", type: "teto", score: 2 },
-                { text: "상황에 맞는 다양한 리더십을 발휘한다", type: "balanced", score: 1 },
-                { text: "공감과 소통을 바탕으로 한 리더십을 추구한다", type: "egen", score: 2 }
+                { text: "카리스마 폭발! 확실한 결단력으로 좌중을 압도하며 이끈다", type: "teto", score: 2 },
+                { text: "상황 대처 능력 만렙. 그때그때 센스 있게 대처하며 융통성을 발휘한다", type: "balanced", score: 1 },
+                { text: "공감 능력 풀가동! 사람들의 마음을 읽고 보듬어주며 부드럽게 이끈다", type: "egen", score: 2 }
             ]
         },
         {
@@ -267,11 +267,11 @@ const questionData = {
             ]
         },
         {
-            situation: "여성 친구들과의 관계",
+            situation: "👯‍♀️ 찐친 케미! 친구들과 함께할 때 나는?",
             options: [
-                { text: "함께 목표를 추구하고 서로 동기부여를 한다", type: "teto", score: 2 },
-                { text: "다양한 방식으로 친밀감을 나눈다", type: "balanced", score: 1 },
-                { text: "감정적 지지와 깊은 공감대를 형성한다", type: "egen", score: 2 }
+                { text: "우리는 어벤져스! 서로 자극 주며 같이 성장하고 성공하자고 파이팅한다", type: "teto", score: 2 },
+                { text: "그냥 노는 거지 뭐. 맛있는 거 먹고 수다 떨며 가볍게 즐긴다", type: "balanced", score: 1 },
+                { text: "눈빛만 봐도 알아. 서로의 아픔을 공감하고 위로해주는 영혼의 단짝이다", type: "egen", score: 2 }
             ]
         }
     ],

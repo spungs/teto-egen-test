@@ -277,276 +277,276 @@ const questionData = {
     ],
     en: [
         {
-            situation: "When attending your first meeting at a new workplace",
+            situation: "🔥 First day, high stakes! The CEO suddenly asks for your opinion in an all-hands meeting?",
             options: [
-                { text: "I prepare materials in advance and actively share my opinions", type: "teto", score: 3 },
-                { text: "I assess the atmosphere and speak appropriately to the situation", type: "balanced", score: 1 },
-                { text: "I listen carefully to others and speak only when necessary", type: "egen", score: 3 }
+                { text: "Showtime! Unleash my prepared ambition and aggressively pour out logical arguments.", type: "teto", score: 3 },
+                { text: "Not enough info yet. Read the room and agree moderately to stay safe.", type: "balanced", score: 1 },
+                { text: "Standing out means death. Watch colleagues' faces and stay quietly invisible.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When a friend asks for advice about their troubles",
+            situation: "💔 A friend calls crying, \"I think I got caught cheating...\"",
             options: [
-                { text: "I logically present specific solutions", type: "teto", score: 3 },
-                { text: "I listen to their emotions fully, then give situation-appropriate advice", type: "balanced", score: 1 },
-                { text: "I empathize and comfort them first, providing emotional support", type: "egen", score: 3 }
+                { text: "Stop crying and prep excuses! Hit them with facts and strategize survival.", type: "teto", score: 3 },
+                { text: "Calm them down, analyze the situation objectively, and discuss countermeasures.", type: "balanced", score: 1 },
+                { text: "Oh no... Are you okay? Stay by their side and offer emotional support first.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When deciding on a date location with your partner",
+            situation: "🍷 Picking a 'Killer' Date Spot for a Successful Night?",
             options: {
                 male: [
-                    { text: "I suggest activity or sports-related places", type: "teto", score: 3 },
-                    { text: "I look for a compromise that both of us would enjoy", type: "balanced", score: 1 },
-                    { text: "I prioritize emotional places my partner would like", type: "egen", score: 3 }
+                    { text: "Overwhelming Energy! A sports stadium with fighting spirit or a hip club.", type: "teto", score: 3 },
+                    { text: "Fail-proof Classic! A fine dining spot with great atmosphere or a pop-up store.", type: "balanced", score: 1 },
+                    { text: "Emotional Vibes... A quiet wine bar or a dawn riverside walk.", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "I suggest new and challenging activities", type: "teto", score: 3 },
-                    { text: "I decide on a place we can both enjoy together", type: "balanced", score: 1 },
-                    { text: "I prefer beautiful and emotional cafes or exhibitions", type: "egen", score: 3 }
+                    { text: "I Lead! Thrilling bungee jumping or a racing circuit.", type: "teto", score: 3 },
+                    { text: "Taste Sniper! The hottest Instagrammable spot right now.", type: "balanced", score: 1 },
+                    { text: "Drunk on Atmosphere... Candlelight concert or a quiet LP bar.", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "When making important life decisions",
+            situation: "🗿 A moment to go 'All-In' that could change your life entirely?",
             options: [
-                { text: "I make logical judgments based on data and facts", type: "teto", score: 3 },
-                { text: "I consider both logic and intuition carefully before deciding", type: "balanced", score: 1 },
-                { text: "I value my inner voice and intuition more", type: "egen", score: 3 }
+                { text: "High Risk, High Return! After thorough analysis, I bet everything I have.", type: "teto", score: 3 },
+                { text: "Stability is king. Distribute risks and double-check even stone bridges.", type: "balanced", score: 1 },
+                { text: "Follow my soul's calling over numbers. Trust trusting fate and intuition.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When facing conflict situations",
+            situation: "🤛 Someone crosses the line and openly disrespects you?",
             options: [
-                { text: "I identify the core problem and try to solve it directly", type: "teto", score: 3 },
-                { text: "I analyze the situation objectively and find the best approach", type: "balanced", score: 1 },
-                { text: "I consider everyone's feelings to find harmonious solutions", type: "egen", score: 3 }
+                { text: "Eye for an eye! Counterattack immediately and clearly set the hierarchy.", type: "teto", score: 3 },
+                { text: "Endure for now. But plot thorough revenge or pressure them elegantly later.", type: "balanced", score: 1 },
+                { text: "I hate fighting. Try to understand why they did that and smooth it over.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "How I cope with stress",
+            situation: "🤯 \"Notice anything different today?\" Lover's lethal question causes brain freeze?",
             options: {
                 male: [
-                    { text: "I relieve stress through exercise or physical activities", type: "teto", score: 3 },
-                    { text: "I try various methods depending on the situation", type: "balanced", score: 1 },
-                    { text: "I calm my mind with quiet activities like music or reading", type: "egen", score: 3 }
+                    { text: "No buffering! Escape crisis with \"Of course, looking gorgeous as always!\"", type: "teto", score: 3 },
+                    { text: "Wild guessing is risky... Desperately scan for changes with rolling eyes.", type: "balanced", score: 1 },
+                    { text: "Honestly don't know, but hold their hand and whisper \"I love you\" instead.", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "I lift my mood through exercise or active activities", type: "teto", score: 3 },
-                    { text: "I choose methods that match my mood at the time", type: "balanced", score: 1 },
-                    { text: "I organize my emotions with emotional movies or music", type: "egen", score: 3 }
+                    { text: "You know I changed. Pressure them to name 3 things that changed.", type: "teto", score: 3 },
+                    { text: "Maybe they don't know. \"Want a hint?\" and loosen the mood playfully.", type: "balanced", score: 1 },
+                    { text: "Feel a wave of sadness that they didn't notice and get slightly sulky.", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "At gatherings with new people",
+            situation: "🥂 High-pressure social gathering with strangers, what's your position?",
             options: [
-                { text: "I approach first and lead conversations", type: "teto", score: 3 },
-                { text: "I naturally participate in conversations", type: "balanced", score: 1 },
-                { text: "I observe the atmosphere and join in carefully", type: "egen", score: 3 }
+                { text: "Already the insider here! Dominate the convo with wit and stand in the center.", type: "teto", score: 3 },
+                { text: "Moderate smiles... Read the air and chime in only when necessary.", type: "balanced", score: 1 },
+                { text: "The corner is my sanctuary. Become one with the wall until asked.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "My priorities when spending money",
+            situation: "💰 Lottery Jackpot! But after taxes, it's less than expected?",
             options: [
-                { text: "I prioritize long-term investments or practical value", type: "teto", score: 3 },
-                { text: "I consider both necessity and enjoyment in balance", type: "balanced", score: 1 },
-                { text: "I value current happiness and emotional satisfaction", type: "egen", score: 3 }
+                { text: "Money makes money! Aggressively invest in real estate, stocks, or business.", type: "teto", score: 3 },
+                { text: "Pay off debts first, save half, spend half sensibly on myself.", type: "balanced", score: 1 },
+                { text: "Luxury bags and travel for the hardworking me! Splurge for present happiness.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When choosing hobbies or leisure activities",
+            situation: "🎮 Playing in a different league! My perfect healing time?",
             options: {
                 male: [
-                    { text: "I prefer competitive and challenging activities", type: "teto", score: 3 },
-                    { text: "I enjoy various activities depending on my mood", type: "balanced", score: 1 },
-                    { text: "I like creative or artistic expression activities", type: "egen", score: 3 }
+                    { text: "Sweat is sweet! Burn competitive spirit with soccer or gaming.", type: "teto", score: 3 },
+                    { text: "Depends on the day. Freely enjoy whatever I feel like.", type: "balanced", score: 1 },
+                    { text: "Recharge emotion listening to music or drawing in my hideout.", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "I prefer active and social hobbies", type: "teto", score: 3 },
-                    { text: "I choose activities that appeal to me at the moment", type: "balanced", score: 1 },
-                    { text: "I enjoy quiet and personal hobbies", type: "egen", score: 3 }
+                    { text: "Staying still makes me sick! Tour hot spots with friends and release energy.", type: "teto", score: 3 },
+                    { text: "It's a mood! Choose active or quiet based on my tension.", type: "balanced", score: 1 },
+                    { text: "Don't disturb. Decorate diary or enjoy hobbies alone quietly.", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "My role in team projects",
+            situation: "⚔️ Group Project Nightmare! Your position among the villains?",
             options: [
-                { text: "I demonstrate leadership and guide the project", type: "teto", score: 3 },
-                { text: "I take either leader or follower roles as needed", type: "balanced", score: 1 },
-                { text: "I provide creative ideas and careful support", type: "egen", score: 3 }
+                { text: "Frustrated so I do it! Hard carry the team even if called a dictator.", type: "teto", score: 3 },
+                { text: "Avoid fights. Coax villains appropriately to get their parts done.", type: "balanced", score: 1 },
+                { text: "Silently support the team from behind with research and editing.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When experiencing failure or setbacks",
+            situation: "🌪️ Mental Breakdown... When life gives you lemons?",
             options: [
-                { text: "I quickly analyze the cause and prepare for the next challenge", type: "teto", score: 3 },
-                { text: "I take appropriate time to recover step by step", type: "balanced", score: 1 },
-                { text: "I fully feel the emotions and build inner strength", type: "egen", score: 3 }
+                { text: "No defeat! Analyze causes brutally and sharpen the knife for 'Just you wait'.", type: "teto", score: 3 },
+                { text: "Time heals. Eat something good and wait for it to fade naturally.", type: "balanced", score: 1 },
+                { text: "World collapsed... Listen to sad songs in my room and pour out tears.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "In situations with differing opinions",
+            situation: "⚔️ Conflict of Opinion! If they spout nonsense?",
             options: [
-                { text: "I present my opinion persuasively with logical evidence", type: "teto", score: 3 },
-                { text: "I combine different opinions to find compromise", type: "balanced", score: 1 },
-                { text: "I understand others' positions and build empathy", type: "egen", score: 3 }
+                { text: "Fact Bomber! Crush their bones with logic and teach them a lesson.", type: "teto", score: 3 },
+                { text: "Peace is good. Match them appropriately and smooth over the situation.", type: "balanced", score: 1 },
+                { text: "Why are they like that... Try to understand their stance and swallow it.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When making future plans",
+            situation: "🗺️ Me in 10 years, what do I look like?",
             options: [
-                { text: "I systematically establish specific goals and action plans", type: "teto", score: 3 },
-                { text: "I set the general direction but maintain flexibility", type: "balanced", score: 1 },
-                { text: "I proceed naturally according to intuition and flow", type: "egen", score: 3 }
+                { text: "Ambition Roadmap Ready! Yearly goals sorted in an Excel file.", type: "teto", score: 3 },
+                { text: "Have a big picture. But life changes, I'll adjust then.", type: "balanced", score: 1 },
+                { text: "Just want happiness... Follow my heart rather than specific goals.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When I feel accomplished",
+            situation: "🏆 My standard for a 'God-Tier Life'?",
             options: [
-                { text: "When I achieve goals and create results", type: "teto", score: 3 },
-                { text: "When I maintain a balanced life", type: "balanced", score: 1 },
-                { text: "When relationships deepen or emotional connections grow", type: "egen", score: 3 }
+                { text: "Bank balance and title! Visible achievements and status must be full.", type: "teto", score: 3 },
+                { text: "Work-life balance is best! Stable life with harmony of work and life.", type: "balanced", score: 1 },
+                { text: "Love and Peace! Living comfortably sharing deep affection with loved ones.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When preparing for important presentations",
+            situation: "🎤 Presentation before hundreds, given only 1 minute?",
             options: [
-                { text: "I focus on thorough material preparation and logical structure", type: "teto", score: 3 },
-                { text: "I prepare both content and delivery methods in balance", type: "balanced", score: 1 },
-                { text: "I emphasize emotional communication and empathy with the audience", type: "egen", score: 3 }
+                { text: "Overwhelming Confidence! Hit key points and imprint myself on the audience.", type: "teto", score: 3 },
+                { text: "Result of thorough practice! Deliver perfectly without mistakes as prepared.", type: "balanced", score: 1 },
+                { text: "Sincerity works! Touch the audience's hearts with genuine emotion over technique.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When facing unexpected changes",
+            situation: "🌪️ Sudden Change of Plans! My reaction?",
             options: [
-                { text: "I quickly assess the situation and respond actively", type: "teto", score: 3 },
-                { text: "I carefully observe the situation and adapt gradually", type: "balanced", score: 1 },
-                { text: "I fully accept emotions from change before responding", type: "egen", score: 3 }
+                { text: "Even better! Immediately activate Plan B and lead the situation.", type: "teto", score: 3 },
+                { text: "Watch first. See how things flow and move slowly.", type: "balanced", score: 1 },
+                { text: "Mental boom... Unprepared and panic, don't know what to do.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "When leadership is required",
+            situation: "👑 If I become a leader, what style?",
             options: [
-                { text: "I lead with clear direction and strong momentum", type: "teto", score: 3 },
-                { text: "I adopt appropriate leadership styles for each situation", type: "balanced", score: 1 },
-                { text: "I lead collaboratively by gathering members' opinions", type: "egen", score: 3 }
+                { text: "Follow me! General type who presents clear vision and charges forward.", type: "teto", score: 3 },
+                { text: "Flexible coordinator. Push and pull according to situation for balance.", type: "balanced", score: 1 },
+                { text: "Warm Mom Leadership. Supporter type who listens to grievances and soothes.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "How I use leisure time",
+            situation: "⛱️ A rare sweet holiday, what do I do?",
             options: {
                 male: [
-                    { text: "I prefer competitive activities like sports or games", type: "teto", score: 3 },
-                    { text: "I spend time differently depending on my mood", type: "balanced", score: 1 },
-                    { text: "I enjoy quiet personal time or cultural activities", type: "egen", score: 3 }
+                    { text: "Body aches if still. Must competer in futsal or LoL to feel satisfied.", type: "teto", score: 3 },
+                    { text: "Depending on mood! Go out to play or rest at home.", type: "balanced", score: 1 },
+                    { text: "Outside is dangerous. Enjoy alone time at home or visit exhibitions.", type: "egen", score: 3 }
                 ],
                 female: [
-                    { text: "I enjoy active social activities with friends", type: "teto", score: 3 },
-                    { text: "Sometimes active, sometimes quiet activities", type: "balanced", score: 1 },
-                    { text: "I invest time in personal hobbies or self-development", type: "egen", score: 3 }
+                    { text: "Social energy explosion! Gather friends, tour food spots, and shop.", type: "teto", score: 3 },
+                    { text: "Half and half! Play during day, rest at night hybrid strategy.", type: "balanced", score: 1 },
+                    { text: "Netflix marathon! Get emotional with hot cocoa.", type: "egen", score: 3 }
                 ]
             }
         },
         {
-            situation: "My way of expressing emotions",
+            situation: "🎭 When my emotions fluctuate, how does it show?",
             options: [
-                { text: "I express through actions rather than emotions", type: "teto", score: 3 },
-                { text: "I adjust expression methods according to situations", type: "balanced", score: 1 },
-                { text: "I express emotions in detailed and rich ways", type: "egen", score: 3 }
+                { text: "Action over emotion! Exercise or focus on work to coolly shake it off.", type: "teto", score: 3 },
+                { text: "Poker face... Hide or adjust emotions appropriately to the situation.", type: "balanced", score: 1 },
+                { text: "My heart is a lake... Honestly reveal inner feelings with rich expressions.", type: "egen", score: 3 }
             ]
         },
         {
-            situation: "My approach to problem-solving",
+            situation: "🧩 Complex problem arises, my solution?",
             options: [
-                { text: "I find solutions systematically and step by step", type: "teto", score: 3 },
-                { text: "I approach by combining intuition and logic", type: "balanced", score: 1 },
-                { text: "I seek creative and flexible methods", type: "egen", score: 3 }
+                { text: "Mechanical brain rotation! Break it down step-by-step and crush it systematically.", type: "teto", score: 3 },
+                { text: "Collab of gut and logic! Mix intuition and facts appropriately.", type: "balanced", score: 1 },
+                { text: "Flash of inspiration! Find creative tricks others didn't think of.", type: "egen", score: 3 }
             ]
         }
     ],
     // English gender-specific additional questions
     en_male_specific: [
         {
-            situation: "About my identity as a man",
+            situation: "🦁 True 'Man's Coolness', how do you define masculinity?",
             options: [
-                { text: "I value traditional masculinity principles", type: "teto", score: 2 },
-                { text: "I pursue a flexible male image for modern times", type: "balanced", score: 1 },
-                { text: "I believe emotional and caring aspects are part of masculinity", type: "egen", score: 2 }
+                { text: "Wild Charisma! Strong body, spirit, and overwhelming leadership.", type: "teto", score: 2 },
+                { text: "Modern Flexibility! Hybrid who is strong when needed, soft when needed.", type: "balanced", score: 1 },
+                { text: "Perfection of Delicate Sense! Consideration for others and grooming oneself.", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "Men's role in romantic relationships",
+            situation: "🌹 I protect my woman! My dating style?",
             options: [
-                { text: "I think men should be protectors and leaders", type: "teto", score: 2 },
-                { text: "I believe roles can change depending on situations", type: "balanced", score: 1 },
-                { text: "I value equal partnership and emotional connection", type: "egen", score: 2 }
+                { text: "Alpha Male: I Lead. \"Trust oppa\" and plan/lead every course.", type: "teto", score: 2 },
+                { text: "Case by case. Flexible to lead or match depending on situation.", type: "balanced", score: 1 },
+                { text: "Do whatever you want! Follow girlfriend's opinion entirely and empathize.", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "My perspective on appearance management",
+            situation: "💅 'Grooming' Craze, honest thought on men's appearance care?",
             options: [
-                { text: "Basic cleanliness is sufficient", type: "teto", score: 2 },
-                { text: "I manage appropriately according to situations", type: "balanced", score: 1 },
-                { text: "I'm also interested in skincare and fashion", type: "egen", score: 2 }
+                { text: "Washing face is enough! Too much focus on looks reduces coolness.", type: "teto", score: 2 },
+                { text: "Keep TPO! Clean and tidy according to place and situation.", type: "balanced", score: 1 },
+                { text: "Self-care is skill! Perfect grooming from skincare to fashion is pro.", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "Expressing friendship with male friends",
+            situation: "🍺 Loyalty! How to prove friendship with bros?",
             options: [
-                { text: "I build friendship through activities and competition", type: "teto", score: 2 },
-                { text: "Sometimes deep, sometimes light interaction", type: "balanced", score: 1 },
-                { text: "I share deep conversations and emotional connections", type: "egen", score: 2 }
+                { text: "Physical clash! Sweat it out exercising or bond over a drink.", type: "teto", score: 2 },
+                { text: "Moderate distance. Help when needed, live well separately otherwise.", type: "balanced", score: 1 },
+                { text: "Deep conversation. Share worries and build emotional bonds.", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "My attitude toward career and success",
+            situation: "💼 Man's Pride! What is success to me?",
             options: [
-                { text: "Achievement and success are important virtues for men", type: "teto", score: 2 },
-                { text: "Success is important but I pursue balanced life", type: "balanced", score: 1 },
-                { text: "I value personal satisfaction and meaning more", type: "egen", score: 2 }
+                { text: "Absolute #1! Standing above others, dominating and achieving.", type: "teto", score: 2 },
+                { text: "Balance Game. Work is important but my life's leisure matters.", type: "balanced", score: 1 },
+                { text: "My Happiness. Finding meaning doing what I like rather than money.", type: "egen", score: 2 }
             ]
         }
     ],
     en_female_specific: [
         {
-            situation: "About my identity as a woman",
+            situation: "🐆 Society's defined 'Femininity', how do you take it?",
             options: [
-                { text: "I pursue a strong and independent female image", type: "teto", score: 2 },
-                { text: "I show various aspects depending on situations", type: "balanced", score: 1 },
-                { text: "I value warm and embracing femininity", type: "egen", score: 2 }
+                { text: "I am the way! Go my own independent, strong path against prejudice.", type: "teto", score: 2 },
+                { text: "Sometimes confident, sometimes soft! Show colorful sides per situation.", type: "balanced", score: 1 },
+                { text: "Power of Warm Embrace! Cherish gentleness that cares for surroundings.", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "Balance between career and family",
+            situation: "👠 Protagonist of my life! Choice between work and love?",
             options: [
-                { text: "Career success is priority, adjusting family accordingly", type: "teto", score: 2 },
-                { text: "I adjust priorities according to situations and timing", type: "balanced", score: 1 },
-                { text: "I value family relationships and harmony most", type: "egen", score: 2 }
+                { text: "Career first. Being recognized for ability and succeeding is priority.", type: "teto", score: 2 },
+                { text: "Adjust to context. Sometimes work, sometimes family comes first.", type: "balanced", score: 1 },
+                { text: "What's the point without love? Warm family and relationships are #1.", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "My leadership style when taking charge",
+            situation: "💄 Soft Charisma! If I become a Queen Bee?",
             options: [
-                { text: "I demonstrate decisive and strong leadership", type: "teto", score: 2 },
-                { text: "I exercise various leadership styles for different situations", type: "balanced", score: 1 },
-                { text: "I pursue leadership based on empathy and communication", type: "egen", score: 2 }
+                { text: "Charisma Explosion! Lead while overwhelming the crowd with decisiveness.", type: "teto", score: 2 },
+                { text: "Max Coping Skill. Handle wittily and flexibly moment to moment.", type: "balanced", score: 1 },
+                { text: "Full Empathy! Read people's hearts and lead gently.", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "My interest in appearance and fashion",
+            situation: "💍 From 'No-Makeup' to 'Full-Glam', what does grooming mean?",
             options: [
-                { text: "I prioritize practicality and convenience", type: "teto", score: 2 },
-                { text: "I adjust according to time and place", type: "balanced", score: 1 },
-                { text: "I consider beauty and style important", type: "egen", score: 2 }
+                { text: "Comfort is best! Prefer practical and active styles over fancy ones.", type: "teto", score: 2 },
+                { text: "Sense of Style! Joy of expressing myself, sometimes hip, sometimes elegant.", type: "balanced", score: 1 },
+                { text: "Gift to myself! Discover new beauty daily through makeup and fashion.", type: "egen", score: 2 }
             ]
         },
         {
-            situation: "Relationships with female friends",
+            situation: "👯‍♀️ Bestie Chemistry! When with friends?",
             options: [
-                { text: "We pursue goals together and motivate each other", type: "teto", score: 2 },
-                { text: "We share intimacy in various ways", type: "balanced", score: 1 },
-                { text: "We form emotional support and deep empathy", type: "egen", score: 2 }
+                { text: "We are Avengers! Stimulate each other to grow and succeed together.", type: "teto", score: 2 },
+                { text: "Just playing. Eat good food, chat, and enjoy lightly.", type: "balanced", score: 1 },
+                { text: "Know just by eyes. Soulmates who empathize with pain and comfort.", type: "egen", score: 2 }
             ]
         }
     ]
@@ -679,44 +679,44 @@ const resultData = {
     en: {
         male: {
             teto: {
-                type: "Teto Male",
-                emoji: "💪",
-                traits: ["Masculine", "Leadership", "Direct", "Realistic", "Social"],
-                description: "A man with strong masculine traits due to high testosterone levels. Interested in sports, games, politics, and enjoys working out at the gym to build muscle. Strives to have a decent job, saves money, and works on self-improvement. Has good relationships with parents and maintains regular social connections with male friends. Simple, positive, and takes pride in his work.",
-                tetoLabel: "Teto Male",
-                egenLabel: "Egen Male",
+                type: "Tier 1: The Ambition Dominator, Teto Man",
+                emoji: "🦁",
+                traits: ["Alpha Male", "Bulldozer Leadership", "Fierce Competitiveness", "Obsessed with Success", "Social King"],
+                description: "You are a natural-born winner. Blessed by testosterone, you can't stand not being the main character wherever you go. You only feel alive when lifting heavy iron at the gym, and the appearance of a rival only fuels your fighting spirit. You may seem simple, but hidden inside is a massive ambition to swallow the world. Even in dating, it's full speed ahead! You're the epitome of cool, shaken off rejection with a workout.",
+                tetoLabel: "Teto Man",
+                egenLabel: "Egen Man",
                 compatibility: [
-                    { type: "Egen Female", emoji: "💕", reason: "Different strengths complement each other for balanced relationship. However, communication style differences may cause misunderstandings" },
-                    { type: "Teto Female", emoji: "🤝", reason: "Similar goal-oriented nature leads to high understanding, but may develop into competitive relationship" }
+                    { type: "Egen Woman", emoji: "💕", reason: "Balanced relationship where different strengths complement each other. But communication style differences may cause misunderstandings." },
+                    { type: "Teto Woman", emoji: "🤝", reason: "Similar goal-oriented nature leads to high understanding, but can turn into a competitive relationship." }
                 ],
                 careers: ["Executive", "Athlete", "Military/Police", "Sales", "Entrepreneur", "Politician", "Real Estate", "Construction"],
                 celebrities: [
                     { name: "Bang Chan", profession: "Singer" },
                     { name: "Minho", profession: "Singer" },
                     { name: "Shownu", profession: "Singer" },
-                    { name: "Jichang-wook", profession: "Singer" }
+                    { name: "Ji Chang-wook", profession: "Actor" }
                 ],
                 health: {
-                    exercise: ["Weight Training", "Soccer/Basketball", "Running/Jogging", "Hiking"],
-                    diet: ["High Protein Diet", "Sufficient Calories for Muscle Gain", "Regular Meals"],
-                    stress: ["Goal Achievement Activities", "Sports with Friends", "Competitive Games"]
+                    exercise: ["Gym Weight Training", "Soccer/Basketball", "Running", "Hiking"],
+                    diet: ["High Protein Diet", "Bulking Calories", "Regular Meals"],
+                    stress: ["Goal Achieving Activities", "Sports with Bros", "Competitive Gaming"]
                 },
                 growth: [
-                    { title: "Improve Emotional Expression", description: "Develop ability to understand and empathize with others' emotions", icon: "❤️" },
-                    { title: "Develop Listening Skills", description: "Cultivate habit of listening to others' opinions completely", icon: "👂" },
-                    { title: "Cultivate Attention to Detail", description: "Develop sensitivity to small details", icon: "🎯" }
+                    { title: "Improve Emotional Expression", description: "Develop empathy skills to understand others' feelings deeper.", icon: "❤️" },
+                    { title: "Develop Listening Skills", description: "Practice listening to others' opinions until the end.", icon: "👂" },
+                    { title: "Cultivate Detail", description: "Develop sensitivity to small details.", icon: "🎯" }
                 ]
             },
             egen: {
-                type: "Egen Male",
+                type: "Tier 1: The Alchemy of Emotion, Egen Man",
                 emoji: "🎨",
-                traits: ["Emotional", "Sensitive", "Creative", "Unique", "Trendy"],
-                description: "A man with strong feminine traits due to high estrogen levels. Pays great attention to clothing and appearance, knows brands well, and tends to be obsessed with self-care. Interested in interior design and enjoys niche music or artistic activities. Capable of sensitive and interesting conversations like women, prefers cozy places when dating. Socially somewhat passive and tends to be very conscious of what others think.",
-                tetoLabel: "Teto Male",
-                egenLabel: "Egen Male",
+                traits: ["Fashion People", "Delicate Touch", "Artistic Soul", "Unique Vibe", "Trendy"],
+                description: "The true dandy guy of this era with high estrogen sensitivity. You pay sharp attention to clothes and appearance, know your brands, and take self-care seriously. You have a deep interest in interior design, niche music, or art. You can hold sensitive and interesting conversations just like women do, and prefer cozy, atmospheric spots for dates. You might be a bit passive socially and care a lot about what others think.",
+                tetoLabel: "Teto Man",
+                egenLabel: "Egen Man",
                 compatibility: [
-                    { type: "Teto Female", emoji: "⚖️", reason: "Different personalities are attractive, but value differences may cause conflict situations" },
-                    { type: "Egen Female", emoji: "🌙", reason: "Deep empathy through similar emotions, but relationship may become passive at times" }
+                    { type: "Teto Woman", emoji: "⚖️", reason: "Different charms are attractive, but clashing values can lead to conflict." },
+                    { type: "Egen Woman", emoji: "🌙", reason: "Deep empathy through similar emotional waves, but the relationship might get too passive." }
                 ],
                 careers: ["Designer", "Artist", "Counselor", "Teacher", "Healthcare", "Writer", "Stylist", "Hairdresser"],
                 celebrities: [
@@ -727,27 +727,27 @@ const resultData = {
                 ],
                 health: {
                     exercise: ["Yoga/Pilates", "Swimming", "Dancing", "Walking"],
-                    diet: ["Balanced Diet", "Vitamin Intake", "Adequate Hydration"],
-                    stress: ["Reading", "Meditation", "Talking with Friends", "Artistic Activities"]
+                    diet: ["Balanced Diet", "Vitamin Intake", "Hydration"],
+                    stress: ["Reading", "Meditation", "Chatting with Friends", "Artistic Activities"]
                 },
                 growth: [
-                    { title: "Build Confidence", description: "Recognize your strengths and express them confidently", icon: "💪" },
-                    { title: "Improve Decisiveness", description: "Develop quick decision-making abilities", icon: "⚡" },
-                    { title: "Develop Social Skills", description: "Increase interactions with diverse people", icon: "🤝" }
+                    { title: "Build Confidence", description: "Recognize your strengths and express them boldly.", icon: "💪" },
+                    { title: "Improve Decisiveness", description: "Develop the ability to make quick decisions.", icon: "⚡" },
+                    { title: "Expand Social Skills", description: "Increase interactions with a wider variety of people.", icon: "🤝" }
                 ]
             }
         },
         female: {
             teto: {
-                type: "Teto Female",
+                type: "Tier 1: The Iron Empress, Teto Woman",
                 emoji: "👑",
-                traits: ["Confident", "Independent", "Direct", "Realistic", "Driven"],
-                description: "A woman with strong testosterone tendencies, having an independent and confident personality. Goal-oriented with strong leadership and prefers direct communication. Not afraid of competition and clearly expresses her opinions. Has career ambitions and seeks to forge her own path rather than traditional female roles. Prioritizes logic over emotions and has excellent problem-solving abilities.",
-                tetoLabel: "Teto Female",
-                egenLabel: "Egen Female",
+                traits: ["Girl Boss", "Independent", "Fact Bomber", "Realistic", "Ambition Incarnate"],
+                description: "The 'Girl Boss' with strong testosterone vibes. You have an independent and confident personality that refuses to rely on others. You're goal-oriented, possess strong leadership, and prefer direct, no-nonsense communication. You aren't afraid of competition and express your opinions clearly. Rather than traditional gender roles, you carve your own path with career ambitions. You prioritize logic over fleeting emotions and are a master problem solver.",
+                tetoLabel: "Teto Woman",
+                egenLabel: "Egen Woman",
                 compatibility: [
-                    { type: "Egen Male", emoji: "⚖️", reason: "Mutually complementary relationship enables growth. However, leadership issues may cause conflicts" },
-                    { type: "Teto Male", emoji: "🔥", reason: "Both strong personalities enable passionate relationship, but clashes and competition also exist" }
+                    { type: "Egen Man", emoji: "⚖️", reason: "Mutually complementary relationship for growth. But leadership struggles can cause friction." },
+                    { type: "Teto Man", emoji: "🔥", reason: "Two strong personalities make for a passionate romance, but clashes and rivalry are inevitable." }
                 ],
                 careers: ["Lawyer", "Doctor", "CEO/Executive", "Journalist", "Consultant", "Politician", "Marketer", "Investor"],
                 celebrities: [
@@ -758,25 +758,25 @@ const resultData = {
                 ],
                 health: {
                     exercise: ["CrossFit", "Boxing", "Tennis", "Golf"],
-                    diet: ["High Protein Low Carb", "Regular Meals", "Supplement Intake"],
-                    stress: ["Energy Release through Exercise", "Goal Achievement Activities", "Competitive Games"]
+                    diet: ["High Protein Low Carb", "Regular Meals", "Supplements"],
+                    stress: ["Energy Release Exercise", "Goal Achievement", "Competitive Games"]
                 },
                 growth: [
-                    { title: "Improve Empathy", description: "Develop understanding and consideration for others' emotions", icon: "💝" },
-                    { title: "Cultivate Flexibility", description: "Learn to compromise and yield sometimes", icon: "🌊" },
-                    { title: "Express Emotions", description: "Express emotions honestly, not just logic", icon: "🎭" }
+                    { title: "Improve Empathy", description: "Cultivate a heart that understands and considers others.", icon: "💝" },
+                    { title: "Cultivate Flexibility", description: "Learn the wisdom of compromising and yielding sometimes.", icon: "🌊" },
+                    { title: "Express Emotions", description: "Try expressing your feelings honestly, not just logic.", icon: "🎭" }
                 ]
             },
             egen: {
-                type: "Egen Female",
+                type: "Tier 1: The Queen of Empathy, Egen Woman",
                 emoji: "🌸",
-                traits: ["Emotional", "Caring", "Sensitive", "Gentle", "Social"],
-                description: "A woman with strong estrogen tendencies, having many typical feminine characteristics. Rich in emotional expression, sensitive, and deeply caring towards others. Has excellent aesthetic sense and is interested in fashion and beauty. Values harmonious relationships and tends to avoid conflict situations. Makes intuitive and emotional judgments, enjoys arts or creative activities. Values deep emotional bonds with people.",
-                tetoLabel: "Teto Female",
-                egenLabel: "Egen Female",
+                traits: ["Emotionally Rich", "Caring Angel", "Sensitive", "Gentle", "Social Queen"],
+                description: "The epitome of femininity with high estrogen levels. You are rich in emotional expression, sensitive, and deeply caring towards everyone around you. You have excellent aesthetic sense and a high interest in fashion and beauty. You value harmonious relationships above all and hate conflict. You tend to judge intuitively and emotionally, and enjoy art or creative activities. Deep emotional bonds are your lifeblood.",
+                tetoLabel: "Teto Woman",
+                egenLabel: "Egen Woman",
                 compatibility: [
-                    { type: "Teto Male", emoji: "💕", reason: "Stable relationship with traditional male-female roles. However, modern value differences may exist" },
-                    { type: "Egen Male", emoji: "🌙", reason: "Deep emotional connection, but may stagnate due to lack of decisiveness at times" }
+                    { type: "Teto Man", emoji: "💕", reason: "Stable relationship with traditional roles. But modern value differences might arise." },
+                    { type: "Egen Man", emoji: "🌙", reason: "Deep emotional connection is possible, but indecisiveness might stall the relationship." }
                 ],
                 careers: ["Nurse", "Teacher", "Artist", "Counselor", "Social Worker", "HR", "Hairdresser", "Floral Designer"],
                 celebrities: [
@@ -787,13 +787,13 @@ const resultData = {
                 ],
                 health: {
                     exercise: ["Yoga", "Pilates", "Ballet", "Walking"],
-                    diet: ["Balanced Diet", "Fruits and Vegetables", "Adequate Hydration"],
+                    diet: ["Balanced Diet", "Fruits & Veggies", "Hydration"],
                     stress: ["Chatting with Friends", "Shopping", "Movies/Dramas", "Travel"]
                 },
                 growth: [
-                    { title: "Increase Self-Assertion", description: "Express your opinions more actively", icon: "📢" },
-                    { title: "Develop Independence", description: "Increase things you can do on your own", icon: "🦋" },
-                    { title: "Set Goals", description: "Set clear goals and pursue them systematically", icon: "🎯" }
+                    { title: "Increase Self-Assertion", description: "Try expressing your own opinions more actively.", icon: "📢" },
+                    { title: "Develop Independence", description: "Increase the number of things you can handle on your own.", icon: "🦋" },
+                    { title: "Set Goals", description: "Set clear goals and try pursuing them systematically.", icon: "🎯" }
                 ]
             }
         }

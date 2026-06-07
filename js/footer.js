@@ -120,11 +120,12 @@ class VisitorCounter {
         // 다른 서비스 링크 렌더링
         this.renderServices();
 
-        // 통계 표시
-        await this.displayStats();
-        setInterval(async () => {
-            await this.displayStats();
-        }, 60000);
+        // 방문자 카운터는 현재 숨김(styles.css의 .stats-container: none) 상태라
+        // 표시용 폴링(60초마다 Supabase 조회 ~3건)을 비활성화해 불필요한 요청 제거.
+        // 방문 카운트 자체(insertDailyVisitor)는 유지되어 데이터는 계속 누적됨.
+        // 카운터를 다시 노출하려면: .stats-container를 flex로 되돌리고 아래를 복구
+        //   await this.displayStats();
+        //   setInterval(() => this.displayStats(), 60000);
     }
 
     // 오늘 이미 방문했는지 확인
